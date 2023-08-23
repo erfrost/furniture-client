@@ -1,0 +1,62 @@
+.container {
+    height: 93px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 0 50px 0 50px;
+    margin-top: 40px;
+}
+.logoContainer {
+    width: 165px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #E2E8CE;
+    padding: 10px 30px;
+}
+.input {
+    height: 48px !important;
+    border: none !important;
+    background-color: #EBEBEB !important;
+    color: #5A5A5A !important;
+    font-weight: 500 !important;
+}
+.input::placeholder {
+    color: #5A5A5A !important;
+    font-weight: 500 !important;
+}
+.phoneContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+.photoIcon {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #E2E8CE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.phone {
+    font-size: 18px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.phone:hover {
+    color: #797979;
+}
+.icon {
+    width: 31px;
+    min-width: 31px;
+    height: 29px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

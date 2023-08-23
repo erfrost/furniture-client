@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    background-color: #E2E8CE;
+    padding: 10px 50px;
+    margin-top: 10px;
+}
+.catalogBtn {
+    padding: 10px 20px;
+    background-color: #ADBFA4;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.catalogBtn:hover {
+    background-color: #8d9c86;
+}
+.catalogBtnText {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+}
+.categories {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.link {
+    font-weight: 500;
+    font-size: 18px;
+    white-space: break-spaces;
+    transition: all 0.3s ease;
+}
+.link:hover {
+    color: #797979;
+}
