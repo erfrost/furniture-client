@@ -3,7 +3,46 @@
     flex-direction: column;
 }
 .fullScreen {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+.catalogContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0 40px 100px 40px;
+    margin-top: 75px;
+    position: relative;
+}
+.catalogTitle {
+    font-weight: 600;
+    font-size: 36px;
+}
+
+@media screen and (max-width: 900px) {
+    .catalogContainer {
+        padding: 0 25px 100px 25px;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .fullScreen {
+        min-height: 75vh;
+    }
+}
+@media screen and (max-width: 768px) {
+    .fullScreen {
+        min-height: auto;
+    }
+}
+@media screen and (max-width: 550px) {
+    .catalogTitle {
+        font-size: 28px;
+    }
+}
+@media screen and (max-width:400px) {
+    .catalogTitle {
+        font-size: 24px;
+    }
 }

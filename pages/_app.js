@@ -1,32 +1,30 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import { RecoilRoot } from "recoil";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Общие теги <head> */}
-        <title>Мой сайт</title>
-        <meta name="description" content="Описание моего сайта" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
+        <title>Дом мебельный центр</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="'Мебельный центр ДОМ' - это крупный онлайн-гипермаркет мебели и товаров для дома. Мы работаем в этой сфере больше 5 лет и сумели зарекомендовать себя как надежного продавца. Купив мебель однажды, 64% клиентов возвращаются к нам за новой мебелью."
         />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
+        <meta
+          name="keywords"
+          content="Мебель Нижневартовск, Мебель Лангепас, Мебель Сургут, Мебель Ноябрьск, Мебель Нефтеюганск, Мебель со склада, купить мебель онлайн, онлайн магазин, онлайн магазин мебели, Нижневартовск, Cургут, Лангепас, Ноябрьск, Нефтеюганск, склад, диван, шкаф, стенка, кровать, Мебель для гостиной, Мебель для прихожей, Мягкая мебель, Мебель для спальни, Детская мебель, Мебель для кухни, Шкафы для дома, Матрасы, Мебель из натурального дерева, Плетеная мебель из ротанга, Мебель для ванной комнаты, Мебель для домашнего кабинета и офиса
+, Аксессуары для интерьера, аксессуары, зеркала, лампы, кресла, стулья, онлайн, для дачи, комоды, кухонные гарнитуры, кухни, раковины, тумбы, для подростка, для девочки, для мальчика, скидки на мебель, мебель по акции, распродажа, рассрочка"
+        ></meta>
         {/* <script src="//code.jivo.ru/widget/fo3JcgKaha" async></script> */}
       </Head>
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <RecoilRoot>
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </RecoilRoot>
     </>
   );
 }

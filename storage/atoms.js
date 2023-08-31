@@ -9,3 +9,8 @@ export const subcategoriesState = atom({
   key: "subcategoriesState",
   default: [],
 });
+
+export const searchItemsState = atom({
+  key: "searchItemsState",
+  default: [],
+});

@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 25px;
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
     margin-top: 40px;
 }
 .logoContainer {
@@ -17,17 +17,6 @@
     border-radius: 6px;
     background-color: #E2E8CE;
     padding: 10px 30px;
-}
-.input {
-    height: 48px !important;
-    border: none !important;
-    background-color: #EBEBEB !important;
-    color: #5A5A5A !important;
-    font-weight: 500 !important;
-}
-.input::placeholder {
-    color: #5A5A5A !important;
-    font-weight: 500 !important;
 }
 .phoneContainer {
     display: flex;
@@ -53,10 +42,34 @@
 .phone:hover {
     color: #797979;
 }
-.icon {
-    width: 31px;
-    min-width: 31px;
-    height: 29px;
+.logo {
+    min-width: 105px;
+    width: 105px;
+    height: 73px;
+}
+.container svg {
     cursor: pointer;
-    transition: all 0.3s ease;
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        padding: 0 25px;
+        margin-top: 10px;
+    }
+    .photoIcon {
+        width: 35px;
+        min-width: 35px;
+        height: 35px;
+    }
+    .phone {
+        font-size: 15px;
+    }
+    .icon {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+    }
 }

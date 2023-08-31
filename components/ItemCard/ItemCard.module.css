@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+.container span {
+    width: 100%;
+}
+.image {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.title {
+    font-size: 16px;
+    color: #454545;
+}
+.price {
+    font-weight: 600;
+    font-size: 26px;
+}
+.specification {
+    font-size: 14px;
+    color: #454545;
+}
+.btnsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+.moreBtn {
+    width: 100%;
+    border: 1px solid #262626;
+    border-radius: 50px;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.moreBtn:hover {
+    background-color: #dee3db;
+}
+.inCartBtn {
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+    border: 1.5px solid #262626;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.inCartBtn:hover {
+    background-color: #dee3db;
+}
+.inCartBtn svg {
+    width: 65%;
+}
+
+@media screen and (max-width: 1350px) {
+    .image {
+        height: 175px;
+    }
+}
+@media screen and (max-width: 1080px) {
+    .image {
+        height: 225px;
+    }
+}
+@media screen and (max-width: 900px) {
+    .image {
+        height: 175px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .image {
+        height: 225px;
+    }
+}
+@media screen and (max-width: 590px) {
+    .image {
+        height: 175px;
+    }
+}
+@media screen and (max-width: 535px) {
+    .image {
+        height: 325px;
+    }
+}
+@media screen and (max-width: 475px) {
+    .image {
+        height: 300px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .image {
+        height: 175px;
+    }
+}

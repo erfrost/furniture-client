@@ -1,33 +1,71 @@
-import Logo from "@/assets/logo";
 import styles from "./Header.module.css";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { PhoneIcon, SearchIcon } from "@chakra-ui/icons";
-import Heart from "@/assets/heartIcon";
+import { PhoneIcon } from "@chakra-ui/icons";
 import CartIcon from "@/assets/cartIcon";
+import Search from "../Search/Search";
+import HeartIcon from "@/assets/heartIcon";
+import Link from "next/link";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { searchItemsState } from "@/storage/atoms";
+import AlertInfo from "../AlertInfo/AlertInfo";
+import { useRouter } from "next/router";
+import logo from "@/assets/logoBlack.svg";
+import Image from "next/image";
+import cancelAction from "@/utils/cancelAction";
 
 const Header = () => {
+  const [searchItems, setSearchItems] = useRecoilState(searchItemsState);
+  const [searchText, setSearchText] = useState("");
+  const [reqError, setReqError] = useState(null);
+
+  const router = useRouter();
+
+  const handleKeyDown = async (e) => {
+    if (e.key === "Enter") {
+      router.push(`search?search=${searchText}`);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <Logo />
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="logo"
+            width={105}
+            height={73}
+            priority
+            className={styles.logo}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
+          />
+        </Link>
       </div>
-      <InputGroup>
-        <InputLeftElement pointerEvents="none" height="48px">
-          <SearchIcon color="#262626" />
-        </InputLeftElement>
-        <Input className={styles.input} placeholder="Введите запрос" />
-      </InputGroup>
+      <Search
+        searchText={searchText}
+        setSearchText={setSearchText}
+        onEnterClick={handleKeyDown}
+      />
       <div className={styles.phoneContainer}>
         <div className={styles.photoIcon}>
-          <PhoneIcon color="#262626" fontSize="large" />
+          <PhoneIcon color="#262626" fontSize="large" boxSize="45%" />
         </div>
         <a href="tel:" className={styles.phone}>
           +7 (951) 117-28-56
         </a>
       </div>
-      <Heart className={styles.icon} />
-      <CartIcon className={styles.icon} />
+      <HeartIcon />
+      <CartIcon />
+      {reqError && (
+        <AlertInfo
+          title="Произошла ошибка:"
+          description={reqError}
+          type="error"
+        />
+      )}
     </div>
   );
 };
+
 export default Header;

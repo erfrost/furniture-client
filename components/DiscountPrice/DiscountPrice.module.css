@@ -1,0 +1,138 @@
+.priceContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.newPrice {
+    font-weight: 600;
+    font-size: 22px;
+}
+.oldPrice {
+    font-weight: 600;
+    font-size: 16px;
+    color: #828282;
+    position: relative;
+}
+.oldPrice::after {
+    content: '';
+    display: block;
+    width: calc(100% + 5px);
+    height: 2px;
+    background-color: #828282;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: -3px;
+    transform: rotate(10deg);
+}
+.discountContainer {
+    padding: 5px;
+    background-color: #85977C;
+    border-radius: 40% 3px 40% 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1430px) {
+    .newPrice {
+        font-size: 19px;
+    }
+    .oldPrice {
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 825px) {
+    .newPrice {
+        font-size: 17px;
+    }
+    .oldPrice {
+        font-size: 13px;
+    }
+    .discountContainer {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .newPrice {
+        font-size: 26px;
+    }
+    .oldPrice {
+        font-size: 20px;
+    }
+    .discountContainer {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 690px) {
+    .newPrice {
+        font-size: 22px;
+    }
+    .oldPrice {
+        font-size: 17px;
+    }
+    .discountContainer {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 615px) {
+    .newPrice {
+        font-size: 20px;
+    }
+    .oldPrice {
+        font-size: 15px;
+    }
+    .discountContainer {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 590px) {
+    .newPrice {
+        font-size: 19px;
+    }
+    .oldPrice {
+        font-size: 14px;
+    }
+    .discountContainer {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 535px) {
+    .newPrice {
+        font-size: 26px;
+    }
+    .oldPrice {
+        font-size: 20px;
+    }
+    .discountContainer {
+        font-size: 19px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .newPrice {
+        font-size: 24px;
+    }
+    .oldPrice {
+        font-size: 18px;
+    }
+    .discountContainer {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .newPrice {
+        font-size: 22px;
+    }
+    .oldPrice {
+        font-size: 16px;
+    }
+    .discountContainer {
+        font-size: 17px;
+    }
+}

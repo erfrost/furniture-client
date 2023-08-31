@@ -1,0 +1,9 @@
+.spinner {
+    width: 45px !important;
+    height: 45px !important;
+    border-width: 3px !important;
+    color: #21261F !important;
+    position: absolute !important;
+    bottom: 25px;
+    left: 46%;
+}

@@ -1,0 +1,9 @@
+.hover {
+    cursor: pointer;
+}
+.hover path {
+    transition: all 0.3s ease;
+}
+.hover:hover path {
+    fill: #b9bcbc;
+}

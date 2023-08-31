@@ -1,0 +1,16 @@
+.input {
+    font-family: 'Montserrat';
+    height: 48px !important;
+    border: none !important;
+    background-color: #EBEBEB !important;
+    color: #5A5A5A !important;
+    font-weight: 500 !important;
+}
+.input::placeholder {
+    font-family: 'Montserrat';
+    color: #5A5A5A !important;
+    font-weight: 500 !important;
+}
+.icon {
+    height: 100% !important;
+}
