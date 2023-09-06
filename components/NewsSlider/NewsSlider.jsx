@@ -11,8 +11,9 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const sliderSettings = {
   dots: true,
-  infinite: false,
+  infinite: true,
   autoplay: true,
+  arrows: false,
   speed: 400,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -41,10 +42,15 @@ const NewsSlider = ({ news }) => {
   }, []);
 
   useEffect(() => {
-    const lazyContainer = document.querySelector(".lazy-load-image-background");
+    const lazyContainer = document.querySelectorAll(
+      ".lazy-load-image-background"
+    );
 
     if (!news?.length) {
       const fullScreen = document.querySelector(".homePage_fullScreen___a3rE");
+      const previewContainer = document.querySelector(
+        ".CategoriesPreview_container__IL_QJ"
+      );
       const categoriesList = document.querySelector(
         ".CategoriesPreview_categoriesList__IdTxo"
       );
@@ -54,20 +60,30 @@ const NewsSlider = ({ news }) => {
 
       fullScreen.style.minHeight = "auto";
       fullScreen.style.paddingBottom = "50px";
-      categoriesList.style.width = "100%";
+      categoriesList.style.minWidth = "100%";
       categoriesList.style.flexDirection = "row";
       categoriesList.style.justifyContent = "space-between";
+      previewContainer.style.display = "flex";
 
       if (screenWidth < 1100) {
         fullScreen.style.paddingBottom = "0";
+        previewContainer.style.display = "none";
       }
       if (screenWidth < 768) {
         catalog.style.marginTop = "25px";
       }
     }
-    if (screenWidth < 768 && lazyContainer)
-      lazyContainer.style.height = "225px";
-    if (screenWidth < 470 && lazyContainer) lazyContainer.style.height = "auto";
+
+    if (screenWidth < 768 && lazyContainer.length) {
+      lazyContainer.forEach((item) => {
+        item.style.height = "225px";
+      });
+    }
+    if (screenWidth < 470 && lazyContainer.length) {
+      lazyContainer.forEach((item) => {
+        item.style.height = "auto";
+      });
+    }
   }, [screenWidth]);
 
   return screenWidth > 768 ? (

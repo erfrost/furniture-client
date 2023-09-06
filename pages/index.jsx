@@ -6,23 +6,38 @@ import CategoriesPreview from "@/components/CategoriesPreview/CategoriesPreview"
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
+import {
+  cartItemsState,
+  categoriesState,
+  favoriteState,
+  subcategoriesState,
+} from "@/storage/atoms";
 import styles from "@/styles/homePage.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
+import { getCartFromCookie } from "@/utils/cart";
+import { getFavoritesFromCookie } from "@/utils/favorites";
 
 const Index = ({ categories, subcategories, discountItems, news, error }) => {
   const [categoriesRecoil, setCategoriesRecoil] =
     useRecoilState(categoriesState);
   const [subcategoriesRecoil, setSubcategoriesRecoil] =
     useRecoilState(subcategoriesState);
+  const [, setCart] = useRecoilState(cartItemsState);
+  const [, setFavorite] = useRecoilState(favoriteState);
   const [screenWidth, setScreenWidth] = useState(null);
 
   useEffect(() => {
     if (categories) setCategoriesRecoil(categories);
     if (subcategories) setSubcategoriesRecoil(subcategories);
+
+    const cartItems = getCartFromCookie();
+    const favoriteItems = getFavoritesFromCookie();
+
+    setCart(cartItems);
+    setFavorite(favoriteItems);
   }, []);
 
   useEffect(() => {
@@ -57,21 +72,21 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
-            <MobileNav categories={categories} />
-            <CategoriesPreview categories={categories} news={news} />
+            <MobileNav categories={categoriesRecoil} />
+            <CategoriesPreview categories={categoriesRecoil} news={news} />
           </div>
         ) : (
           <div className={styles.fullScreen}>
             <Header />
             <CategoriesSelect
-              categories={categories}
-              subcategories={subcategories}
+              categories={categoriesRecoil}
+              subcategories={subcategoriesRecoil}
             />
-            <CategoriesPreview categories={categories} news={news} />
+            <CategoriesPreview categories={categoriesRecoil} news={news} />
           </div>
         )}
 
-        <CategoriesCatalog categories={categories} />
+        <CategoriesCatalog categories={categoriesRecoil} />
         {discountItems?.length ? (
           <div className={styles.catalogContainer}>
             <span className={styles.catalogTitle}>Мебель со скидкой</span>

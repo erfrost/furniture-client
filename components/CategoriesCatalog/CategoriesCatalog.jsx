@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import CategoryItem from "../CategoryItem/CategoryItem";
 import styles from "./CategoriesCatalog.module.css";
 

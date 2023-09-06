@@ -10,7 +10,17 @@ export const subcategoriesState = atom({
   default: [],
 });
 
-export const searchItemsState = atom({
-  key: "searchItemsState",
+export const cartItemsState = atom({
+  key: "cartItemsState",
   default: [],
+});
+
+export const favoriteState = atom({
+  key: "favoriteState",
+  default: [],
+});
+
+export const sortState = atom({
+  key: "sortState",
+  default: "none",
 });

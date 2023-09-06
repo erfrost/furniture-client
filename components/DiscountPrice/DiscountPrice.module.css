@@ -7,10 +7,12 @@
     gap: 10px;
 }
 .newPrice {
+    width: auto !important;
     font-weight: 600;
     font-size: 22px;
 }
 .oldPrice {
+    width: auto !important;
     font-weight: 600;
     font-size: 16px;
     color: #828282;

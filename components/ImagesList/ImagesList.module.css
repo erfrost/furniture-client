@@ -1,0 +1,41 @@
+.imagesList {
+    min-width: 80px;
+    max-height: 385px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    position: relative;
+}
+.imagesList::-webkit-scrollbar {
+    width: 0;
+}
+.miniImage {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+}
+/* .arrowContainer {
+    width: 31px;
+    height: 31px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.top {
+    top: 0;
+}
+.bottom {
+    bottom: 0;
+} */
+
+@media screen and (max-width: 1300px) {
+    .imagesList {
+        max-height: 325px;
+    }
+}

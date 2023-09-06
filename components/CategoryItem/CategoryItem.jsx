@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./CategoryItem.module.css";
 import { BACKEND_IMAGES_URL } from "@/config";
 import axiosInstance from "@/axios.config";
-import Icon from "@/assets/ellipseArrow.png";
+import Icon from "@/assets/subcategoryIcon.svg";
 import { useEffect, useState } from "react";
 import AlertInfo from "../AlertInfo/AlertInfo";
 import { useRouter } from "next/router";

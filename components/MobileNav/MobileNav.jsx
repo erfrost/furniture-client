@@ -10,7 +10,7 @@ import logo from "@/assets/logoBlack.svg";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
 
-const MobileNav = () => {
+const MobileNav = ({ categories }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -81,6 +81,19 @@ const MobileNav = () => {
     };
   }, [isOpen]);
 
+  const goToCategories = () => {
+    setIsOpen(false);
+
+    setTimeout(() => {
+      const catalog = document.querySelector(
+        ".CategoriesCatalog_container__4lSB5"
+      );
+      if (catalog) {
+        catalog.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300);
+  };
+
   return (
     <div className={styles.container}>
       <div
@@ -89,19 +102,15 @@ const MobileNav = () => {
       >
         <HamburgerIcon color="#697862" boxSize="60%" />
       </div>
-      <div
-        className={styles.menu}
-        // onTouchStart={handleTouchStart}
-        // onTouchMove={handleTouchMove}
-      >
+      <div className={styles.menu}>
         <Search
           searchText={searchText}
           setSearchText={setSearchText}
           onEnterClick={handleKeyDown}
         />
-        <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
+        <div className={styles.link} onClick={goToCategories}>
           Каталог
-        </Link>
+        </div>
         <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
           О нас
         </Link>

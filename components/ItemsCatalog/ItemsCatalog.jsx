@@ -3,31 +3,63 @@ import ItemCard from "../ItemCard/ItemCard";
 import styles from "./ItemsCatalog.module.css";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "../AlertInfo/AlertInfo";
-import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import { throttle } from "lodash";
 
-const ItemsCatalog = ({ items, isDiscountPage }) => {
+const ItemsCatalog = ({
+  items,
+  isDiscountPage,
+  queryCategoryId,
+  querySubcategoryId,
+  querySearch,
+}) => {
   const [allItems, setAllItems] = useState(items);
   const [offset, setOffset] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [reqError, setReqError] = useState(null);
+  let nullMoreItems = false;
 
+  useEffect(() => {
+    if (!items?.length) {
+      const footer = document.querySelector(".Footer_container__Mn8SS");
+      footer.style.position = "absolute";
+      footer.style.bottom = "0";
+    }
+  }, [items]);
+
+  useEffect(() => {
+    setAllItems(items);
+  }, [items]);
+  console.log(nullMoreItems);
   const loadMoreItems = async () => {
-    if (!isLoading) {
+    if (!isLoading && !nullMoreItems) {
       try {
         setIsLoading(true);
         if (isDiscountPage) {
           const items = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
           );
+          if (!items.data.length) nullMoreItems = true;
           setAllItems((prevState) => [...prevState, ...items.data]);
         } else {
-          const items = await axiosInstance.get(
-            `items?limit=25&offset=${offset}`
-          );
+          let items;
+          if (queryCategoryId) {
+            items = await axiosInstance.get(
+              `items/by_category/${queryCategoryId}?limit=25&offset=${offset}`
+            );
+          } else if (querySubcategoryId) {
+            items = await axiosInstance.get(
+              `items/by_subcategory/${querySubcategoryId}?limit=25&offset=${offset}`
+            );
+          } else if (querySearch) {
+            items = await axiosInstance.get(
+              `items/search?search=${querySearch}&limit=25&offset=${offset}`
+            );
+          }
+          if (!items.data.length) nullMoreItems = true;
           setAllItems((prevState) => [...prevState, ...items.data]);
         }
       } catch (error) {
+        console.log("error");
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"
@@ -49,12 +81,8 @@ const ItemsCatalog = ({ items, isDiscountPage }) => {
         footerHeight = footer.offsetHeight;
       }
 
-      if (
-        scrollTop + clientHeight >= scrollHeight - footerHeight &&
-        !isLoading
-      ) {
+      if (scrollTop + clientHeight >= scrollHeight - footerHeight)
         loadMoreItems();
-      }
     }, 500)
   ).current;
 
@@ -72,15 +100,14 @@ const ItemsCatalog = ({ items, isDiscountPage }) => {
         {allItems?.map((item) => (
           <ItemCard key={item._id} item={item} />
         ))}
-        {reqError && (
-          <AlertInfo
-            title="Произошла ошибка:"
-            description={reqError}
-            type="error"
-          />
-        )}
       </div>
-      {isLoading && <LoadSpinner />}
+      {reqError && (
+        <AlertInfo
+          title="Произошла ошибка:"
+          description={reqError}
+          type="error"
+        />
+      )}
     </>
   );
 };

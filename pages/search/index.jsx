@@ -1,11 +1,11 @@
-import SearchPageSEO from "@/SEO/SearchPageSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
+import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ const SearchPage = ({ items, error }) => {
   const router = useRouter();
   const { query } = router;
   const searchText = query.search;
-
+  console.log(items);
   useEffect(() => {
     const fetchCategoriesAndSubcategories = async () => {
       if (!categories.length && !subcategories.length) {
@@ -62,33 +62,35 @@ const SearchPage = ({ items, error }) => {
   }, []);
 
   return (
-    <>
-      <SearchPageSEO />
-      <div className={styles.container}>
-        {screenWidth < 768 ? (
-          <div className={styles.fullScreen}>
-            <MobileNav categories={categories} />
-          </div>
-        ) : (
-          <div className={styles.fullScreen}>
-            <Header />
-            <CategoriesSelect
-              categories={categories}
-              subcategories={subcategories}
-            />
-          </div>
-        )}
-        <div className={styles.content}>
-          <div className={styles.titleContainer}>
-            <span className={styles.searchText}>Поиск «{searchText}»</span>
-            <RouteToHome />
-          </div>
-          <span className={styles.itemsCount}>
-            Найдено: {items.length} товаров
-          </span>
-          <ItemsCatalog items={items} isDiscountPage={false} />
+    <div className={styles.container}>
+      {screenWidth < 768 ? (
+        <div className={styles.fullScreen}>
+          <MobileNav categories={categories} />
         </div>
+      ) : (
+        <div className={styles.fullScreen}>
+          <Header />
+          <CategoriesSelect
+            categories={categories}
+            subcategories={subcategories}
+          />
+        </div>
+      )}
+      <div className={styles.content}>
+        <CatalogTitle
+          title={`Поиск «${searchText}»`}
+          setSortedItems={setItemsState}
+        />
+        <span className={styles.itemsCount}>
+          Найдено: {items.length} товаров
+        </span>
+        <ItemsCatalog
+          items={itemsState}
+          isDiscountPage={false}
+          querySearch={searchText}
+        />
       </div>
+      <Footer />
       {reqError && (
         <AlertInfo
           title="Произошла ошибка:"
@@ -96,14 +98,14 @@ const SearchPage = ({ items, error }) => {
           type="error"
         />
       )}
-    </>
+    </div>
   );
 };
 
 export async function getServerSideProps({ query }) {
   try {
     const items = await axiosInstance.get(
-      `items/search?search=${query.search}?limit=25`
+      `items/search?search=${query.search}&limit=25`
     );
 
     return {

@@ -1,11 +1,12 @@
 import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
+import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
 import { useRouter } from "next/router";
@@ -21,6 +22,26 @@ const Index = ({ items, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
+  const { categoryId } = router.query;
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `items/by_category/${categoryId}?limit=25`
+        );
+        setItemsState(response.data);
+      } catch (error) {
+        console.log(error);
+        setReqError(
+          error?.response?.data?.message ||
+            "Произошла ошибка запроса. Попробуйте позднее"
+        );
+      }
+    };
+
+    fetchItems();
+  }, [categoryId]);
 
   useEffect(() => {
     const fetchCategoriesAndSubcategories = async () => {
@@ -73,7 +94,9 @@ const Index = ({ items, error }) => {
 
   return (
     <>
-      <CatalogSEO title={categoryTitle + " | Дом"} />
+      <CatalogSEO
+        title={categoryTitle ? categoryTitle : "Каталог" + " | Дом"}
+      />
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
@@ -89,17 +112,19 @@ const Index = ({ items, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <div className={styles.titleContainer}>
-            <span className={styles.searchText}>{categoryTitle}</span>
-            <RouteToHome />
-          </div>
+          <CatalogTitle title={categoryTitle} setSortedItems={setItemsState} />
           <span className={styles.itemsCount}>
-            {!items.length
+            {!itemsState?.length
               ? "Ничего не найдено"
-              : `Найдено: ${items?.length} товаров`}
+              : `Найдено: ${itemsState?.length} товаров`}
           </span>
-          <ItemsCatalog items={items} isDiscountPage={false} />
+          <ItemsCatalog
+            items={itemsState}
+            isDiscountPage={false}
+            queryCategoryId={categoryId}
+          />
         </div>
+        <Footer />
       </div>
       {reqError && (
         <AlertInfo

@@ -1,11 +1,12 @@
 import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
+import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
 import { useRouter } from "next/router";
@@ -21,6 +22,7 @@ const Index = ({ items, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
+  const { subcategoryId } = router;
 
   useEffect(() => {
     const fetchCategoriesAndSubcategories = async () => {
@@ -74,7 +76,9 @@ const Index = ({ items, error }) => {
 
   return (
     <>
-      <CatalogSEO title={subcategoryTitle + " | Дом"} />
+      <CatalogSEO
+        title={subcategoryTitle ? subcategoryTitle : "Каталог" + " | Дом"}
+      />
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
@@ -90,15 +94,22 @@ const Index = ({ items, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <div className={styles.titleContainer}>
-            <span className={styles.searchText}>{subcategoryTitle}</span>
-            <RouteToHome />
-          </div>
+          <CatalogTitle
+            title={subcategoryTitle}
+            setSortedItems={setItemsState}
+          />
           <span className={styles.itemsCount}>
-            Найдено: {items?.length} товаров
+            {!itemsState?.length
+              ? "Ничего не найдено"
+              : `Найдено: ${itemsState?.length} товаров`}
           </span>
-          <ItemsCatalog items={items} isDiscountPage={false} />
+          <ItemsCatalog
+            items={itemsState}
+            isDiscountPage={false}
+            querySubcategoryId={subcategoryId}
+          />
         </div>
+        <Footer />
       </div>
       {reqError && (
         <AlertInfo
