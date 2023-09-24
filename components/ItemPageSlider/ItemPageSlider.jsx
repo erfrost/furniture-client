@@ -18,15 +18,6 @@ const sliderSettings = {
 };
 
 const ItemPageSlider = ({ images }) => {
-  //   useEffect(() => {
-  //     const slick = document.querySelectorAll(".slick-active");
-  //     slick.forEach((el) => {
-  //       if (el.localName === "li") {
-  //         const currentDot = el.children[0];
-  //       }
-  //     });
-  //   }, []);
-
   return (
     <Slider {...sliderSettings} className={styles.slider}>
       {images?.map((img, index) => (

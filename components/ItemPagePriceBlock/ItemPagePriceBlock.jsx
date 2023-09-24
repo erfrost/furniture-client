@@ -40,12 +40,6 @@ const ItemPagePriceBlock = ({ item }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (inFavoriteActive) {
-  //     addToFavorites(item._id);
-  //   } else removeFromFavorites(item._id);
-  // }, [inFavoriteActive]);
-
   useEffect(() => {
     setTimeout(() => {
       if (count > 0) {

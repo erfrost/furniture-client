@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import RouteToHome from "../RouteToHome/RouteToHome";
 import styles from "./CatalogTitle.module.css";
 import { useRecoilState } from "recoil";
