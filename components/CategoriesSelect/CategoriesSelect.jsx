@@ -3,7 +3,6 @@ import styles from "./CategoriesSelect.module.css";
 import Icon from "@/assets/catalogIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Spinner } from "@chakra-ui/react";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);

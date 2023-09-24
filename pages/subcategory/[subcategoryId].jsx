@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
@@ -22,10 +23,10 @@ const Index = ({ items, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
-  const { subcategoryId } = router;
+  const { subcategoryId } = router.query;
 
   useEffect(() => {
-    const fetchCategoriesAndSubcategories = async () => {
+    async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
         try {
           const categoriesAndSubcategories = await axiosInstance.get(
@@ -52,7 +53,7 @@ const Index = ({ items, error }) => {
         );
         setSubcategoryTitle(currentSubcategory?.title);
       }
-    };
+    }
 
     fetchCategoriesAndSubcategories();
   }, []);
@@ -73,11 +74,11 @@ const Index = ({ items, error }) => {
       }
     };
   }, []);
-
+  console.log(subcategoryTitle);
   return (
     <>
       <CatalogSEO
-        title={subcategoryTitle ? subcategoryTitle : "Каталог" + " | Дом"}
+        title={(subcategoryTitle ? subcategoryTitle : "Каталог") + " | Дом"}
       />
       <div className={styles.container}>
         {screenWidth < 768 ? (

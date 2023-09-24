@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./Header.module.css";
 import { PhoneIcon } from "@chakra-ui/icons";
 import CartIcon from "@/assets/cartIcon";
@@ -9,20 +10,14 @@ import { useRouter } from "next/router";
 import logo from "@/assets/logoBlack.svg";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  useDisclosure,
-} from "@chakra-ui/react";
 import { getFavoritesFromCookie } from "@/utils/favorites";
 import axiosInstance from "@/axios.config";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
-import arrow from "@/assets/swiperArrow.svg";
+import AlertInfo from "../AlertInfo/AlertInfo";
 
 const Header = () => {
-  const { onOpen, onClose, isOpen } = useDisclosure();
+  const [popoverActive, setPopoverActive] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [reqError, setReqError] = useState(null);
@@ -37,31 +32,49 @@ const Header = () => {
   };
 
   const fetchFavoriteItems = async () => {
-    if (!favoriteItems.length) {
-      try {
-        setIsLoading(true);
-
-        const items = await axiosInstance.post("items/favorites", {
-          itemIds: getFavoritesFromCookie(),
-        });
-        console.log(items);
-        setFavoriteItems(items.data);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      } finally {
-        setIsLoading(false);
-      }
+    try {
+      setIsLoading(true);
+      const items = await axiosInstance.post("items/by_ids", {
+        itemIds: getFavoritesFromCookie(),
+      });
+      console.log(items);
+      setFavoriteItems(items.data);
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    const popover = document.querySelector(".chakra-popover__popper");
-    if (popover) {
-      popover.style.width = "586px";
+    if (popoverActive) {
+      fetchFavoriteItems();
     }
+  }, [popoverActive]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const popoverContent = document.querySelector(
+        `.${styles.popoverContent}`
+      );
+      const icon = document.getElementById("favoriteIcon");
+      if (
+        popoverContent &&
+        !popoverContent.contains(e.target) &&
+        !icon.contains(e.target)
+      ) {
+        setPopoverActive(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -85,48 +98,50 @@ const Header = () => {
         setSearchText={setSearchText}
         onEnterClick={handleKeyDown}
       />
-      <div className={styles.phoneContainer}>
+      <Link href="tel: +7 (929) 298-01-23" className={styles.phoneContainer}>
         <div className={styles.photoIcon}>
           <PhoneIcon color="#262626" fontSize="large" boxSize="45%" />
         </div>
-        <a href="tel:" className={styles.phone}>
-          +7 (951) 117-28-56
-        </a>
-      </div>
-      <Popover
-        isOpen={isOpen}
-        onOpen={() => {
-          onOpen();
-          fetchFavoriteItems();
-        }}
-        onClose={onClose}
-        placement="bottom-end"
-      >
-        <PopoverTrigger>
-          <div>
-            <HeartIcon />
-          </div>
-        </PopoverTrigger>
-        <PopoverContent className={styles.popoverContent}>
-          {/* <div className={`${styles.swiperBtn} ${styles.leftBtn}`}>
-            <Image src={arrow} alt="btn" />
-          </div> */}
+        <span className={styles.phone}>+7 (929) 298-01-23</span>
+      </Link>
+      <div className={styles.favoriteRelative}>
+        <div
+          id="favoriteIcon"
+          onClick={() => setPopoverActive((prevState) => !prevState)}
+        >
+          <HeartIcon />
+        </div>
+        <div
+          className={`${styles.popoverContent} ${
+            popoverActive ? styles.show : null
+          }`}
+        >
           <div className={styles.popoverHeader}>Избранные товары</div>
           {isLoading ? (
             <LoadSpinner />
           ) : (
             <div className={styles.list}>
-              {favoriteItems.map((item) => (
-                <FavoriteItem key={item._id} item={item} />
-              ))}
+              {favoriteItems.length ? (
+                favoriteItems.map((item) => (
+                  <FavoriteItem key={item._id} item={item} />
+                ))
+              ) : (
+                <span className={styles.nullFavorites}>Ничего не найдено</span>
+              )}
             </div>
           )}
-          {/* <div className={`${styles.swiperBtn} ${styles.rightBtn}`}>
-            <Image src={arrow} alt="btn" />
-          </div> */}
-        </PopoverContent>
-      </Popover>
-      <CartIcon />
+        </div>
+      </div>
+      <Link href="/cart">
+        <CartIcon />
+      </Link>
+      {reqError && (
+        <AlertInfo
+          title="Произошла ошибка:"
+          description={reqError}
+          type="error"
+        />
+      )}
     </div>
   );
 };

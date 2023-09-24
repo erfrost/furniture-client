@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ItemInfoSEO from "@/SEO/ItemInfoSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
@@ -10,18 +11,13 @@ import ItemPageSlider from "@/components/ItemPageSlider/ItemPageSlider";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { BACKEND_IMAGES_URL } from "@/config";
-import {
-  cartItemsState,
-  categoriesState,
-  favoriteState,
-  subcategoriesState,
-} from "@/storage/atoms";
+import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import cancelAction from "@/utils/cancelAction";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 const Index = ({ item, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -29,8 +25,6 @@ const Index = ({ item, error }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-  const cart = useRecoilValue(cartItemsState);
-  const favorite = useRecoilValue(favoriteState);
 
   const router = useRouter();
 
@@ -48,7 +42,7 @@ const Index = ({ item, error }) => {
   }, [item]);
 
   useEffect(() => {
-    const fetchCategoriesAndSubcategories = async () => {
+    async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
         try {
           const categoriesAndSubcategories = await axiosInstance.get(
@@ -66,7 +60,7 @@ const Index = ({ item, error }) => {
           );
         }
       }
-    };
+    }
 
     fetchCategoriesAndSubcategories();
   }, []);

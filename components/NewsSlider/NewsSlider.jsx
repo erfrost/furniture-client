@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./NewsSlider.module.css";
 import cancelAction from "@/utils/cancelAction";
 import { useEffect, useState } from "react";
@@ -12,9 +13,9 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 const sliderSettings = {
   dots: true,
   infinite: true,
-  autoplay: true,
   arrows: false,
   speed: 400,
+  autoplay: true,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -45,6 +46,7 @@ const NewsSlider = ({ news }) => {
     const lazyContainer = document.querySelectorAll(
       ".lazy-load-image-background"
     );
+    const images = document.querySelectorAll(".NewsSlider_sliderImage__LO5vh");
 
     if (!news?.length) {
       const fullScreen = document.querySelector(".homePage_fullScreen___a3rE");
@@ -73,10 +75,10 @@ const NewsSlider = ({ news }) => {
         catalog.style.marginTop = "25px";
       }
     }
-
+    images.forEach((el) => (el.parentElement.style.width = "50%"));
     if (screenWidth < 768 && lazyContainer.length) {
       lazyContainer.forEach((item) => {
-        item.style.height = "225px";
+        item.style.maxWidth = "225px";
       });
     }
     if (screenWidth < 470 && lazyContainer.length) {
@@ -143,7 +145,12 @@ const NewsSlider = ({ news }) => {
               />
               <span className={styles.titleSubmain}>{item.description}</span>
             </div>
-            <div className={styles.btn}>Перейти к разделу</div>
+            <div
+              className={styles.btn}
+              onClick={() => router.push(`/subcategory/${item.subcategory_id}`)}
+            >
+              Перейти к разделу
+            </div>
           </div>
         ))}
       </Slider>

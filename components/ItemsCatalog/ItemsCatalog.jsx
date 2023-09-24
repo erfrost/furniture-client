@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import styles from "./ItemsCatalog.module.css";
@@ -29,7 +30,7 @@ const ItemsCatalog = ({
   useEffect(() => {
     setAllItems(items);
   }, [items]);
-  console.log(nullMoreItems);
+
   const loadMoreItems = async () => {
     if (!isLoading && !nullMoreItems) {
       try {
@@ -59,7 +60,6 @@ const ItemsCatalog = ({
           setAllItems((prevState) => [...prevState, ...items.data]);
         }
       } catch (error) {
-        console.log("error");
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"

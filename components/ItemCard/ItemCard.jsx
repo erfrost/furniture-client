@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./ItemCard.module.css";
 import { BACKEND_IMAGES_URL } from "@/config";
 import CartIcon from "@/assets/cartIcon";
@@ -6,34 +7,39 @@ import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRouter } from "next/router";
-import { addToCart, getCartFromCookie } from "@/utils/cart";
-import { useEffect } from "react";
+import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
+import { useEffect, useState } from "react";
 
 const ItemCard = ({ item }) => {
+  const [activeBtn, setActiveBtn] = useState(false);
   const router = useRouter();
+  const cart = getCartFromCookie();
+  const itemExists = cart.some((el) => el.itemId === item._id);
 
+  useEffect(() => {
+    if (itemExists) {
+      setActiveBtn(true);
+    }
+  }, []);
   const procent =
     "-" +
     Math.round((1 - item.discountPrice / item.price) * 100).toString() +
     "%";
 
-  const onCartAdd = () => {
-    const cart = getCartFromCookie();
-    const currentItem = cart.find((el) => el.itemId === item._id);
-
-    if (currentItem) {
-      console.log(currentItem);
-      const count = currentItem.count;
-      addToCart(item._id, count + 1);
-    } else addToCart(item._id, 1);
-
-    console.log(getCartFromCookie());
+  const onCartAdd = (e) => {
+    if (cart.some((el) => el.itemId === item._id)) {
+      removeFromCart(item._id);
+      setActiveBtn(false);
+    } else {
+      addToCart(item._id, 1);
+      setActiveBtn(true);
+    }
   };
 
   useEffect(() => {
-    const lazyLoad = document.querySelectorAll(".lazy-load-image-background");
-    if (lazyLoad.length) {
-      lazyLoad.forEach((el) => (el.style.width = "100%"));
+    const images = document.querySelectorAll(".ItemCard_image__mTZsx");
+    if (images.length) {
+      images.forEach((el) => (el.parentElement.style.minWidth = "100%"));
     }
   }, []);
 
@@ -68,7 +74,12 @@ const ItemCard = ({ item }) => {
         >
           ПОДРОБНЕЕ
         </div>
-        <div className={styles.inCartBtn} onClick={onCartAdd}>
+        <div
+          className={`${styles.inCartBtn} ${
+            activeBtn ? styles.activeCart : null
+          }`}
+          onClick={onCartAdd}
+        >
           <CartIcon />
         </div>
       </div>

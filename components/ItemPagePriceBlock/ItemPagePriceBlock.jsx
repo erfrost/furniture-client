@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import formattedNumber from "@/utils/formattedNumber";
 import styles from "./ItemPagePriceBlock.module.css";
 import { useEffect, useState } from "react";
 import minusIcon from "@/assets/minus.svg";
 import plusIcon from "@/assets/plus.svg";
 import Image from "next/image";
-import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
+import { addToCart, removeFromCart } from "@/utils/cart";
 import {
   addToFavorites,
   getFavoritesFromCookie,
@@ -19,26 +20,31 @@ const ItemPagePriceBlock = ({ item }) => {
   useEffect(() => {
     const favoriteItems = getFavoritesFromCookie();
     const currentItem = favoriteItems.find((id) => id === item._id);
-    console.log(favoriteItems, item);
     if (currentItem) {
       setInFavoriteActive(true);
     }
   }, []);
-  console.log(inFavoriteActive);
+
   const handleInCart = () => {
     setInCartActive(true);
     setCount(1);
   };
 
   const onFollow = () => {
-    setInFavoriteActive((prevState) => !prevState);
+    if (!inFavoriteActive) {
+      addToFavorites(item._id);
+      setInFavoriteActive(true);
+    } else {
+      removeFromFavorites(item._id);
+      setInFavoriteActive(false);
+    }
   };
 
-  useEffect(() => {
-    if (inFavoriteActive) {
-      addToFavorites(item._id);
-    } else removeFromFavorites(item._id);
-  }, [inFavoriteActive]);
+  // useEffect(() => {
+  //   if (inFavoriteActive) {
+  //     addToFavorites(item._id);
+  //   } else removeFromFavorites(item._id);
+  // }, [inFavoriteActive]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -69,10 +75,7 @@ const ItemPagePriceBlock = ({ item }) => {
       )}
       {inCartActive ? (
         <div className={styles.rowBtns}>
-          <div
-            className={styles.linkBtn}
-            onClick={() => console.log(getCartFromCookie())}
-          >
+          <div className={styles.linkBtn}>
             <span className={styles.title1}>В корзине</span>
             <span className={styles.title2}>Перейти</span>
           </div>

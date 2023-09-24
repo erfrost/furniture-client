@@ -5,28 +5,8 @@ import TelegramWhite from "@/assets/telegramWhite";
 import OdnoklassnikiWhite from "@/assets/odnoklassnikiWhite";
 import VkWhite from "@/assets/vkWhite";
 import { Divider } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 
 const Footer = () => {
-  const [screenWidth, setScreenWidth] = useState(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    if (typeof window !== "undefined") {
-      setScreenWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
-      }
-    };
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -36,28 +16,34 @@ const Footer = () => {
         <div className={styles.infoContainer}>
           <div className={styles.listContainer}>
             <span className={styles.title}>Навигация</span>
-            <Link href="#" className={styles.link}>
+            <Link href="/aboutUs" className={styles.link}>
               О нас
             </Link>
-            <Link href="#" className={styles.link}>
-              Мероприятия
+            <Link href="/refund" className={styles.link}>
+              Условия возврата
             </Link>
-            <Link href="#" className={styles.link}>
-              Полезное
+            <Link href="/deliveryAndPayment" className={styles.link}>
+              Доставка и оплата
             </Link>
-            <Link href="#" className={styles.link}>
-              Вопрос-ответ
+            <Link href="/salons" className={styles.link}>
+              Салоны продаж
+            </Link>
+            <Link href="/kitchensToOrder" className={styles.link}>
+              Кухни на заказ
             </Link>
           </div>
           <div className={styles.listContainer}>
-            <span className={styles.title}>Навигация</span>
+            <span className={styles.title}>Контакты</span>
             <div className={styles.social}>
               <TelegramWhite />
               <VkWhite />
               <OdnoklassnikiWhite />
             </div>
-            <Link href="tel:">
-              <span className={styles.phoneNumber}>+7 (951) 117-56-39</span>
+            <Link href="mailto:89227720462@mail.ru">
+              <span className={styles.socialLink}>89227720462@mail.ru</span>
+            </Link>
+            <Link href="tel:+7 (929) 298-01-23">
+              <span className={styles.socialLink}>+7 (929) 298-01-23</span>
             </Link>
           </div>
         </div>

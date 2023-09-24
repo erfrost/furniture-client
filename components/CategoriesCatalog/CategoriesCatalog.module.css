@@ -22,14 +22,21 @@
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
+@media screen and (max-width: 1000px) {
+    .container {
+        padding-top: 100px;
+    }
+}
 @media screen and (max-width: 900px) {
     .container {
         padding: 0 20px;
+        padding-top: 100px;
     }
 }
 @media screen and (max-width: 768px) {
     .container {
         margin-top: 75px;
+        padding-top: 0;
     }
 }
 @media screen and (max-width: 750px) {

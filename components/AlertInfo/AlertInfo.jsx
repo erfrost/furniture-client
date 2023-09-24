@@ -10,8 +10,10 @@ const AlertInfo = ({ title, description, type }) => {
   return (
     <Alert status={type} className={styles.alert}>
       <AlertIcon />
-      <AlertTitle>{title}</AlertTitle>
-      <AlertDescription>{description}</AlertDescription>
+      <AlertTitle className={styles.title}>{title}</AlertTitle>
+      <AlertDescription className={styles.description}>
+        {description}
+      </AlertDescription>
     </Alert>
   );
 };

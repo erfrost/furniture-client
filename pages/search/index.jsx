@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
 import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
@@ -24,7 +25,7 @@ const SearchPage = ({ items, error }) => {
   const searchText = query.search;
   console.log(items);
   useEffect(() => {
-    const fetchCategoriesAndSubcategories = async () => {
+    async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
         try {
           const categoriesAndSubcategories = await axiosInstance.get(
@@ -39,7 +40,7 @@ const SearchPage = ({ items, error }) => {
           );
         }
       }
-    };
+    }
 
     fetchCategoriesAndSubcategories();
   }, []);

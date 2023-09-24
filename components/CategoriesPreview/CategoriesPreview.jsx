@@ -31,7 +31,7 @@ const CategoriesPreview = ({ categories, news }) => {
               alt="stool"
               width={160}
               height={152}
-              priority={true}
+              priority
               className={styles.image}
               onDragStart={cancelAction}
               onContextMenu={cancelAction}

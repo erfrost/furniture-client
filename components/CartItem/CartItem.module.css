@@ -1,0 +1,229 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+}
+.imageContainer {
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+.image {
+    width: 140px;
+    max-height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+}
+.texts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+.title {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.title:hover {
+    color: rgb(107, 107, 107);
+}
+.categoryAndSubcategory {
+    color: #4B4B4B;
+    font-size: 17px;
+    font-weight: 500;
+}
+.deleteBtn {
+    color: #525C4D;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.deleteBtn:hover {
+    color: black;
+}
+.countContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+.countBtns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+}
+.countBtn {
+    width: 46px;
+    height: 50px;
+    background-color: #E2E8CE;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.countBtn:hover {
+     background-color: #ccd2b0;
+}
+.disabledBtn {
+    background-color: #F0F0F0;
+    cursor: default;
+}
+.disabledBtn:hover {
+    background-color: #F0F0F0;
+}
+.onePrice {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1450px) {
+    .title {
+        font-size: 15px;
+    }
+    .categoryAndSubcategory {
+        font-size: 13px;
+    }
+    .deleteBtn {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 1300px) {
+    .title {
+        font-size: 20px;
+    }
+    .categoryAndSubcategory {
+        font-size: 17px;
+    }
+    .deleteBtn {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .title {
+        font-size: 15px;
+    }
+    .categoryAndSubcategory {
+        font-size: 13px;
+    }
+    .deleteBtn {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 975px) {
+    .image {
+        width: 110px;
+    }
+}
+@media screen and (max-width: 925px) {
+    .title {
+        font-size: 13px;
+    }
+    .categoryAndSubcategory {
+        font-size: 11px;
+    }
+    .deleteBtn {
+        font-size: 10px;
+    }
+    .countBtn {
+        width: 38px;
+        height: 42px;
+    }
+}
+@media screen and (max-width: 850px) {
+    .container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .image {
+        width: 140px;
+    }
+    .title {
+        font-size: 18px;
+    }
+    .categoryAndSubcategory {
+        font-size: 15px;
+    }
+    .deleteBtn {
+        font-size: 13px;
+    }
+    .countBtn {
+        width: 52px;
+        height: 56px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .image {
+        width: 125px;
+    }
+    .title {
+        font-size: 15px;
+    }
+    .categoryAndSubcategory {
+        font-size: 13px;
+    }
+    .deleteBtn {
+        font-size: 11px;
+    }
+    .countBtn {
+        width: 52px;
+        height: 56px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .imageContainer {
+        width: 100%;
+        flex-direction: column;
+    }
+    .imageLink {
+        width: 100%;
+        height: 250px;
+    }
+    .image {
+        width: 100%;
+    }
+    .info {
+        height: auto;
+    }
+}
+@media screen and (max-width: 475px) {
+    .imageLink {
+        height: 175px;
+    }
+    .title {
+        font-size: 13px;
+    }
+    .categoryAndSubcategory {
+        font-size: 11px;
+    }
+    .deleteBtn {
+        font-size: 12px;
+    }
+    .countBtn {
+        width: 46px;
+        height: 50px;
+    }
+}

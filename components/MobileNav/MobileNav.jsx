@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./MobileNav.module.css";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
@@ -9,11 +10,21 @@ import { useRouter } from "next/router";
 import logo from "@/assets/logoBlack.svg";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
+import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import FavoriteItem from "../FavoriteItem/FavoriteItem";
+import AlertInfo from "../AlertInfo/AlertInfo";
+import { getFavoritesFromCookie } from "@/utils/favorites";
+import axiosInstance from "@/axios.config";
+import { Divider } from "@chakra-ui/react";
 
 const MobileNav = ({ categories }) => {
+  const [popoverActive, setPopoverActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const [reqError, setReqError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -81,18 +92,57 @@ const MobileNav = ({ categories }) => {
     };
   }, [isOpen]);
 
-  const goToCategories = () => {
+  const goToCategories = async () => {
     setIsOpen(false);
+    if (router.pathname !== "/") {
+      await router.push("/");
 
-    setTimeout(() => {
-      const catalog = document.querySelector(
-        ".CategoriesCatalog_container__4lSB5"
-      );
-      if (catalog) {
-        catalog.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 300);
+      setTimeout(() => {
+        const catalog = document.querySelector(
+          ".CategoriesCatalog_container__4lSB5"
+        );
+        if (catalog) {
+          catalog.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      setTimeout(() => {
+        const catalog = document.querySelector(
+          ".CategoriesCatalog_container__4lSB5"
+        );
+        if (catalog) {
+          catalog.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    }
   };
+
+  const fetchFavoriteItems = async () => {
+    if (!favoriteItems.length) {
+      try {
+        setIsLoading(true);
+
+        const items = await axiosInstance.post("items/by_ids", {
+          itemIds: getFavoritesFromCookie(),
+        });
+        console.log(items);
+        setFavoriteItems(items.data);
+      } catch (error) {
+        setReqError(
+          error?.response?.data?.message ||
+            "Произошла ошибка запроса. Попробуйте позднее"
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (popoverActive) {
+      fetchFavoriteItems();
+    }
+  }, [popoverActive]);
 
   return (
     <div className={styles.container}>
@@ -111,17 +161,37 @@ const MobileNav = ({ categories }) => {
         <div className={styles.link} onClick={goToCategories}>
           Каталог
         </div>
-        <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
+        <Divider />
+        <Link
+          href="/aboutUs"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
           О нас
         </Link>
-        <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
-          Мероприятия
+        <Divider />
+        <Link
+          href="/refund"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
+          Условия возврата
         </Link>
-        <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
-          Полезное
+        <Divider />
+        <Link
+          href="/deliveryAndPayment"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
+          Доставка и оплата
         </Link>
-        <Link href="#" className={styles.link} onClick={() => setIsOpen(false)}>
-          Вопрос - ответ
+        <Divider />
+        <Link
+          href="/salons"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
+          Салоны продаж
         </Link>
       </div>
       <Link href="/" className={styles.logoLink}>
@@ -137,9 +207,47 @@ const MobileNav = ({ categories }) => {
         />
       </Link>
       <div className={styles.iconsContainer}>
-        <HeartIcon />
-        <CartIcon />
+        <div className={styles.favoriteRelative}>
+          <div
+            id="favoriteIcon"
+            onClick={() => setPopoverActive((prevState) => !prevState)}
+          >
+            <HeartIcon />
+          </div>
+          <div
+            className={`${styles.popoverContent} ${
+              popoverActive ? styles.show : null
+            }`}
+          >
+            <div className={styles.popoverHeader}>Избранные товары</div>
+            {isLoading ? (
+              <LoadSpinner />
+            ) : (
+              <div className={styles.list}>
+                {favoriteItems.length ? (
+                  favoriteItems.map((item) => (
+                    <FavoriteItem key={item._id} item={item} />
+                  ))
+                ) : (
+                  <span className={styles.nullFavorites}>
+                    Ничего не найдено
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+        <Link href="/cart">
+          <CartIcon />
+        </Link>
       </div>
+      {reqError && (
+        <AlertInfo
+          title="Произошла ошибка:"
+          description={reqError}
+          type="error"
+        />
+      )}
     </div>
   );
 };

@@ -68,6 +68,9 @@
 .inCartBtn svg {
     width: 65%;
 }
+.activeCart {
+    background-color: #dee3db;
+}
 
 @media screen and (max-width: 1350px) {
     .image {

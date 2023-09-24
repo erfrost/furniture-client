@@ -1,12 +1,29 @@
-import { Stack } from "@chakra-ui/react";
 import RouteToHome from "../RouteToHome/RouteToHome";
 import styles from "./CatalogTitle.module.css";
 import { useRecoilState } from "recoil";
 import { sortState } from "@/storage/atoms";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const CatalogTitle = ({ title, setSortedItems }) => {
   const [sort, setSort] = useRecoilState(sortState);
+  const [screenWidth, setScreenWidth] = useState(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    if (typeof window !== "undefined") {
+      setScreenWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
+  }, []);
 
   const onChangeSort = () => {
     if (sort === "none") {
@@ -35,18 +52,15 @@ const CatalogTitle = ({ title, setSortedItems }) => {
   }, [sort]);
 
   return (
-    <Stack
-      width="100%"
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-    >
+    <div className={styles.container}>
       <div className={styles.titleContainer}>
         <span className={styles.searchText}>{title}</span>
         <RouteToHome />
       </div>
       <div className={styles.filterContainer}>
-        <span className={styles.text}>Cортировка</span>
+        {screenWidth > 400 ? (
+          <span className={styles.text}>Cортировка</span>
+        ) : null}
         <div className={styles.btn} onClick={onChangeSort}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +98,7 @@ const CatalogTitle = ({ title, setSortedItems }) => {
           </svg>
         </div>
       </div>
-    </Stack>
+    </div>
   );
 };
 

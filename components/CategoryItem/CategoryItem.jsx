@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 import styles from "./CategoryItem.module.css";
 import { BACKEND_IMAGES_URL } from "@/config";
@@ -18,7 +19,7 @@ const CategoryItem = ({ category }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchSubcategories = async () => {
+    async function fetchSubcategories() {
       try {
         const subcategories = await axiosInstance.get(
           `subcategories/${category._id}`
@@ -31,25 +32,26 @@ const CategoryItem = ({ category }) => {
             "Произошла ошибка запроса. Попробуйте позднее"
         );
       }
-    };
+    }
 
     fetchSubcategories();
   }, []);
+
   return (
     <div className={styles.container}>
-      <Image
+      {/* <Image
         src={BACKEND_IMAGES_URL + category.photo_name}
         alt="category"
         width={250}
         height={150}
-        priority={true}
+        priority
         className={styles.image}
         draggable={false}
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
         onClick={() => router.push(`category/${category._id}`)}
-      />
-      {/* <LazyLoadImage
+      /> */}
+      <LazyLoadImage
         src={BACKEND_IMAGES_URL + category.photo_name}
         alt="category"
         effect="blur"
@@ -58,7 +60,7 @@ const CategoryItem = ({ category }) => {
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
         onClick={() => router.push(`category/${category._id}`)}
-      /> */}
+      />
       <Link href={`/category/${category._id}`} className={styles.title}>
         {category.title}
       </Link>
@@ -69,7 +71,7 @@ const CategoryItem = ({ category }) => {
             alt="icon"
             width={15}
             height={15}
-            priority={true}
+            priority
             onDragStart={cancelAction}
             onContextMenu={cancelAction}
           />

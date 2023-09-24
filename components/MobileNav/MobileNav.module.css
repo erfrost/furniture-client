@@ -54,6 +54,9 @@
 .link:hover {
     color: rgb(206, 206, 206);
 }
+.miniFont {
+    font-size: 13px;
+}
 .logoLink {
     position: absolute;
     top: 50%;
@@ -82,10 +85,73 @@
     min-width: 75px;
     height: 50px;
 }
+.favoriteRelative {
+    position: relative;
+}
+.popoverContent {
+    max-width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 64px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.show {
+    opacity: 1;
+    visibility: visible;
+}
+.popoverHeader {
+    color: black;
+    font-size: 25px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.nullFavorites {
+    font-size: 16px;
+}
+.list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow: auto;
+}
+.list::-webkit-scrollbar {
+    width: 0;
+}
 
 @media screen and (max-width: 550px) {
     .menu {
         width: 200px;
         transform: translate(-215px, 0px);
+    }
+}
+@media screen and (max-width: 550px) {
+    .popoverContent {
+        width: 100vw;
+        min-width: 100vw;
+        top: 52px;
+        right: -60px;
+        border-radius: 0;
+        padding-left: 10px;
+        padding-right: 10px
+    }
+}
+@media screen and (max-width: 375px) {
+    .popoverContent {
+        gap: 10px;
+    }
+    .popoverHeader {
+        font-size: 20px;
     }
 }

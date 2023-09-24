@@ -10,9 +10,16 @@
     font-weight: 500;
     font-size: 14px;
     color: #656565;
+    white-space: nowrap;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .routerTitle:hover {
     color: black;
+}
+
+@media screen and (max-width: 430px) {
+    .routerTitle {
+        font-size: 11px;
+    }
 }

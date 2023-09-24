@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
@@ -25,7 +26,7 @@ const Index = ({ items, error }) => {
   const { categoryId } = router.query;
 
   useEffect(() => {
-    const fetchItems = async () => {
+    async function fetchItems() {
       try {
         const response = await axiosInstance.get(
           `items/by_category/${categoryId}?limit=25`
@@ -38,13 +39,13 @@ const Index = ({ items, error }) => {
             "Произошла ошибка запроса. Попробуйте позднее"
         );
       }
-    };
+    }
 
     fetchItems();
   }, [categoryId]);
 
   useEffect(() => {
-    const fetchCategoriesAndSubcategories = async () => {
+    async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
         try {
           const categoriesAndSubcategories = await axiosInstance.get(
@@ -70,7 +71,7 @@ const Index = ({ items, error }) => {
         );
         setCategoryTitle(currentCategory?.title);
       }
-    };
+    }
 
     fetchCategoriesAndSubcategories();
   }, []);
@@ -95,7 +96,7 @@ const Index = ({ items, error }) => {
   return (
     <>
       <CatalogSEO
-        title={categoryTitle ? categoryTitle : "Каталог" + " | Дом"}
+        title={(categoryTitle ? categoryTitle : "Каталог") + " | Дом"}
       />
       <div className={styles.container}>
         {screenWidth < 768 ? (

@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+}
+.image {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.city {
+    font-size: 20px;
+    font-weight: 600;
+}
+.address {
+    font-size: 17px;
+}
+.phone {
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.phone:hover {
+    color: rgb(91, 91, 91);
+}
+
+@media screen and (max-width: 768px) {
+    .image {
+        height: 400px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .container {
+        gap: 15px;
+    }
+    .image {
+        height: 300px;
+    }
+    .city {
+        font-size: 17px;
+    }
+    .address {
+        font-size: 14px;
+    }
+    .phone {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 390px) {
+    .image {
+        height: 225px;
+    }
+}

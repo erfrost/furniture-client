@@ -1,10 +1,10 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import DiscountPrice from "../DiscountPrice/DiscountPrice";
 import styles from "./FavoriteItem.module.css";
 import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const FavoriteItem = ({ item }) => {
   const router = useRouter();
@@ -13,6 +13,15 @@ const FavoriteItem = ({ item }) => {
     "-" +
     Math.round((1 - item.discountPrice / item.price) * 100).toString() +
     "%";
+
+  useEffect(() => {
+    const LazyLoadContainer = document.querySelector(
+      ".lazy-load-image-background"
+    );
+    if (LazyLoadContainer) {
+      LazyLoadContainer.style.height = "156px !important";
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -26,7 +35,15 @@ const FavoriteItem = ({ item }) => {
           onClick={() => router.push(`/item/${item._id}`)}
         />
         {item.price > item.discountPrice ? (
-          <DiscountPrice item={item} procent={procent} />
+          <div className={styles.priceContainer}>
+            <span className={styles.newPrice}>
+              {formattedNumber(item.discountPrice) + " ₽"}
+            </span>
+            <span className={styles.oldPrice}>
+              {formattedNumber(item.price) + " ₽"}
+            </span>
+            <div className={styles.discountContainer}>{procent}</div>
+          </div>
         ) : (
           <span className={styles.price}>{formattedNumber(item.price)} ₽</span>
         )}
