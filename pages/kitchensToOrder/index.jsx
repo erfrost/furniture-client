@@ -91,7 +91,7 @@ const Index = ({ images, kitchens, error }) => {
           <RouteToHome />
           <OurWorksSwiper images={images} />
           <div className={styles.list}>
-            {kitchens.map((item) => (
+            {kitchens?.map((item) => (
               <div className={styles.item} key={item._id}>
                 <Link className={styles.link} href={`/kitchen/${item._id}`}>
                   <LazyLoadImage

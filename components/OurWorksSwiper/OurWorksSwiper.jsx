@@ -80,11 +80,12 @@ const OurWorksSwiper = ({ images }) => {
       </div>
       <span className={styles.title}>Наши работы</span>
       <div className={styles.swiper}>
-        {images.map((img, index) => (
+        {images?.map((img, index) => (
           <LazyLoadImage
             src={BACKEND_IMAGES_URL + img.photo_name}
             alt="work"
             className={styles.image}
+            effect="blur"
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}
