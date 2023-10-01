@@ -74,7 +74,7 @@ const Index = ({ items, error }) => {
       }
     };
   }, []);
-  console.log(subcategoryTitle);
+
   return (
     <>
       <CatalogSEO

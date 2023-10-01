@@ -62,7 +62,7 @@ const Index = ({ kitchen, error }) => {
       }
     };
   }, []);
-  console.log(kitchen);
+
   return (
     <>
       <div className={styles.container}>

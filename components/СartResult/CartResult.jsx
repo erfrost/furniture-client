@@ -11,7 +11,7 @@ const CartResult = ({ items, totalCount }) => {
     0
   );
   const discount = totalPrice - totalDiscountPrice;
-  console.log(totalCount);
+
   return (
     <div className={styles.container}>
       <div className={styles.btn}>Перейти к оформлению заказа</div>

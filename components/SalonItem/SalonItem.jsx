@@ -5,7 +5,6 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import Link from "next/link";
 
 const SalonItem = ({ salon }) => {
-  console.log(salon);
   return (
     <div className={styles.container}>
       <LazyLoadImage

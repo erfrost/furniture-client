@@ -125,7 +125,6 @@ const MobileNav = ({ categories }) => {
         const items = await axiosInstance.post("items/by_ids", {
           itemIds: getFavoritesFromCookie(),
         });
-        console.log(items);
         setFavoriteItems(items.data);
       } catch (error) {
         setReqError(
@@ -161,6 +160,14 @@ const MobileNav = ({ categories }) => {
         <div className={styles.link} onClick={goToCategories}>
           Каталог
         </div>
+        <Divider />
+        <Link
+          href="/kitchensToOrder"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
+          Кухни на заказ
+        </Link>
         <Divider />
         <Link
           href="/aboutUs"

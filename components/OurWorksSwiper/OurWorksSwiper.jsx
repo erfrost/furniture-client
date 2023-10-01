@@ -1,11 +1,10 @@
 import { BACKEND_IMAGES_URL } from "@/config";
 import styles from "./OurWorksSwiper.module.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
 import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { px } from "framer-motion";
+import Image from "next/image";
 
 const OurWorksSwiper = ({ images }) => {
   const [pxLength, setPxLength] = useState(300);
@@ -29,6 +28,18 @@ const OurWorksSwiper = ({ images }) => {
   }, []);
 
   useEffect(() => {
+    const list = document.querySelector(".OurWorksSwiper_swiper__TpkQo");
+
+    if (list) {
+      const lazyLoadList = Array.from(list.children);
+
+      lazyLoadList.forEach((el) => {
+        el.style.height = "100%";
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     if (screenWidth < 725) setPxLength(200);
     if (screenWidth < 550) setPxLength(150);
     else setPxLength(300);
@@ -49,12 +60,11 @@ const OurWorksSwiper = ({ images }) => {
 
       const totalImagesWidth =
         countImages * currentImageWidth + swiperGap * (countImages - 1);
-      console.log(swiperWidth, totalImagesWidth);
+
       if (swiperWidth < totalImagesWidth) {
         const arrows = document.querySelectorAll(
           ".OurWorksSwiper_arrow__bu5Jk"
         );
-        console.log(arrows);
         arrows.forEach((el) => (el.style.display = "flex"));
       }
     }
@@ -63,10 +73,12 @@ const OurWorksSwiper = ({ images }) => {
   const onScroll = (px) => {
     const swiper = document.querySelector(".OurWorksSwiper_swiper__TpkQo");
     if (swiper) {
+      console.log(px);
       swiper.scrollBy({
         left: px,
         behavior: "smooth",
       });
+      console.log(swiper.scrollLeft);
     }
   };
 
@@ -81,11 +93,12 @@ const OurWorksSwiper = ({ images }) => {
       <span className={styles.title}>Наши работы</span>
       <div className={styles.swiper}>
         {images?.map((img, index) => (
-          <LazyLoadImage
+          <Image
             src={BACKEND_IMAGES_URL + img.photo_name}
             alt="work"
             className={styles.image}
-            effect="blur"
+            width={100}
+            height={100}
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}

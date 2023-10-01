@@ -11,6 +11,7 @@ import {
   getFavoritesFromCookie,
   removeFromFavorites,
 } from "@/utils/favorites";
+import Link from "next/link";
 
 const ItemPagePriceBlock = ({ item }) => {
   const [inCartActive, setInCartActive] = useState(false);
@@ -69,10 +70,10 @@ const ItemPagePriceBlock = ({ item }) => {
       )}
       {inCartActive ? (
         <div className={styles.rowBtns}>
-          <div className={styles.linkBtn}>
+          <Link href="/cart" className={styles.linkBtn}>
             <span className={styles.title1}>В корзине</span>
             <span className={styles.title2}>Перейти</span>
-          </div>
+          </Link>
           <div className={styles.countBlock}>
             <div
               className={styles.countBtn}

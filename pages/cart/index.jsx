@@ -55,7 +55,6 @@ const Index = () => {
           setTotalCount(count);
         }
       } catch (error) {
-        console.log(error);
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"

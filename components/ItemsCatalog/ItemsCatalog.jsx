@@ -20,14 +20,6 @@ const ItemsCatalog = ({
   let nullMoreItems = false;
 
   useEffect(() => {
-    if (!items?.length) {
-      const footer = document.querySelector(".Footer_container__Mn8SS");
-      footer.style.position = "absolute";
-      footer.style.bottom = "0";
-    }
-  }, [items]);
-
-  useEffect(() => {
     setAllItems(items);
   }, [items]);
 

@@ -23,7 +23,11 @@ const SearchPage = ({ items, error }) => {
   const router = useRouter();
   const { query } = router;
   const searchText = query.search;
-  console.log(items);
+
+  useEffect(() => {
+    setItemsState(items);
+  }, [items]);
+
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {

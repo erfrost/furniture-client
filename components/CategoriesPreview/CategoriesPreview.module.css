@@ -26,18 +26,34 @@
     cursor: pointer;
     transition: all 0.3 ease;
 }
-.item:hover {
-    background: #ADBFA4;
+.item svg {
+    transition: all 0.3s ease;
+}
+/* .item:hover svg {
+    scale: 1.2;
+} */
+.item:hover .itemText {
+    scale: 1.1;
+    margin-left: 5px;
 }
 .itemText {
     font-weight: 600;
     font-size: 26px;
     color: white;
+    transition: all 0.3s ease;
 }
 .image {
     width: 160px;
     height: 152px;
     object-fit: fill;
+}
+.item svg {
+    width: 60px;
+    height: 35px;
+    transform: rotate(180deg);
+}
+.item svg path {
+    fill: white;
 }
 
 @media screen and (max-width: 1360px) {
@@ -48,7 +64,7 @@
         width: 350px;
     }
     .itemText {
-        font-size: 18px;
+        font-size: 20px;
     }
     .image {
         width: 125px;

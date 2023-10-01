@@ -33,7 +33,6 @@ const Index = ({ items, error }) => {
         );
         setItemsState(response.data);
       } catch (error) {
-        console.log(error);
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"

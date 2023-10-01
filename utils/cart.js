@@ -8,7 +8,7 @@ export const getCartFromCookie = () => {
 export const addToCart = (itemId, count) => {
   const cart = getCartFromCookie();
   const existingProduct = cart.find((item) => item.itemId === itemId);
-  console.log(count);
+
   if (existingProduct) {
     existingProduct.count = count;
   } else {

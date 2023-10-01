@@ -28,19 +28,6 @@ const Index = ({ item, error }) => {
 
   const router = useRouter();
 
-  const currentCategoryTitle = categories.find(
-    (cat) => cat._id === item.category_id
-  )?.title;
-  const currentSubcategoryTitle = subcategories.find(
-    (subcat) => subcat._id === item.subcategory_id
-  )?.title;
-
-  useEffect(() => {
-    if (!item) {
-      router.push("/");
-    }
-  }, [item]);
-
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -104,6 +91,17 @@ const Index = ({ item, error }) => {
       }
     }
   }, [screenWidth]);
+
+  if (!item) {
+    return null;
+  }
+
+  const currentCategoryTitle = categories.find(
+    (cat) => cat._id === item.category_id
+  )?.title;
+  const currentSubcategoryTitle = subcategories.find(
+    (subcat) => subcat._id === item.subcategory_id
+  )?.title;
 
   return (
     <>

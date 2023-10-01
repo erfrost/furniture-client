@@ -27,7 +27,7 @@ const Header = () => {
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      router.push(`search?search=${searchText}`);
+      router.push(`/search?search=${searchText}`);
     }
   };
 
@@ -37,7 +37,6 @@ const Header = () => {
       const items = await axiosInstance.post("items/by_ids", {
         itemIds: getFavoritesFromCookie(),
       });
-      console.log(items);
       setFavoriteItems(items.data);
     } catch (error) {
       setReqError(

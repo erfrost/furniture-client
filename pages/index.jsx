@@ -62,7 +62,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
             <MobileNav categories={categoriesRecoil} />
-            <CategoriesPreview categories={categoriesRecoil} news={news} />
+            <CategoriesPreview news={news} />
           </div>
         ) : (
           <div className={styles.fullScreen}>
@@ -71,7 +71,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
               categories={categoriesRecoil}
               subcategories={subcategoriesRecoil}
             />
-            <CategoriesPreview categories={categoriesRecoil} news={news} />
+            <CategoriesPreview news={news} />
           </div>
         )}
 
