@@ -10,9 +10,9 @@ jobs:
     name: Create docker image and push to registry, then start image
     runs-on: ubuntu-latest
     steps:
-    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+    - uses: de-vri-es/setup-git-credentials@v2
       with: 
-        token: https://erfrost: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@github.com/
+        credentials: https://erfrost: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@github.com/
       
     - name: Pull image and run container with .env variables from secrets
       uses: appleboy/ssh-action@v0.1.6
