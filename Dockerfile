@@ -1,16 +1,15 @@
-# Определение базового образа
-FROM node:18.16.1
+FROM node:19.6.0
 
-WORKDIR /app
+WORKDIR /client
 
-COPY package*.json ./
+COPY ./package.json /client
 
 RUN npm install
 
+COPY . /client
+
 RUN npm run build
 
-COPY . .
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+CMD ["npm", "start", "-p", "80"]
