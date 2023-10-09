@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull image and run container with .env variables from secrets
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@v0.1.6 oleksiyrudenko/gha-git-credentials@v2-latest
         with:
+          token: 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
           host: 31.184.254.214
           username: root
           password: 1awj3vkosi
