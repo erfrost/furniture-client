@@ -9,11 +9,7 @@ jobs:
   docker:
     name: Create docker image and push to registry, then start image
     runs-on: ubuntu-latest
-    steps:
-    - uses: de-vri-es/setup-git-credentials@v2
-      with: 
-        credentials: https://erfrost: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@github.com/
-      
+    steps: 
     - name: Pull image and run container with .env variables from secrets
       uses: appleboy/ssh-action@v0.1.6
       with:
