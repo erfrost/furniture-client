@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./Header.module.css";
 import { PhoneIcon } from "@chakra-ui/icons";
-import CartIcon from "@/assets/cartIcon";
+import cartIcon from "@/assets/cartIcon.svg";
 import Search from "../Search/Search";
-import HeartIcon from "@/assets/heartIcon";
+import heartIcon from "@/assets/heartIcon.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -108,7 +108,13 @@ const Header = () => {
           id="favoriteIcon"
           onClick={() => setPopoverActive((prevState) => !prevState)}
         >
-          <HeartIcon />
+          <Image
+            className={styles.heartIcon}
+            src={heartIcon}
+            alt="heartIcon"
+            width={50}
+            height={50}
+          />
         </div>
         <div
           className={`${styles.popoverContent} ${
@@ -132,7 +138,13 @@ const Header = () => {
         </div>
       </div>
       <Link href="/cart">
-        <CartIcon />
+        <Image
+          className={styles.cartIcon}
+          src={cartIcon}
+          alt="cartIcon"
+          width={50}
+          height={50}
+        />
       </Link>
       {reqError && (
         <AlertInfo

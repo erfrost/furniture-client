@@ -1,8 +1,9 @@
 import Link from "next/link";
 import styles from "./CategoriesSelect.module.css";
-import Icon from "@/assets/catalogIcon";
+import catalogIcon from "@/assets/catalogIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
@@ -39,7 +40,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
         className={styles.catalogBtn}
         onClick={() => setIsOpen((prevState) => !prevState)}
       >
-        <Icon />
+        <Image src={catalogIcon} alt="catalogIcon" width={30} height={30} />
         <span className={styles.catalogBtnText}>Каталог</span>
       </div>
       <div className={styles.categories}>

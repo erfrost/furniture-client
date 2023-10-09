@@ -2,8 +2,8 @@
 import styles from "./MobileNav.module.css";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
-import HeartIcon from "@/assets/heartIcon";
-import CartIcon from "@/assets/cartIcon";
+import heartIcon from "@/assets/heartIcon.svg";
+import cartIcon from "@/assets/cartIcon.svg";
 import Link from "next/link";
 import Search from "../Search/Search";
 import { useRouter } from "next/router";
@@ -219,7 +219,13 @@ const MobileNav = ({ categories }) => {
             id="favoriteIcon"
             onClick={() => setPopoverActive((prevState) => !prevState)}
           >
-            <HeartIcon />
+            <Image
+              className={styles.heartIcon}
+              src={heartIcon}
+              alt="heartIcon"
+              width={50}
+              height={50}
+            />
           </div>
           <div
             className={`${styles.popoverContent} ${
@@ -245,7 +251,13 @@ const MobileNav = ({ categories }) => {
           </div>
         </div>
         <Link href="/cart">
-          <CartIcon />
+          <Image
+            className={styles.cartIcon}
+            src={cartIcon}
+            alt="cartIcon"
+            width={50}
+            height={50}
+          />
         </Link>
       </div>
       {reqError && (

@@ -1,17 +1,24 @@
-import LogoWhite from "@/assets/logoWhite";
+import logo from "@/assets/logoWhite.svg";
 import styles from "./Footer.module.css";
 import Link from "next/link";
 import TelegramWhite from "@/assets/telegramWhite";
 import OdnoklassnikiWhite from "@/assets/odnoklassnikiWhite";
 import VkWhite from "@/assets/vkWhite";
 import { Divider } from "@chakra-ui/react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Link href="/">
-          <LogoWhite />
+          <Image
+            className={styles.logo}
+            src={logo}
+            alt="logo"
+            width={120}
+            height={50}
+          />
         </Link>
         <div className={styles.infoContainer}>
           <div className={styles.listContainer}>

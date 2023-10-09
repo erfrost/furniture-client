@@ -82,12 +82,12 @@ const Index = () => {
           <RouteToHome />
           <span className={styles.title}>Более 10 лет на рынке</span>
           <span className={styles.subtitle}>
-            НАШИ МАГАЗИНЫ ЯВЛЯЮТСЯ ЛИДЕРАМИ ПРОДАЖ В СВОИХ ГОРОДАХ
+            Наша компания является ведущими магазинами мебели в своих городах
           </span>
           <span className={styles.texts}>
             <span className={styles.text}>
               Мы имеем богатый опыт работы на рынке, и наша компания успешно
-              функционирует уже более 30 лет.
+              функционирует уже более 10 лет.
             </span>
             <span className={styles.text}>
               Мы гордимся своими достижениями и являемся признанными лидерами

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./ItemCard.module.css";
 import { BACKEND_IMAGES_URL } from "@/config";
-import CartIcon from "@/assets/cartIcon";
+import cartIcon from "@/assets/cartIcon.svg";
 import DiscountPrice from "../DiscountPrice/DiscountPrice";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
@@ -9,6 +9,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRouter } from "next/router";
 import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const ItemCard = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -21,6 +22,7 @@ const ItemCard = ({ item }) => {
       setActiveBtn(true);
     }
   }, []);
+
   const procent =
     "-" +
     Math.round((1 - item.discountPrice / item.price) * 100).toString() +
@@ -80,7 +82,7 @@ const ItemCard = ({ item }) => {
           }`}
           onClick={onCartAdd}
         >
-          <CartIcon />
+          <Image src={cartIcon} alt="cartIcon" width={25} height={25} />
         </div>
       </div>
     </div>
