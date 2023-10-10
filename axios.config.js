@@ -13,7 +13,7 @@ import axios from "axios";
 
 // Создание экземпляра Axios с настройками
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "https://api.dom888.ru/api/",
   headers: {
     "Content-Type": "application/json",
   },
