@@ -15,6 +15,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 const CategoryItem = ({ category }) => {
   const [reqError, setReqError] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(null);
 
   const router = useRouter();
 
@@ -37,20 +38,34 @@ const CategoryItem = ({ category }) => {
     fetchSubcategories();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    if (typeof window !== "undefined") {
+      setScreenWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (screenWidth < 475) {
+      const cards = document.querySelectorAll(".CategoryItem_container__6Zath");
+      cards.forEach((el) => {
+        el.children[0].style.width = "100%";
+      });
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
-      {/* <Image
-        src={BACKEND_IMAGES_URL + category.photo_name}
-        alt="category"
-        width={250}
-        height={150}
-        priority
-        className={styles.image}
-        draggable={false}
-        onDragStart={cancelAction}
-        onContextMenu={cancelAction}
-        onClick={() => router.push(`category/${category._id}`)}
-      /> */}
       <LazyLoadImage
         src={BACKEND_IMAGES_URL + category.photo_name}
         alt="category"
