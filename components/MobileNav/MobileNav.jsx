@@ -225,6 +225,9 @@ const MobileNav = ({ categories }) => {
               alt="heartIcon"
               width={50}
               height={50}
+              draggable={false}
+              onDragStart={cancelAction}
+              onContextMenu={cancelAction}
             />
           </div>
           <div
@@ -257,6 +260,9 @@ const MobileNav = ({ categories }) => {
             alt="cartIcon"
             width={50}
             height={50}
+            draggable={false}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
           />
         </Link>
       </div>

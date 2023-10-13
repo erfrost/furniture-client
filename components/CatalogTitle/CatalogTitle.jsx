@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { sortState } from "@/storage/atoms";
 import { useEffect, useState } from "react";
 
-const CatalogTitle = ({ title, setSortedItems }) => {
+const CatalogTitle = ({ title, items, setSortedItems }) => {
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
 
@@ -32,11 +32,14 @@ const CatalogTitle = ({ title, setSortedItems }) => {
     } else if (sort === "up") {
       setSort("down");
     } else if (sort === "down") {
-      setSort("up");
+      setSort("none");
     }
   };
 
   useEffect(() => {
+    if (sort === "none") {
+      setSortedItems(items);
+    }
     if (sort === "up") {
       setSortedItems((prevState) => {
         const items = [...prevState];

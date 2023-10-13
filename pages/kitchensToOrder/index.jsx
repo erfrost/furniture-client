@@ -89,31 +89,35 @@ const Index = ({ images, kitchens, error }) => {
         )}
         <div className={styles.content}>
           <RouteToHome />
-          <OurWorksSwiper images={images} />
+          {images.length ? <OurWorksSwiper images={images} /> : null}
           <div className={styles.list}>
-            {kitchens?.map((item) => (
-              <div className={styles.item} key={item._id}>
-                <Link className={styles.link} href={`/kitchen/${item._id}`}>
-                  <LazyLoadImage
-                    src={BACKEND_IMAGES_URL + item.photo_names[0]}
-                    alt="preview"
-                    className={styles.image}
-                    draggable={false}
-                    onDragStart={cancelAction}
-                    onContextMenu={cancelAction}
-                  />
-                </Link>
-                <Link href={`/kitchen/${item._id}`} className={styles.title}>
-                  {item.title}
-                </Link>
-                <span className={styles.text}>
-                  {transformDescriptionLength(item.description)}
-                </span>
-                <Link className={styles.link} href={`/kitchen/${item._id}`}>
-                  <div className={styles.btn}>Подробнее</div>
-                </Link>
-              </div>
-            ))}
+            {kitchens.length ? (
+              kitchens?.map((item) => (
+                <div className={styles.item} key={item._id}>
+                  <Link className={styles.link} href={`/kitchen/${item._id}`}>
+                    <LazyLoadImage
+                      src={BACKEND_IMAGES_URL + item.photo_names[0]}
+                      alt="preview"
+                      className={styles.image}
+                      draggable={false}
+                      onDragStart={cancelAction}
+                      onContextMenu={cancelAction}
+                    />
+                  </Link>
+                  <Link href={`/kitchen/${item._id}`} className={styles.title}>
+                    {item.title}
+                  </Link>
+                  <span className={styles.text}>
+                    {transformDescriptionLength(item.description)}
+                  </span>
+                  <Link className={styles.link} href={`/kitchen/${item._id}`}>
+                    <div className={styles.btn}>Подробнее</div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <span className={styles.nullText}>Ничего не найдено</span>
+            )}
           </div>
         </div>
         <Footer />

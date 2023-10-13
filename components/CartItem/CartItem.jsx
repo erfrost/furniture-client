@@ -92,14 +92,26 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
             }`}
             onClick={() => handleChangeCount("minus", item._id)}
           >
-            <Image src={minus} alt="minus" />
+            <Image
+              src={minus}
+              alt="minus"
+              draggable={false}
+              onDragStart={cancelAction}
+              onContextMenu={cancelAction}
+            />
           </div>
           <span className={styles.count}>{count}</span>
           <div
             className={styles.countBtn}
             onClick={() => handleChangeCount("plus", item._id)}
           >
-            <Image src={plus} alt="plus" />
+            <Image
+              src={plus}
+              alt="plus"
+              draggable={false}
+              onDragStart={cancelAction}
+              onContextMenu={cancelAction}
+            />
           </div>
         </div>
         {item.count > 1 ? (

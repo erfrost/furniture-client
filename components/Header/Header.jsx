@@ -114,6 +114,9 @@ const Header = () => {
             alt="heartIcon"
             width={50}
             height={50}
+            draggable={false}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
           />
         </div>
         <div
@@ -144,6 +147,9 @@ const Header = () => {
           alt="cartIcon"
           width={50}
           height={50}
+          draggable={false}
+          onDragStart={cancelAction}
+          onContextMenu={cancelAction}
         />
       </Link>
       {reqError && (

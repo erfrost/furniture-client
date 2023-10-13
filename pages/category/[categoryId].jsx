@@ -112,7 +112,11 @@ const Index = ({ items, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <CatalogTitle title={categoryTitle} setSortedItems={setItemsState} />
+          <CatalogTitle
+            title={categoryTitle}
+            items={items}
+            setSortedItems={setItemsState}
+          />
           <span className={styles.itemsCount}>
             {!itemsState?.length
               ? "Ничего не найдено"

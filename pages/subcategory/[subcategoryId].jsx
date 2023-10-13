@@ -97,6 +97,7 @@ const Index = ({ items, error }) => {
         <div className={styles.content}>
           <CatalogTitle
             title={subcategoryTitle}
+            items={items}
             setSortedItems={setItemsState}
           />
           <span className={styles.itemsCount}>

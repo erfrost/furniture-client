@@ -6,6 +6,7 @@ import OdnoklassnikiWhite from "@/assets/odnoklassnikiWhite";
 import VkWhite from "@/assets/vkWhite";
 import { Divider } from "@chakra-ui/react";
 import Image from "next/image";
+import cancelAction from "@/utils/cancelAction";
 
 const Footer = () => {
   return (
@@ -18,6 +19,9 @@ const Footer = () => {
             alt="logo"
             width={120}
             height={50}
+            draggable={false}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
           />
         </Link>
         <div className={styles.infoContainer}>

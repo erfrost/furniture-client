@@ -84,6 +84,7 @@ const SearchPage = ({ items, error }) => {
       <div className={styles.content}>
         <CatalogTitle
           title={`Поиск «${searchText}»`}
+          items={items}
           setSortedItems={setItemsState}
         />
         <span className={styles.itemsCount}>

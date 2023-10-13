@@ -12,6 +12,7 @@ import {
   removeFromFavorites,
 } from "@/utils/favorites";
 import Link from "next/link";
+import cancelAction from "@/utils/cancelAction";
 
 const ItemPagePriceBlock = ({ item }) => {
   const [inCartActive, setInCartActive] = useState(false);
@@ -84,14 +85,26 @@ const ItemPagePriceBlock = ({ item }) => {
                 })
               }
             >
-              <Image src={minusIcon} alt="minus" />
+              <Image
+                src={minusIcon}
+                alt="minus"
+                draggable={false}
+                onDragStart={cancelAction}
+                onContextMenu={cancelAction}
+              />
             </div>
             <span className={styles.count}>{count}</span>
             <div
               className={styles.countBtn}
               onClick={() => setCount((prevState) => prevState + 1)}
             >
-              <Image src={plusIcon} alt="plus" />
+              <Image
+                src={plusIcon}
+                alt="plus"
+                draggable={false}
+                onDragStart={cancelAction}
+                onContextMenu={cancelAction}
+              />
             </div>
           </div>
         </div>

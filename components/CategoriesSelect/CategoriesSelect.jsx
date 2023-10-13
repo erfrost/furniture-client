@@ -4,6 +4,7 @@ import catalogIcon from "@/assets/catalogIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import cancelAction from "@/utils/cancelAction";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
@@ -40,7 +41,15 @@ const CategoriesSelect = ({ categories, subcategories }) => {
         className={styles.catalogBtn}
         onClick={() => setIsOpen((prevState) => !prevState)}
       >
-        <Image src={catalogIcon} alt="catalogIcon" width={30} height={30} />
+        <Image
+          src={catalogIcon}
+          alt="catalogIcon"
+          width={30}
+          height={30}
+          draggable={false}
+          onDragStart={cancelAction}
+          onContextMenu={cancelAction}
+        />
         <span className={styles.catalogBtnText}>Каталог</span>
       </div>
       <div className={styles.categories}>

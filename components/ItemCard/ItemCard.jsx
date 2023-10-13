@@ -82,7 +82,15 @@ const ItemCard = ({ item }) => {
           }`}
           onClick={onCartAdd}
         >
-          <Image src={cartIcon} alt="cartIcon" width={25} height={25} />
+          <Image
+            src={cartIcon}
+            alt="cartIcon"
+            width={25}
+            height={25}
+            draggable={false}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
+          />
         </div>
       </div>
     </div>

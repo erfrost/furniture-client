@@ -51,6 +51,7 @@ const OurWorksSwiper = ({ images }) => {
       const imagesList = document.querySelectorAll(
         ".OurWorksSwiper_image__GWZR9"
       );
+
       const computedStyles = getComputedStyle(swiper);
       const swiperGap = parseInt(computedStyles.getPropertyValue("gap"));
       const swiperWidth = swiper.offsetWidth;
