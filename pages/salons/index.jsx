@@ -82,7 +82,7 @@ const Index = () => {
           <RouteToHome />
           <div className={styles.list}>
             {salons.map((salon, index) => (
-              <SalonItem key={index} salon={salon} />
+              <SalonItem salon={salon} key={index} />
             ))}
           </div>
         </div>

@@ -90,7 +90,7 @@ const ItemsCatalog = ({
     <>
       <div className={styles.list}>
         {allItems?.map((item) => (
-          <ItemCard key={item._id} item={item} />
+          <ItemCard item={item} key={item._id} />
         ))}
       </div>
       {reqError && (

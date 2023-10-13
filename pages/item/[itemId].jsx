@@ -14,7 +14,6 @@ import { BACKEND_IMAGES_URL } from "@/config";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import cancelAction from "@/utils/cancelAction";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRecoilState } from "recoil";
@@ -25,8 +24,6 @@ const Index = ({ item, error }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-
-  const router = useRouter();
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
