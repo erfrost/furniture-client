@@ -1,4 +1,3 @@
-// Установка сервисного работника
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open("cache").then((cache) => {
@@ -20,11 +19,26 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Обработка запросов на сеть
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
+    })
+  );
+});
+
+const cacheName = "cache";
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      return (
+        cachedResponse ||
+        fetch(event.request).then(async (response) => {
+          const cache = await caches.open(cacheName);
+          cache.put(event.request, response.clone());
+          return response;
+        })
+      );
     })
   );
 });
