@@ -242,7 +242,11 @@ const MobileNav = ({ categories }) => {
               <div className={styles.list}>
                 {favoriteItems.length ? (
                   favoriteItems.map((item) => (
-                    <FavoriteItem item={item} key={item._id} />
+                    <FavoriteItem
+                      item={item}
+                      key={item._id}
+                      setFavoriteItems={setFavoriteItems}
+                    />
                   ))
                 ) : (
                   <span className={styles.nullFavorites}>

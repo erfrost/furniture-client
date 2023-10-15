@@ -131,7 +131,11 @@ const Header = () => {
             <div className={styles.list}>
               {favoriteItems.length ? (
                 favoriteItems.map((item) => (
-                  <FavoriteItem key={item._id} item={item} />
+                  <FavoriteItem
+                    key={item._id}
+                    item={item}
+                    setFavoriteItems={setFavoriteItems}
+                  />
                 ))
               ) : (
                 <span className={styles.nullFavorites}>Ничего не найдено</span>
