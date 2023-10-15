@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import minusIcon from "@/assets/minus.svg";
 import plusIcon from "@/assets/plus.svg";
 import Image from "next/image";
-import { addToCart, removeFromCart } from "@/utils/cart";
+import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import {
   addToFavorites,
   getFavoritesFromCookie,
@@ -17,16 +17,24 @@ import cancelAction from "@/utils/cancelAction";
 const ItemPagePriceBlock = ({ item }) => {
   const [inCartActive, setInCartActive] = useState(false);
   const [inFavoriteActive, setInFavoriteActive] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     const favoriteItems = getFavoritesFromCookie();
-    const currentItem = favoriteItems.find((id) => id === item._id);
-    if (currentItem) {
+    const currentItemInFavorite = favoriteItems.find((id) => id === item._id);
+    if (currentItemInFavorite) {
       setInFavoriteActive(true);
     }
-  }, []);
 
+    const cartItem = getCartFromCookie();
+    const currentItemInCart = cartItem.find((el) => el.itemId === item._id);
+    console.log(cartItem, currentItemInCart);
+    if (currentItemInCart) {
+      setInCartActive(true);
+      setCount(currentItemInCart.count);
+    } else setCount(0);
+  }, []);
+  console.log(count, inCartActive);
   const handleInCart = () => {
     setInCartActive(true);
     setCount(1);
