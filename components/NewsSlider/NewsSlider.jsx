@@ -76,11 +76,7 @@ const NewsSlider = ({ news }) => {
       }
     }
     images.forEach((el) => (el.parentElement.style.width = "50%"));
-    // if (screenWidth < 768 && lazyContainer.length) {
-    //   lazyContainer.forEach((item) => {
-    //     item.style.maxWidth = "225px";
-    //   });
-    // }
+
     if (screenWidth < 470 && lazyContainer.length) {
       lazyContainer.forEach((item) => {
         item.style.height = "auto";
