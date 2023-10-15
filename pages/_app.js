@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
         <title>Дом мебельный центр</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="manifest" href="/public/manifest.webmanifest"></link>
+        <link rel="manifest" href="/manifest.webmanifest"></link>
         <link rel="apple-touch-icon" href="/public/icon-192x192.png"></link>
         <meta
           name="description"
