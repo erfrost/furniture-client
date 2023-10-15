@@ -9,6 +9,9 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Дом мебельный центр</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="manifest" href="/public/manifest.webmanifest"></link>
+        <link rel="apple-touch-icon" href="/public/icon-192x192.png"></link>
         <meta
           name="description"
           content="'Мебельный центр ДОМ' - это крупный онлайн-гипермаркет мебели и товаров для дома. Мы работаем в этой сфере больше 5 лет и сумели зарекомендовать себя как надежного продавца. Купив мебель однажды, 64% клиентов возвращаются к нам за новой мебелью."
