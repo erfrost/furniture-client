@@ -1,9 +1,6 @@
 import logo from "@/assets/logoWhite.svg";
 import styles from "./Footer.module.css";
 import Link from "next/link";
-import TelegramWhite from "@/assets/telegramWhite";
-import OdnoklassnikiWhite from "@/assets/odnoklassnikiWhite";
-import VkWhite from "@/assets/vkWhite";
 import { Divider } from "@chakra-ui/react";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
@@ -45,11 +42,6 @@ const Footer = () => {
           </div>
           <div className={styles.listContainer}>
             <span className={styles.title}>Контакты</span>
-            <div className={styles.social}>
-              <TelegramWhite />
-              <VkWhite />
-              <OdnoklassnikiWhite />
-            </div>
             <Link href="mailto:89227720462@mail.ru">
               <span className={styles.socialLink}>89227720462@mail.ru</span>
             </Link>
