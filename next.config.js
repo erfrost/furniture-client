@@ -1,4 +1,5 @@
-// abcd
+import withPWA from "next-pwa";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -12,4 +13,12 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const PWA = withPWA({
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
+});
+
+module.exports = { nextConfig, PWA };
