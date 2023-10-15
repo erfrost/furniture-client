@@ -26,10 +26,28 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
-      console.log("load");
-      navigator.serviceWorker
-        .register("/service-worker.js")
-        .then((registration) => console.log("scope is: ", registration.scope));
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
+        });
+      });
+      navigator.serviceWorker.getRegistration().then((registration) => {
+        if (registration) {
+          console.log("Service Worker already registered");
+        } else {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker registered with scope:",
+                registration.scope
+              );
+            })
+            .catch((error) => {
+              console.error("Service Worker registration failed:", error);
+            });
+        }
+      });
     }
   }, []);
 
