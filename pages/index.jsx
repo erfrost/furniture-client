@@ -24,7 +24,14 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
 
   const router = useRouter();
 
-  navigator.serviceWorker.register();
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      console.log("load");
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => console.log("scope is: ", registration.scope));
+    }
+  }, []);
 
   useEffect(() => {
     if (categories) setCategoriesRecoil(categories);
