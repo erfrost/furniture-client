@@ -58,11 +58,11 @@ const MobileNav = ({ categories }) => {
     if (isOpen) {
       body.style.transition = "all 0.3s ease 0s";
       body.style.overflow = "hidden";
-      if (screenWidth < 550) {
-        body.style.transform = "translate(200px, 0)";
-      } else {
-        body.style.transform = "translate(300px, 0)";
-      }
+      // if (screenWidth < 550) {
+      //   body.style.transform = "translate(200px, 0)";
+      // } else {
+      body.style.transform = "translate(300px, 0)";
+      // }
     } else {
       body.style.transform = "none";
       body.style.overflow = "auto";

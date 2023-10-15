@@ -135,12 +135,12 @@
     height: 30px;
 }
 
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
     .menu {
         width: 200px;
         transform: translate(-215px, 0px);
     }
-}
+} */
 @media screen and (max-width: 550px) {
     .popoverContent {
         width: 100vw;
