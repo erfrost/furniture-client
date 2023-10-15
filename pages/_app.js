@@ -8,7 +8,10 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Дом Мебельный центр</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="manifest" href="/manifest.json"></link>
         <link rel="apple-touch-icon" href="/icon-192x192.png"></link>
