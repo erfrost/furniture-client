@@ -119,16 +119,20 @@ const Index = ({ kitchen, error }) => {
                 <span className={styles.text}>{kitchen.advantages}</span>
               </div>
               <div className={styles.block}>
-                <span className={styles.miniTitle}>Характеристики</span>
-                {kitchen.specifications.map((item, index) => (
-                  <div key={index} className={styles.specificationItem}>
-                    <span className={styles.key}>{item.title}</span>
-                    <span className={styles.dots}>
-                      ................................................
-                    </span>
-                    <span className={styles.value}>{item.value}</span>
-                  </div>
-                ))}
+                {kitchen.specifications.length > 0 ? (
+                  <>
+                    <span className={styles.miniTitle}>Характеристики</span>
+                    {kitchen.specifications.map((item, index) => (
+                      <div key={index} className={styles.specificationItem}>
+                        <span className={styles.key}>{item.title}</span>
+                        <span className={styles.dots}>
+                          ................................................
+                        </span>
+                        <span className={styles.value}>{item.value}</span>
+                      </div>
+                    ))}
+                  </>
+                ) : null}
               </div>
             </div>
           </div>
