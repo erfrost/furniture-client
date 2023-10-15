@@ -7,7 +7,7 @@ const nextConfig = {
     domains: [
       {
         protocol: "https",
-        domain: "",
+        domain: "**",
       },
     ],
   },
