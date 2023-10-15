@@ -29,7 +29,7 @@ const MobileNav = ({ categories }) => {
   const router = useRouter();
 
   const handleKeyDown = async (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && searchText.length > 0) {
       setIsOpen(false);
       router.push(`search?search=${searchText}`);
     }

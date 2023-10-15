@@ -26,7 +26,7 @@ const Header = () => {
   const router = useRouter();
 
   const handleKeyDown = async (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && searchText.length > 0) {
       router.push(`/search?search=${searchText}`);
     }
   };
