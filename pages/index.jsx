@@ -24,6 +24,8 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
 
   const router = useRouter();
 
+  navigator.serviceWorker.register();
+
   useEffect(() => {
     if (categories) setCategoriesRecoil(categories);
     if (subcategories) setSubcategoriesRecoil(subcategories);
