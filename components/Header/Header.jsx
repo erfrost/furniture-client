@@ -5,7 +5,7 @@ import cartIcon from "@/assets/cartIcon.svg";
 import Search from "../Search/Search";
 import heartIcon from "@/assets/heartIcon.svg";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
@@ -22,11 +22,13 @@ const Header = () => {
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [reqError, setReqError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
 
   const router = useRouter();
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter" && searchText.length > 0) {
+      inputRef.current.blur();
       router.push(`/search?search=${searchText}`);
     }
   };
@@ -96,6 +98,7 @@ const Header = () => {
         searchText={searchText}
         setSearchText={setSearchText}
         onEnterClick={handleKeyDown}
+        inputRef={inputRef}
       />
       <Link href="tel: +7 (929) 298-01-23" className={styles.phoneContainer}>
         <div className={styles.photoIcon}>

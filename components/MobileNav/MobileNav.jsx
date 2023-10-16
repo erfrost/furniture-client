@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./MobileNav.module.css";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heartIcon from "@/assets/heartIcon.svg";
 import cartIcon from "@/assets/cartIcon.svg";
 import Link from "next/link";
@@ -25,11 +25,13 @@ const MobileNav = ({ categories }) => {
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [reqError, setReqError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
 
   const router = useRouter();
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter" && searchText.length > 0) {
+      inputRef.current.blur();
       setIsOpen(false);
       router.push(`search?search=${searchText}`);
     }
@@ -152,6 +154,7 @@ const MobileNav = ({ categories }) => {
           searchText={searchText}
           setSearchText={setSearchText}
           onEnterClick={handleKeyDown}
+          inputRef={inputRef}
         />
         <div className={styles.link} onClick={goToCategories}>
           Каталог
