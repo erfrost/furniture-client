@@ -32,6 +32,11 @@ const Index = ({ items, error }) => {
           `items/by_category/${categoryId}?limit=25`
         );
         setItemsState(response.data);
+
+        const currentCategory = categories.find(
+          (cat) => cat._id === router.query.categoryId
+        );
+        setCategoryTitle(currentCategory?.title);
       } catch (error) {
         setReqError(
           error?.response?.data?.message ||

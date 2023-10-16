@@ -67,7 +67,10 @@ const ItemCard = ({ item }) => {
         {item.title}
       </span>
       <span className={styles.specification}>
-        {item.specifications[0]?.title}: {item.specifications[0]?.value}
+        {item.specifications[0]?.title}:{" "}
+        {item.specifications[0]?.value.length > 50
+          ? `${item.specifications[0]?.value.substring(0, 50)}...`
+          : item.specifications[0]?.value}
       </span>
       <div className={styles.btnsContainer}>
         <div

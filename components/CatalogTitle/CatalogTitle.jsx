@@ -35,7 +35,7 @@ const CatalogTitle = ({ title, items, setSortedItems }) => {
       setSort("none");
     }
   };
-
+  console.log(title);
   useEffect(() => {
     if (sort === "none") {
       setSortedItems(items);

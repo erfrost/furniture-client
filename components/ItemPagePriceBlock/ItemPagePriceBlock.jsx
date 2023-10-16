@@ -28,13 +28,13 @@ const ItemPagePriceBlock = ({ item }) => {
 
     const cartItem = getCartFromCookie();
     const currentItemInCart = cartItem.find((el) => el.itemId === item._id);
-    console.log(cartItem, currentItemInCart);
+
     if (currentItemInCart) {
       setInCartActive(true);
       setCount(currentItemInCart.count);
     } else setCount(0);
   }, []);
-  console.log(count, inCartActive);
+
   const handleInCart = () => {
     setInCartActive(true);
     setCount(1);

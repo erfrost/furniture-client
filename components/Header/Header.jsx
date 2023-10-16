@@ -7,7 +7,6 @@ import heartIcon from "@/assets/heartIcon.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import logo from "@/assets/logoBlack.svg";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
 import { getFavoritesFromCookie } from "@/utils/favorites";
@@ -15,6 +14,7 @@ import axiosInstance from "@/axios.config";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import AlertInfo from "../AlertInfo/AlertInfo";
+import logo from "@/assets/logo.svg";
 
 const Header = () => {
   const [popoverActive, setPopoverActive] = useState(false);

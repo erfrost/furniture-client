@@ -46,7 +46,7 @@ const Footer = () => {
               <span className={styles.socialLink}>89227720462@mail.ru</span>
             </Link>
             <Link href="tel:+7 (929) 298-01-23">
-              <span className={styles.socialLink}>+7 (929) 298-01-23</span>
+              <span className={styles.socialLink}>+7 (922) 773-22-55</span>
             </Link>
           </div>
         </div>

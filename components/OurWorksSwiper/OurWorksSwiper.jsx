@@ -74,12 +74,10 @@ const OurWorksSwiper = ({ images }) => {
   const onScroll = (px) => {
     const swiper = document.querySelector(".OurWorksSwiper_swiper__TpkQo");
     if (swiper) {
-      console.log(px);
       swiper.scrollBy({
         left: px,
         behavior: "smooth",
       });
-      console.log(swiper.scrollLeft);
     }
   };
 
