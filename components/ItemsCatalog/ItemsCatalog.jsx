@@ -14,9 +14,9 @@ const ItemsCatalog = ({
   querySearch,
 }) => {
   const [allItems, setAllItems] = useState(items);
-  const [offset, setOffset] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [reqError, setReqError] = useState(null);
+  let offset = 25;
   let nullMoreItems = false;
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const ItemsCatalog = ({
     if (!isLoading && !nullMoreItems) {
       try {
         setIsLoading(true);
+        console.log("offset:", offset);
         if (isDiscountPage) {
           const items = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
@@ -57,12 +58,12 @@ const ItemsCatalog = ({
             "Произошла ошибка запроса. Попробуйте позднее"
         );
       } finally {
-        setOffset((prevState) => prevState + 25);
+        offset += 25;
         setIsLoading(false);
       }
     }
   };
-
+  console.log(offset);
   const handleScroll = useRef(
     throttle(() => {
       const { scrollTop, clientHeight, scrollHeight } =
