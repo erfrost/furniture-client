@@ -34,7 +34,7 @@ const Index = ({ items, error }) => {
         setItemsState(response.data);
 
         const currentCategory = categories.find(
-          (cat) => cat._id === router.query.categoryId
+          (cat) => cat._id === categoryId
         );
         setCategoryTitle(currentCategory?.title);
       } catch (error) {

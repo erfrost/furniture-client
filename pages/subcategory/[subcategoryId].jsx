@@ -24,6 +24,29 @@ const Index = ({ items, error }) => {
 
   const router = useRouter();
   const { subcategoryId } = router.query;
+  console.log(items);
+  useEffect(() => {
+    async function fetchItems() {
+      try {
+        const response = await axiosInstance.get(
+          `items/by_subcategory/${subcategoryId}?limit=25`
+        );
+        setItemsState(response.data);
+
+        const currentSubcategory = subcategories.find(
+          (cat) => cat._id === subcategoryId
+        );
+        setSubcategoryTitle(currentSubcategory?.title);
+      } catch (error) {
+        setReqError(
+          error?.response?.data?.message ||
+            "Произошла ошибка запроса. Попробуйте позднее"
+        );
+      }
+    }
+
+    fetchItems();
+  }, [subcategoryId]);
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
