@@ -149,9 +149,6 @@ const Index = ({ item, error }) => {
               {item?.specifications?.map((item, index) => (
                 <div key={index} className={styles.specificationItem}>
                   <span className={styles.key}>{item.title}</span>
-                  <span className={styles.dots}>
-                    ................................................
-                  </span>
                   <span className={styles.value}>{item.value}</span>
                 </div>
               ))}
