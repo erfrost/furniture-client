@@ -28,8 +28,10 @@ const ItemCard = ({ item }) => {
     Math.round((1 - item.discountPrice / item.price) * 100).toString() +
     "%";
 
-  const onCartAdd = (e) => {
-    if (cart.some((el) => el.itemId === item._id)) {
+  const onCartAdd = () => {
+    const currentCart = getCartFromCookie();
+
+    if (currentCart.some((el) => el.itemId === item._id)) {
       removeFromCart(item._id);
       setActiveBtn(false);
     } else {

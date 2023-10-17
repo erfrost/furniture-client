@@ -19,6 +19,8 @@ const ItemsCatalog = ({
   let offset = 25;
   let nullMoreItems = false;
 
+  console.log(items);
+
   useEffect(() => {
     setAllItems(items);
   }, [items]);

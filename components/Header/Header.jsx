@@ -100,11 +100,11 @@ const Header = () => {
         onEnterClick={handleKeyDown}
         inputRef={inputRef}
       />
-      <Link href="tel: +7 (929) 298-01-23" className={styles.phoneContainer}>
+      <Link href="tel: +7 (922) 773-22-55" className={styles.phoneContainer}>
         <div className={styles.photoIcon}>
           <PhoneIcon color="#262626" fontSize="large" boxSize="45%" />
         </div>
-        <span className={styles.phone}>+7 (929) 298-01-23</span>
+        <span className={styles.phone}>+7 (922) 773-22-55</span>
       </Link>
       <div className={styles.favoriteRelative}>
         <div

@@ -112,3 +112,8 @@
         height: 175px;
     }
 }
+@media (pointer: course) {
+    .inCartBtn:hover {
+        background-color: transparent;
+    }
+}
