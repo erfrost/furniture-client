@@ -82,6 +82,14 @@
         height: 225px;
     }
 }
+@media screen and (max-width: 1000px) {
+    .inCartBtn:hover {
+        background-color: transparent;
+    }
+    .activeCart:hover {
+        background-color: #dee3db;
+    }
+}
 @media screen and (max-width: 900px) {
     .image {
         height: 175px;
@@ -110,10 +118,5 @@
 @media screen and (max-width: 400px) {
     .image {
         height: 175px;
-    }
-}
-@media (pointer: course) {
-    .inCartBtn:hover {
-        background-color: transparent;
     }
 }
