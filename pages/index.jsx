@@ -118,12 +118,16 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
             </svg>
           </div>
         </div>
-        {discountItems?.length ? (
-          <div className={styles.catalogContainer}>
-            <span className={styles.catalogTitle}>Мебель со скидкой</span>
+        <div className={styles.catalogContainer}>
+          <span className={styles.catalogTitle}>Мебель со скидкой</span>
+          {discountItems?.length ? (
             <ItemsCatalog items={discountItems} isDiscountPage={true} />
-          </div>
-        ) : null}
+          ) : (
+            <span className={styles.notDiscountItems}>
+              В данный момент нет товаров со скидкой
+            </span>
+          )}
+        </div>
         <Footer />
         {error && (
           <AlertInfo
