@@ -13,28 +13,28 @@ export default function App({ Component, pageProps }) {
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="shortcut icon" href="favicons/favicon.ico" />
+        <link rel="shortcut icon" href="/favicons/favicon.ico" />
         <link rel="manifest" href="/manifest.json"></link>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="favicons/apple-touch-icon.png"
+          href="/favicons/apple-touch-icon.png"
         ></link>
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="favicons/favicon-32x32.png"
+          href="/favicons/favicon-32x32.png"
         ></link>
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="favicons/favicon-16x16.png"
+          href="/favicons/favicon-16x16.png"
         ></link>
         <link
           rel="mask-icon"
-          href="favicons/safari-pinned-tab.svg"
+          href="/favicons/safari-pinned-tab.svg"
           color="#5bbad5"
         ></link>
         <meta name="msapplication-TileColor" content="#2d89ef" />
