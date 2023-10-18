@@ -106,7 +106,7 @@ const Index = ({ item, error }) => {
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
-            <MobileNav categories={categories} />
+            <MobileNav />
           </div>
         ) : (
           <div className={styles.fullScreen}>

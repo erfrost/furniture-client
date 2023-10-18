@@ -8,6 +8,10 @@
     gap: 16px;
     background-color: #21261F;
 }
+.logo {
+    width: 180px;
+    height: 80px;
+}
 .top {
     width: 100%;
     display: flex;

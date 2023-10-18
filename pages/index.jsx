@@ -83,7 +83,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
-            <MobileNav categories={categoriesRecoil} />
+            <MobileNav />
             <CategoriesPreview news={news} />
           </div>
         ) : (

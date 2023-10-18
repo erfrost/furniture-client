@@ -7,7 +7,7 @@ import cartIcon from "@/assets/cartIcon.svg";
 import Link from "next/link";
 import Search from "../Search/Search";
 import { useRouter } from "next/router";
-import logo from "@/assets/logoBlack.svg";
+import logo from "@/assets/logo.svg";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
@@ -17,10 +17,9 @@ import { getFavoritesFromCookie } from "@/utils/favorites";
 import axiosInstance from "@/axios.config";
 import { Divider } from "@chakra-ui/react";
 
-const MobileNav = ({ categories }) => {
+const MobileNav = () => {
   const [popoverActive, setPopoverActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [reqError, setReqError] = useState(null);
@@ -36,23 +35,6 @@ const MobileNav = ({ categories }) => {
       router.push(`search?search=${searchText}`);
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    if (typeof window !== "undefined") {
-      setScreenWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const body = document.querySelector("body");

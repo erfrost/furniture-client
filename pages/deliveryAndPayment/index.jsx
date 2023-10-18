@@ -66,7 +66,7 @@ const Index = () => {
       <div className={homePageStyles.container}>
         {screenWidth < 768 ? (
           <div className={homePageStyles.fullScreen}>
-            <MobileNav categories={categories} />
+            <MobileNav />
           </div>
         ) : (
           <>

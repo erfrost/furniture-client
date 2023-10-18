@@ -14,7 +14,30 @@ export default function App({ Component, pageProps }) {
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="manifest" href="/manifest.json"></link>
-        <link rel="apple-touch-icon" href="/icon-192x192.png"></link>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="../public/favicons/apple-touch-icon.png"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="../public/favicons/favicon-32x32.png"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="../public/favicons/favicon-16x16.png"
+        ></link>
+        <link
+          rel="mask-icon"
+          href="../public/favicons/safari-pinned-tab.svg"
+          color="#5bbad5"
+        ></link>
+        <meta name="msapplication-TileColor" content="#2d89ef" />
+        <meta name="theme-color" content="#ffffff" />
         <meta name="theme-color" content="#e2e8ce" />
         <meta
           name="description"
@@ -24,7 +47,7 @@ export default function App({ Component, pageProps }) {
           name="keywords"
           content="Мебель Нижневартовск, Мебель Лангепас, Мебель Сургут, Мебель Ноябрьск, Мебель Нефтеюганск, Мебель со склада, купить мебель онлайн, онлайн магазин, онлайн магазин мебели, Нижневартовск, Cургут, Лангепас, Ноябрьск, Нефтеюганск, склад, диван, шкаф, стенка, кровать, Мебель для гостиной, Мебель для прихожей, Мягкая мебель, Мебель для спальни, Детская мебель, Мебель для кухни, Шкафы для дома, Матрасы, Мебель из натурального дерева, Плетеная мебель из ротанга, Мебель для ванной комнаты, Мебель для домашнего кабинета и офиса
 , Аксессуары для интерьера, аксессуары, зеркала, лампы, кресла, стулья, онлайн, для дачи, комоды, кухонные гарнитуры, кухни, раковины, тумбы, для подростка, для девочки, для мальчика, скидки на мебель, мебель по акции, распродажа, рассрочка"
-        ></meta>
+        />
         <meta name="yandex-verification" content="23c981ccac8729f6" />
         <script src="//code.jivo.ru/widget/fo3JcgKaha" async></script>
       </Head>
