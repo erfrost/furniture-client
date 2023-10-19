@@ -178,7 +178,9 @@ const Index = () => {
                 <span className={styles.nullCart}>Корзина пуста</span>
               </div>
             )}
-            <CartResult items={items} totalCount={totalCount} />
+            {items.length ? (
+              <CartResult items={items} totalCount={totalCount} />
+            ) : null}
           </div>
         </div>
         {reqError && (

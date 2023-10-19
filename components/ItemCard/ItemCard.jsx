@@ -10,10 +10,12 @@ import { useRouter } from "next/router";
 import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { CheckIcon } from "@chakra-ui/icons";
 
 const ItemCard = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState(false);
   const router = useRouter();
+
   const cart = getCartFromCookie();
   const itemExists = cart.some((el) => el.itemId === item._id);
 
@@ -87,15 +89,19 @@ const ItemCard = ({ item }) => {
           }`}
           onClick={onCartAdd}
         >
-          <Image
-            src={cartIcon}
-            alt="cartIcon"
-            width={25}
-            height={25}
-            draggable={false}
-            onDragStart={cancelAction}
-            onContextMenu={cancelAction}
-          />
+          {activeBtn ? (
+            <CheckIcon boxSize="50%" />
+          ) : (
+            <Image
+              src={cartIcon}
+              alt="cartIcon"
+              width={25}
+              height={25}
+              draggable={false}
+              onDragStart={cancelAction}
+              onContextMenu={cancelAction}
+            />
+          )}
         </div>
       </div>
     </div>

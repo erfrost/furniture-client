@@ -24,7 +24,7 @@ const Index = ({ items, error }) => {
 
   const router = useRouter();
   const { subcategoryId } = router.query;
-  console.log(items);
+
   useEffect(() => {
     async function fetchItems() {
       try {

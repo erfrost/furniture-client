@@ -6,7 +6,7 @@ import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getCartFromCookie } from "@/utils/cart";
+import { addToCart, getCartFromCookie } from "@/utils/cart";
 import { removeFromFavorites } from "@/utils/favorites";
 
 const FavoriteItem = ({ item, setFavoriteItems }) => {
@@ -43,6 +43,11 @@ const FavoriteItem = ({ item, setFavoriteItems }) => {
       return filteredItems;
     });
     removeFromFavorites(itemId);
+  };
+
+  const addInCart = () => {
+    addToCart(item._id, 1);
+    setInCartActive(true);
   };
 
   return (
@@ -87,10 +92,7 @@ const FavoriteItem = ({ item, setFavoriteItems }) => {
           ПЕРЕЙТИ В КОРЗИНУ
         </div>
       ) : (
-        <div
-          className={styles.moreBtn}
-          onClick={() => router.push(`/item/${item._id}`)}
-        >
+        <div className={styles.moreBtn} onClick={addInCart}>
           ДОБАВИТЬ В КОРЗИНУ
         </div>
       )}

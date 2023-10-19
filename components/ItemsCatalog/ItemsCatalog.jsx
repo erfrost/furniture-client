@@ -19,8 +19,6 @@ const ItemsCatalog = ({
   let offset = 25;
   let nullMoreItems = false;
 
-  console.log(items);
-
   useEffect(() => {
     setAllItems(items);
   }, [items]);
@@ -29,7 +27,7 @@ const ItemsCatalog = ({
     if (!isLoading && !nullMoreItems) {
       try {
         setIsLoading(true);
-        console.log("offset:", offset);
+
         if (isDiscountPage) {
           const items = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
@@ -65,7 +63,7 @@ const ItemsCatalog = ({
       }
     }
   };
-  console.log(offset);
+
   const handleScroll = useRef(
     throttle(() => {
       const { scrollTop, clientHeight, scrollHeight } =

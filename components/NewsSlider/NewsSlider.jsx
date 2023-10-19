@@ -15,7 +15,7 @@ const sliderSettings = {
   infinite: true,
   arrows: false,
   speed: 400,
-  autoplay: true,
+  // autoplay: true,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -75,7 +75,11 @@ const NewsSlider = ({ news }) => {
         catalog.style.marginTop = "25px";
       }
     }
-    images.forEach((el) => (el.parentElement.style.width = "50%"));
+    images.forEach((el) => {
+      el.parentElement.style.width = "50%";
+      el.parentElement.style.display = "flex";
+      el.parentElement.style.justifyContent = "center";
+    });
 
     if (screenWidth < 470 && lazyContainer.length) {
       lazyContainer.forEach((item) => {
