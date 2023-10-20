@@ -4,7 +4,10 @@ import catalogIcon from "@/assets/catalogIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
+import { BACKEND_IMAGES_URL } from "@/config";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
@@ -27,7 +30,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
       }
     };
   }, []);
-
+  console.log(categories);
   const calculatedCount = () => {
     if (screenWidth > 1250) return 5;
     else if (screenWidth > 1100) return 4;
@@ -87,6 +90,14 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                   href={`/category/${cat._id}`}
                   onClick={() => setIsOpen(false)}
                 >
+                  <LazyLoadImage
+                    src={BACKEND_IMAGES_URL + cat.photo_name}
+                    alt="photo"
+                    className={styles.categoryImage}
+                    draggable={false}
+                    onDragStart={cancelAction}
+                    onContextMenu={cancelAction}
+                  />
                   {cat.title}
                 </Link>
               ))}
