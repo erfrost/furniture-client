@@ -81,11 +81,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .countBtn:hover {
      background-color: #ccd2b0;
+}
+.count {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .disabledBtn {
     background-color: #F0F0F0;
@@ -98,6 +108,10 @@
     color: black;
     font-size: 12px;
     font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 @media screen and (max-width: 1450px) {

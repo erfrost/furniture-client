@@ -54,8 +54,8 @@ const MobileNav = () => {
     const header = document.querySelector(".MobileNav_container__k3Zl_");
     if (!header) return;
 
-    const handleClick = (event) => {
-      const isClickInsideHeader = header.contains(event.target);
+    const handleClick = (e) => {
+      const isClickInsideHeader = header.contains(e.target);
       if (!isClickInsideHeader) {
         setIsOpen(false);
       }

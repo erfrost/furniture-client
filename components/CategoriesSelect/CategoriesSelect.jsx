@@ -30,7 +30,34 @@ const CategoriesSelect = ({ categories, subcategories }) => {
       }
     };
   }, []);
-  console.log(categories);
+  console.log(isOpen);
+  useEffect(() => {
+    const body = document.querySelector("body");
+    const btn = document.querySelector(".CategoriesSelect_catalogBtn__w5DQe");
+    const select = document.querySelector(
+      ".CategoriesSelect_selectContainer__92U0j"
+    );
+    if (!select) return;
+
+    const handleClick = (e) => {
+      const isClickInsideSelect = select.contains(e.target);
+      const isClickInsideBtn = btn.contains(e.target);
+      if (!isClickInsideSelect && !isClickInsideBtn && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      body.addEventListener("click", handleClick);
+      body.addEventListener("touchstart", handleClick);
+    }
+
+    return () => {
+      body.removeEventListener("click", handleClick);
+      body.removeEventListener("touchstart", handleClick);
+    };
+  }, [isOpen]);
+
   const calculatedCount = () => {
     if (screenWidth > 1250) return 5;
     else if (screenWidth > 1100) return 4;
