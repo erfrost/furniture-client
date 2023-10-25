@@ -46,7 +46,13 @@ const NewsSlider = ({ news }) => {
     const lazyContainer = document.querySelectorAll(
       ".lazy-load-image-background"
     );
+    const slides = document.querySelectorAll(".NewsSlider_slide__hF9_Q");
     const images = document.querySelectorAll(".NewsSlider_sliderImage__LO5vh");
+
+    Array.from(slides).map((el) => {
+      el.style.height = "100%";
+      el.style.alignItems = "center";
+    });
 
     if (!news?.length) {
       const fullScreen = document.querySelector(".homePage_fullScreen___a3rE");

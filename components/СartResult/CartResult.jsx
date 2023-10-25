@@ -1,7 +1,11 @@
 import formattedNumber from "@/utils/formattedNumber";
 import styles from "./CartResult.module.css";
+import { useDisclosure } from "@chakra-ui/react";
+import OrderModal from "../OrderModal/OrderModal";
 
 const CartResult = ({ items, totalCount }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.count,
     0
@@ -14,7 +18,9 @@ const CartResult = ({ items, totalCount }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.btn}>Перейти к оформлению заказа</div>
+      <div className={styles.btn} onClick={onOpen}>
+        Перейти к оформлению заказа
+      </div>
       <span className={styles.title}>Корзина</span>
       <div className={styles.row}>
         <span className={styles.subTitle}>{`Корзина (${
@@ -36,6 +42,7 @@ const CartResult = ({ items, totalCount }) => {
           {formattedNumber(totalDiscountPrice) + " ₽"}
         </span>
       </div>
+      <OrderModal isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };
