@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./ItemCard.module.css";
-import { BACKEND_IMAGES_URL } from "@/config";
 import cartIcon from "@/assets/cartIcon.svg";
 import DiscountPrice from "../DiscountPrice/DiscountPrice";
 import cancelAction from "@/utils/cancelAction";
@@ -52,7 +51,7 @@ const ItemCard = ({ item }) => {
   return (
     <div className={styles.container}>
       <LazyLoadImage
-        src={BACKEND_IMAGES_URL + item.photo_names[0]}
+        src={item.photo_names[0]}
         effect="blur"
         className={styles.image}
         onDragStart={cancelAction}
@@ -70,12 +69,14 @@ const ItemCard = ({ item }) => {
       >
         {item.title}
       </span>
-      <span className={styles.specification}>
-        {item.specifications[0]?.title}:{" "}
-        {item.specifications[0]?.value.length > 50
-          ? `${item.specifications[0]?.value.substring(0, 50)}...`
-          : item.specifications[0]?.value}
-      </span>
+      {item.specifications.length ? (
+        <span className={styles.specification}>
+          {item.specifications[0].title}:{" "}
+          {item.specifications[0].value.length > 50
+            ? `${item.specifications[0].value.substring(0, 50)}...`
+            : item.specifications[0].value}
+        </span>
+      ) : null}
       <div className={styles.btnsContainer}>
         <div
           className={styles.moreBtn}

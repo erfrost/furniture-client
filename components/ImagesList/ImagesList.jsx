@@ -1,7 +1,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import styles from "./ImagesList.module.css";
 import cancelAction from "@/utils/cancelAction";
-import { BACKEND_IMAGES_URL } from "@/config";
 
 const ImagesList = ({ item, setCurrentImageIndex }) => {
   return (
@@ -9,7 +8,7 @@ const ImagesList = ({ item, setCurrentImageIndex }) => {
       {item?.photo_names?.map((img, index) => (
         <LazyLoadImage
           key={index}
-          src={BACKEND_IMAGES_URL + img}
+          src={img}
           effect="blur"
           className={styles.miniImage}
           onDragStart={cancelAction}

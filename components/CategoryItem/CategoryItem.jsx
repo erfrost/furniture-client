@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 import styles from "./CategoryItem.module.css";
-import { BACKEND_IMAGES_URL } from "@/config";
 import axiosInstance from "@/axios.config";
 import Icon from "@/assets/subcategoryIcon.svg";
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import Link from "next/link";
 import cancelAction from "@/utils/cancelAction";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { BACKEND_IMAGES_URL } from "@/config";
 
 const CategoryItem = ({ category }) => {
   const [reqError, setReqError] = useState(null);

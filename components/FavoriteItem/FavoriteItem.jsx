@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import styles from "./FavoriteItem.module.css";
-import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
 import { useRouter } from "next/router";
@@ -54,7 +53,7 @@ const FavoriteItem = ({ item, setFavoriteItems }) => {
     <div className={styles.container}>
       <div className={styles.content}>
         <LazyLoadImage
-          src={BACKEND_IMAGES_URL + item.photo_names[0]}
+          src={item.photo_names[0]}
           effect="blur"
           className={styles.image}
           onDragStart={cancelAction}

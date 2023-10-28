@@ -39,6 +39,19 @@
 .link:hover {
     color: rgb(110, 110, 110);
 }
+.orgInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.orgTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    align-self: center;
+    margin-bottom: 15px;
+}
 
 @media screen and (max-width: 900px) {
     .content {

@@ -8,8 +8,16 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import styles from "./OrderModal.module.css";
+import { formatPhoneNumber } from "@/utils/formattedPhoneNumber";
 
-const OrderModal = ({ isOpen, onClose }) => {
+const OrderModal = ({
+  isOpen,
+  onClose,
+  name,
+  setName,
+  telNumber,
+  setTelNumber,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -24,11 +32,25 @@ const OrderModal = ({ isOpen, onClose }) => {
           </span>
           <div className={styles.form}>
             <span className={styles.formTitle}>Имя</span>
-            <Input placeholder="Иван" className={styles.input} />
+            <Input
+              placeholder="Иван"
+              className={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className={styles.form}>
             <span className={styles.formTitle}>Телефон</span>
-            <Input placeholder="+7 (919) 111-23-45" className={styles.input} />
+            <Input
+              placeholder="+7 (919) 111-23-45"
+              className={styles.input}
+              value={telNumber}
+              onChange={(e) =>
+                setTelNumber((prevState) =>
+                  formatPhoneNumber(prevState, e.target.value)
+                )
+              }
+            />
           </div>
           <div className={`${styles.btn} ${styles.btn1}`}>
             Оплатить при получении

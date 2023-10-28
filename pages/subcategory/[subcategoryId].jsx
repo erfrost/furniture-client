@@ -21,7 +21,7 @@ const Index = ({ items, error }) => {
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-
+  console.log(items.length);
   const router = useRouter();
   const { subcategoryId } = router.query;
 

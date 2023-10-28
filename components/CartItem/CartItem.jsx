@@ -3,7 +3,6 @@ import cancelAction from "@/utils/cancelAction";
 import styles from "./CartItem.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { BACKEND_IMAGES_URL } from "@/config";
 import { useEffect, useState } from "react";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import axiosInstance from "@/axios.config";
@@ -56,7 +55,7 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
       <div className={styles.imageContainer}>
         <Link href={`item/${item._id}`} className={styles.imageLink}>
           <LazyLoadImage
-            src={BACKEND_IMAGES_URL + item.photo_names[0]}
+            src={item.photo_names[0]}
             alt="photo"
             className={styles.image}
             draggable={false}

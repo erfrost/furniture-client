@@ -84,7 +84,7 @@ const Index = () => {
           <span className={styles.subtitle}>
             Наша компания является ведущими магазинами мебели в своих городах
           </span>
-          <span className={styles.texts}>
+          <div className={styles.texts}>
             <span className={styles.text}>
               Мы имеем богатый опыт работы на рынке, и наша компания успешно
               функционирует уже более 10 лет.
@@ -121,7 +121,24 @@ const Index = () => {
               </Link>
               деньги. Ваше удовлетворение - наш главный приоритет.
             </span>
-          </span>
+            <div className={styles.orgInfo}>
+              <span className={styles.orgTitle}>Реквизиты Продавца</span>
+              <span className={styles.text}>
+                Полное наименование: Старикова Елена Владимировна
+              </span>
+              <span className={styles.text}>ИНН: 235205998471</span>
+              <span className={styles.text}>ОГРН/ОГРНИП: 323861700045122</span>
+              <span className={styles.text}>
+                Контактный телефон: +7 999 418-13-93
+              </span>
+              <span className={styles.text}>
+                Контактный e-mail: 89227720462@mail.ru
+              </span>
+            </div>
+            <a href="/oferta.docx" download>
+              <button>Скачать файл</button>
+            </a>
+          </div>
         </div>
         <Footer />
         {reqError && (

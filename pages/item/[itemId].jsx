@@ -10,7 +10,6 @@ import ItemPagePriceBlock from "@/components/ItemPagePriceBlock/ItemPagePriceBlo
 import ItemPageSlider from "@/components/ItemPageSlider/ItemPageSlider";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { BACKEND_IMAGES_URL } from "@/config";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import cancelAction from "@/utils/cancelAction";
@@ -129,7 +128,7 @@ const Index = ({ item, error }) => {
                   setCurrentImageIndex={setCurrentImageIndex}
                 />
                 <LazyLoadImage
-                  src={BACKEND_IMAGES_URL + item.photo_names[currentImageIndex]}
+                  src={item.photo_names[currentImageIndex]}
                   effect="blur"
                   className={styles.image}
                   onDragStart={cancelAction}
