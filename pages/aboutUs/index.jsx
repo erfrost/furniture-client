@@ -135,9 +135,6 @@ const Index = () => {
                 Контактный e-mail: 89227720462@mail.ru
               </span>
             </div>
-            <a href="/oferta.docx" download>
-              <button>Скачать файл</button>
-            </a>
           </div>
         </div>
         <Footer />
