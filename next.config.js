@@ -9,6 +9,6 @@ const withPWA = require("next-pwa")({
 module.exports = withPWA({
   reactStrictMode: true,
   images: {
-    domains: ["https://api.admin"],
+    domains: ["*"],
   },
 });
