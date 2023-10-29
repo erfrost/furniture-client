@@ -50,9 +50,11 @@ const ItemCard = ({ item }) => {
 
   return (
     <div className={styles.container}>
-      <LazyLoadImage
+      <Image
         src={item.photo_names[0]}
-        effect="blur"
+        alt="item"
+        width={300}
+        height={300}
         className={styles.image}
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
