@@ -146,7 +146,7 @@ export async function getServerSideProps() {
       props: {
         categories: categoriesAndSubcategories.data.categories,
         subcategories: categoriesAndSubcategories.data.subcategories,
-        discountItems: discountItems.data,
+        discountItems: discountItems.data.items,
         news: news.data,
       },
     };

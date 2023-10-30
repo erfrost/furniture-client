@@ -14,8 +14,8 @@ const ItemsCatalog = ({
   querySearch,
 }) => {
   const [allItems, setAllItems] = useState(items);
-  const [isLoading, setIsLoading] = useState(false);
   const [reqError, setReqError] = useState(null);
+  let isLoading = false;
   let offset = 25;
   let nullMoreItems = false;
 
@@ -25,15 +25,14 @@ const ItemsCatalog = ({
 
   const loadMoreItems = async () => {
     if (!isLoading && !nullMoreItems) {
+      isLoading = true;
       try {
-        setIsLoading(true);
-
         if (isDiscountPage) {
           const items = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
           );
           if (!items.data.length) nullMoreItems = true;
-          setAllItems((prevState) => [...prevState, ...items.data]);
+          setAllItems((prevState) => [...prevState, ...items.data.items]);
         } else {
           let items;
           if (queryCategoryId) {
@@ -49,8 +48,8 @@ const ItemsCatalog = ({
               `items/search?search=${querySearch}&limit=25&offset=${offset}`
             );
           }
-          if (!items.data.length) nullMoreItems = true;
-          setAllItems((prevState) => [...prevState, ...items.data]);
+          if (!items.data.items.length) nullMoreItems = true;
+          setAllItems((prevState) => [...prevState, ...items.data.items]);
         }
       } catch (error) {
         setReqError(
@@ -59,7 +58,7 @@ const ItemsCatalog = ({
         );
       } finally {
         offset += 25;
-        setIsLoading(false);
+        isLoading = false;
       }
     }
   };

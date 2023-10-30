@@ -14,9 +14,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-const Index = ({ items, error }) => {
+const Index = ({ items, itemsCount, error }) => {
   const [categoryTitle, setCategoryTitle] = useState(undefined);
   const [itemsState, setItemsState] = useState(items);
+  const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
@@ -26,17 +27,19 @@ const Index = ({ items, error }) => {
   const { categoryId } = router.query;
 
   useEffect(() => {
+    const currentCategory = categories.find((cat) => cat._id === categoryId);
+
+    setCategoryTitle(currentCategory?.title);
+  }, [categoryId]);
+
+  useEffect(() => {
     async function fetchItems() {
       try {
         const response = await axiosInstance.get(
           `items/by_category/${categoryId}?limit=25`
         );
-        setItemsState(response.data);
-
-        const currentCategory = categories.find(
-          (cat) => cat._id === categoryId
-        );
-        setCategoryTitle(currentCategory?.title);
+        setItemsState(response.data.items);
+        setCountState(response.data.count);
       } catch (error) {
         setReqError(
           error?.response?.data?.message ||
@@ -57,8 +60,9 @@ const Index = ({ items, error }) => {
           );
           const categories = categoriesAndSubcategories.data.categories;
           const subcategories = categoriesAndSubcategories.data.subcategories;
+
           const currentCategory = categories.find(
-            (cat) => cat._id === router.query.categoryId
+            (cat) => cat._id === categoryId
           );
           setCategoryTitle(currentCategory?.title);
           setCategories(categories);
@@ -71,7 +75,7 @@ const Index = ({ items, error }) => {
         }
       } else {
         const currentCategory = categories.find(
-          (cat) => cat._id === router.query.categoryId
+          (cat) => cat._id === categoryId
         );
         setCategoryTitle(currentCategory?.title);
       }
@@ -123,9 +127,7 @@ const Index = ({ items, error }) => {
             setSortedItems={setItemsState}
           />
           <span className={styles.itemsCount}>
-            {!itemsState?.length
-              ? "Ничего не найдено"
-              : `Найдено: ${itemsState?.length} товаров`}
+            Найдено: {countState} товаров
           </span>
           <ItemsCatalog
             items={itemsState}
@@ -154,7 +156,8 @@ export async function getServerSideProps({ query }) {
 
     return {
       props: {
-        items: items.data,
+        items: items.data.items,
+        itemsCount: items.data.count,
       },
     };
   } catch (error) {

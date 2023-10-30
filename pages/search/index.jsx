@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-const SearchPage = ({ items, error }) => {
+const SearchPage = ({ items, itemsCount, error }) => {
   const [itemsState, setItemsState] = useState(items);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -87,9 +87,7 @@ const SearchPage = ({ items, error }) => {
           items={items}
           setSortedItems={setItemsState}
         />
-        <span className={styles.itemsCount}>
-          Найдено: {items.length} товаров
-        </span>
+        <span className={styles.itemsCount}>Найдено: {itemsCount} товаров</span>
         <ItemsCatalog
           items={itemsState}
           isDiscountPage={false}
@@ -110,13 +108,14 @@ const SearchPage = ({ items, error }) => {
 
 export async function getServerSideProps({ query }) {
   try {
-    const items = await axiosInstance.get(
+    const res = await axiosInstance.get(
       `items/search?search=${query.search}&limit=25`
     );
 
     return {
       props: {
-        items: items.data,
+        items: res.data.items,
+        itemsCount: res.data.count,
       },
     };
   } catch (error) {

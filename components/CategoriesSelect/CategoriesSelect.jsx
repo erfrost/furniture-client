@@ -28,7 +28,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
       }
     };
   }, []);
-  console.log(isOpen);
+
   useEffect(() => {
     const body = document.querySelector("body");
     const btn = document.querySelector(".CategoriesSelect_catalogBtn__w5DQe");
