@@ -14,8 +14,6 @@ const Footer = () => {
             className={styles.logo}
             src={logo}
             alt="logo"
-            width={120}
-            height={50}
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}

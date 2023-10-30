@@ -1,12 +1,11 @@
 import styles from "./CategoriesPreview.module.css";
 import { useRouter } from "next/router";
 import NewsSlider from "../NewsSlider/NewsSlider";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
 import image1 from "@/assets/categoriesPreview1.png";
 import image2 from "@/assets/categoriesPreview2.png";
 import image3 from "@/assets/categoriesPreview3.png";
+import Image from "next/image";
 
 const CategoriesPreview = ({ news }) => {
   const router = useRouter();
@@ -40,9 +39,11 @@ const CategoriesPreview = ({ news }) => {
         {mockText.map((item, index) => (
           <div className={styles.item} key={index} onClick={item.function}>
             <span className={styles.itemText}>{item.text}</span>
-            <LazyLoadImage
+            <Image
               src={item.image}
               alt="photo"
+              width={150}
+              height={150}
               className={styles.image}
               draggable={false}
               onDragStart={cancelAction}

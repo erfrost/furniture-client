@@ -1,15 +1,16 @@
 import cancelAction from "@/utils/cancelAction";
 import styles from "./SalonItem.module.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const SalonItem = ({ salon }) => {
   return (
     <div className={styles.container}>
-      <LazyLoadImage
+      <Image
         src={salon.img.src}
         alt="image"
+        width={300}
+        height={300}
         className={styles.image}
         draggable={false}
         onDragStart={cancelAction}

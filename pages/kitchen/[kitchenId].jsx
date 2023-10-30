@@ -8,12 +8,11 @@ import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/kitchenItem.module.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
+import Image from "next/image";
 
 const Index = ({ kitchen, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -83,11 +82,13 @@ const Index = ({ kitchen, error }) => {
           <RouteToHome />
           <div className={styles.item}>
             <div className={styles.photosContainer}>
-              <LazyLoadImage
+              <Image
                 src={
                   BACKEND_IMAGES_URL + kitchen.photo_names[currentImageIndex]
                 }
                 alt="photo"
+                width={300}
+                height={300}
                 className={styles.bigImage}
                 draggable={false}
                 onDragStart={cancelAction}
@@ -95,9 +96,11 @@ const Index = ({ kitchen, error }) => {
               />
               <div className={styles.list}>
                 {kitchen.photo_names.map((img, index) => (
-                  <LazyLoadImage
+                  <Image
                     src={BACKEND_IMAGES_URL + img}
                     alt="photo"
+                    width={300}
+                    height={300}
                     className={styles.image}
                     draggable={false}
                     onDragStart={cancelAction}

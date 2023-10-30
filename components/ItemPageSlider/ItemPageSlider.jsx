@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
+import Image from "next/image";
 
 const sliderSettings = {
   dots: true,
@@ -19,11 +20,12 @@ const ItemPageSlider = ({ images }) => {
   return (
     <Slider {...sliderSettings} className={styles.slider}>
       {images?.map((img, index) => (
-        <LazyLoadImage
+        <Image
           key={index}
           src={img}
+          width={300}
+          height={300}
           alt="slide image"
-          effect="blur"
           className={styles.image}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}

@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import cancelAction from "@/utils/cancelAction";
 import styles from "./CartItem.module.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { useEffect, useState } from "react";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import axiosInstance from "@/axios.config";
@@ -54,9 +52,11 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <Link href={`item/${item._id}`} className={styles.imageLink}>
-          <LazyLoadImage
+          <Image
             src={item.photo_names[0]}
             alt="photo"
+            width={300}
+            height={300}
             className={styles.image}
             draggable={false}
             onDragStart={cancelAction}
@@ -66,7 +66,15 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
         <div className={styles.info}>
           <div className={styles.texts}>
             <Link href={`item/${item._id}`}>
-              <span className={styles.title}>{item.title}</span>
+              <span
+                className={
+                  item.title.length > 35
+                    ? `${styles.title} ${styles.longTitle}`
+                    : styles.title
+                }
+              >
+                {item.title}
+              </span>
             </Link>
             <span className={styles.categoryAndSubcategory}>
               {categoryTitle && subcategoryTitle

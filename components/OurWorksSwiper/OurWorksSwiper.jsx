@@ -96,8 +96,6 @@ const OurWorksSwiper = ({ images }) => {
             src={BACKEND_IMAGES_URL + img.photo_name}
             alt="work"
             className={styles.image}
-            width={100}
-            height={100}
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}

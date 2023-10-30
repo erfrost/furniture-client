@@ -9,13 +9,12 @@ import OurWorksSwiper from "@/components/OurWorksSwiper/OurWorksSwiper";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/KitchensToOrder.module.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
 import Link from "next/link";
+import Image from "next/image";
 
 const Index = ({ images, kitchens, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -95,9 +94,11 @@ const Index = ({ images, kitchens, error }) => {
               kitchens?.map((item) => (
                 <div className={styles.item} key={item._id}>
                   <Link className={styles.link} href={`/kitchen/${item._id}`}>
-                    <LazyLoadImage
+                    <Image
                       src={BACKEND_IMAGES_URL + item.photo_names[0]}
                       alt="preview"
+                      width={300}
+                      height={300}
                       className={styles.image}
                       draggable={false}
                       onDragStart={cancelAction}

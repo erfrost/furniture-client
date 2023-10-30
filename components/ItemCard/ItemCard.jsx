@@ -69,7 +69,7 @@ const ItemCard = ({ item }) => {
         className={styles.title}
         onClick={() => router.push(`/item/${item._id}`)}
       >
-        {item.title}
+        {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."}
       </span>
       {item.specifications.length ? (
         <span className={styles.specification}>
@@ -98,8 +98,7 @@ const ItemCard = ({ item }) => {
             <Image
               src={cartIcon}
               alt="cartIcon"
-              width={25}
-              height={25}
+              className={styles.cartIcon}
               draggable={false}
               onDragStart={cancelAction}
               onContextMenu={cancelAction}

@@ -71,6 +71,9 @@
 .activeCart {
     background-color: #dee3db;
 }
+.cartIcon {
+    width: 65%;
+}
 
 @media screen and (max-width: 1350px) {
     .image {

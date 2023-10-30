@@ -68,6 +68,9 @@
         min-width: 400px !important;
         max-width: 400px !important;
     }
+    .header {
+        font-size: 22px !important;
+    }
 }
 @media screen and (max-width: 435px) {
     .content {

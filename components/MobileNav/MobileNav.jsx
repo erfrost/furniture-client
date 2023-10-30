@@ -186,9 +186,6 @@ const MobileNav = () => {
         <Image
           src={logo}
           alt="logo"
-          width={105}
-          height={73}
-          priority
           className={styles.logo}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}
@@ -204,8 +201,6 @@ const MobileNav = () => {
               className={styles.heartIcon}
               src={heartIcon}
               alt="heartIcon"
-              width={50}
-              height={50}
               draggable={false}
               onDragStart={cancelAction}
               onContextMenu={cancelAction}
@@ -243,8 +238,6 @@ const MobileNav = () => {
             className={styles.cartIcon}
             src={cartIcon}
             alt="cartIcon"
-            width={50}
-            height={50}
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}

@@ -7,15 +7,14 @@ import { BACKEND_IMAGES_URL } from "@/config";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "next/image";
 
 const sliderSettings = {
   dots: true,
   infinite: true,
   arrows: false,
   speed: 400,
-  // autoplay: true,
+  autoplay: true,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -43,17 +42,6 @@ const NewsSlider = ({ news }) => {
   }, []);
 
   useEffect(() => {
-    const lazyContainer = document.querySelectorAll(
-      ".lazy-load-image-background"
-    );
-    const slides = document.querySelectorAll(".NewsSlider_slide__hF9_Q");
-    const images = document.querySelectorAll(".NewsSlider_sliderImage__LO5vh");
-
-    Array.from(slides).map((el) => {
-      el.style.height = "100%";
-      el.style.alignItems = "center";
-    });
-
     if (!news?.length) {
       const fullScreen = document.querySelector(".homePage_fullScreen___a3rE");
       const previewContainer = document.querySelector(
@@ -80,17 +68,6 @@ const NewsSlider = ({ news }) => {
       if (screenWidth < 768) {
         catalog.style.marginTop = "25px";
       }
-    }
-    images.forEach((el) => {
-      el.parentElement.style.width = "50%";
-      el.parentElement.style.display = "flex";
-      el.parentElement.style.justifyContent = "center";
-    });
-
-    if (screenWidth < 470 && lazyContainer.length) {
-      lazyContainer.forEach((item) => {
-        item.style.height = "auto";
-      });
     }
   }, [screenWidth]);
 
@@ -122,10 +99,11 @@ const NewsSlider = ({ news }) => {
                 </div>
               )}
             </div>
-            <LazyLoadImage
+            <Image
               src={BACKEND_IMAGES_URL + item.photo_name}
               alt="slide image"
-              effect="blur"
+              width={300}
+              height={300}
               className={styles.sliderImage}
               onDragStart={cancelAction}
               onContextMenu={cancelAction}
@@ -141,10 +119,11 @@ const NewsSlider = ({ news }) => {
           <div className={styles.content} key={item._id}>
             <div className={styles.texts}>
               <span className={styles.titleMain}>{item.title}</span>
-              <LazyLoadImage
+              <Image
                 src={BACKEND_IMAGES_URL + item.photo_name}
                 alt="slide image"
-                effect="blur"
+                width={300}
+                height={300}
                 className={styles.sliderImage}
                 onDragStart={cancelAction}
                 onContextMenu={cancelAction}

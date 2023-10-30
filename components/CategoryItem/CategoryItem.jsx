@@ -8,8 +8,6 @@ import AlertInfo from "../AlertInfo/AlertInfo";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import cancelAction from "@/utils/cancelAction";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { BACKEND_IMAGES_URL } from "@/config";
 
 const CategoryItem = ({ category }) => {
@@ -66,10 +64,11 @@ const CategoryItem = ({ category }) => {
 
   return (
     <div className={styles.container}>
-      <LazyLoadImage
+      <Image
         src={BACKEND_IMAGES_URL + category.photo_name}
         alt="category"
-        effect="blur"
+        width={100}
+        height={100}
         className={styles.image}
         draggable={false}
         onDragStart={cancelAction}
@@ -84,8 +83,6 @@ const CategoryItem = ({ category }) => {
           <Image
             src={Icon}
             alt="icon"
-            width={15}
-            height={15}
             priority
             onDragStart={cancelAction}
             onContextMenu={cancelAction}

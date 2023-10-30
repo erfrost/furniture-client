@@ -4,8 +4,6 @@ import catalogIcon from "@/assets/catalogIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
 import { BACKEND_IMAGES_URL } from "@/config";
 
@@ -74,8 +72,6 @@ const CategoriesSelect = ({ categories, subcategories }) => {
         <Image
           src={catalogIcon}
           alt="catalogIcon"
-          width={30}
-          height={30}
           draggable={false}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}
@@ -117,9 +113,11 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                   href={`/category/${cat._id}`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <LazyLoadImage
+                  <Image
                     src={BACKEND_IMAGES_URL + cat.photo_name}
                     alt="photo"
+                    width={100}
+                    height={75}
                     className={styles.categoryImage}
                     draggable={false}
                     onDragStart={cancelAction}

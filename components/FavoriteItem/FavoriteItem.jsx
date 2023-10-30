@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import styles from "./FavoriteItem.module.css";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
@@ -7,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { addToCart, getCartFromCookie } from "@/utils/cart";
 import { removeFromFavorites } from "@/utils/favorites";
+import Image from "next/image";
 
 const FavoriteItem = ({ item, setFavoriteItems }) => {
   const [inCartActive, setInCartActive] = useState(false);
@@ -52,9 +52,11 @@ const FavoriteItem = ({ item, setFavoriteItems }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <LazyLoadImage
+        <Image
           src={item.photo_names[0]}
-          effect="blur"
+          alt="image"
+          width={100}
+          height={100}
           className={styles.image}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}

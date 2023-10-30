@@ -11,15 +11,20 @@
     padding: 10px;
 }
 .imageContainer {
-    height: 100%;
+    height: 125px;
     max-height: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 20px;
 }
+.imageLink {
+    height: 100%;
+}
 .image {
-    width: 140px;
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
     max-height: 100%;
     border-radius: 6px;
     object-fit: cover;
@@ -41,10 +46,15 @@
     color: black;
     font-size: 20px;
     font-weight: 600;
+    word-wrap: break-word;
     transition: all 0.3s ease;
 }
 .title:hover {
     color: rgb(107, 107, 107);
+}
+.longTitle {
+    max-width: 50%;
+    font-size: 12px;
 }
 .categoryAndSubcategory {
     color: #4B4B4B;
@@ -129,6 +139,9 @@
     .title {
         font-size: 20px;
     }
+    .longTitle {
+        font-size: 13px;
+    }
     .categoryAndSubcategory {
         font-size: 17px;
     }
@@ -148,8 +161,15 @@
     }
 }
 @media screen and (max-width: 975px) {
+    .imageContainer {
+        height: 110px;
+    }
     .image {
-        width: 110px;
+        width: 150px;
+        min-width: 150px;
+    }
+    .longTitle {
+        font-size: 12px;
     }
 }
 @media screen and (max-width: 925px) {
@@ -210,6 +230,7 @@
 @media screen and (max-width: 600px) {
     .imageContainer {
         width: 100%;
+        height: auto;
         flex-direction: column;
     }
     .imageLink {

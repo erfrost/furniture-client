@@ -126,7 +126,7 @@ const Index = () => {
       });
       setItems(newItems);
       addToCart(itemId, currentItem.count - 1);
-    } else if (action === "plus") {
+    } else if (action === "plus" && currentItem.count < 50) {
       const newItems = items.map((item) => {
         if (item._id === itemId) {
           return {

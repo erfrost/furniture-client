@@ -13,8 +13,8 @@ import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import cancelAction from "@/utils/cancelAction";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRecoilState } from "recoil";
 
 const Index = ({ item, error }) => {
@@ -65,29 +65,6 @@ const Index = ({ item, error }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (screenWidth > 1100) {
-      const lazyload = document.querySelectorAll(".lazy-load-image-background");
-
-      const currentElement = lazyload[lazyload.length - 1];
-      lazyload.forEach((el, index) => {
-        if (index !== lazyload.length - 1) {
-          el.style.width = "80px";
-          el.style.height = "80px";
-        }
-      });
-      currentElement.style.minWidth = "533px";
-      currentElement.style.height = "385px";
-      if (screenWidth < 1400) {
-        currentElement.style.minWidth = "450px";
-      }
-      if (screenWidth < 1300) {
-        currentElement.style.minWidth = "375px";
-        currentElement.style.height = "325px";
-      }
-    }
-  }, [screenWidth]);
-
   if (!item) {
     return null;
   }
@@ -127,9 +104,11 @@ const Index = ({ item, error }) => {
                   item={item}
                   setCurrentImageIndex={setCurrentImageIndex}
                 />
-                <LazyLoadImage
+                <Image
                   src={item.photo_names[currentImageIndex]}
-                  effect="blur"
+                  alt="image"
+                  width={300}
+                  height={300}
                   className={styles.image}
                   onDragStart={cancelAction}
                   onContextMenu={cancelAction}
