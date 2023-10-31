@@ -23,7 +23,7 @@ const Index = ({ item, error }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-
+  console.log(item);
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -119,7 +119,10 @@ const Index = ({ item, error }) => {
               <span className={styles.title}>{item.title}</span>
               <span className={styles.categoryTitle}>
                 {currentCategoryTitle && currentSubcategoryTitle
-                  ? currentCategoryTitle + ", " + currentSubcategoryTitle
+                  ? currentCategoryTitle +
+                    ", " +
+                    currentSubcategoryTitle +
+                    (item.furnisherId ? ", " + item.furnisherId : "")
                   : "Загрузка..."}
               </span>
               {screenWidth < 1100 ? <ItemPagePriceBlock item={item} /> : null}
