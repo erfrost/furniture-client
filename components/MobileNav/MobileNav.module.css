@@ -54,6 +54,13 @@
 .link:hover {
     color: rgb(206, 206, 206);
 }
+.contact {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+}
 .miniFont {
     font-size: 13px;
 }

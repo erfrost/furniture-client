@@ -35,7 +35,7 @@ const CategoriesPreview = ({ news }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.categoriesList}>
+      {/* <div className={styles.categoriesList}>
         {mockText.map((item, index) => (
           <div className={styles.item} key={index} onClick={item.function}>
             <span className={styles.itemText}>{item.text}</span>
@@ -51,7 +51,7 @@ const CategoriesPreview = ({ news }) => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
       <NewsSlider news={news} />
     </div>
   );

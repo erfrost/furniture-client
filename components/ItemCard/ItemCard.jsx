@@ -69,7 +69,8 @@ const ItemCard = ({ item }) => {
         className={styles.title}
         onClick={() => router.push(`/item/${item._id}`)}
       >
-        {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."}
+        {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."},{" "}
+        {item.furnisherId}
       </span>
       {item.specifications.length ? (
         <span className={styles.specification}>

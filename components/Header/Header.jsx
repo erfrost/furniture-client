@@ -15,6 +15,7 @@ import FavoriteItem from "../FavoriteItem/FavoriteItem";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import AlertInfo from "../AlertInfo/AlertInfo";
 import logo from "@/assets/logo.svg";
+import HeaderContacts from "../HeaderContacts/HeaderContacts";
 
 const Header = () => {
   const [popoverActive, setPopoverActive] = useState(false);
@@ -98,12 +99,7 @@ const Header = () => {
         onEnterClick={handleKeyDown}
         inputRef={inputRef}
       />
-      <Link href="tel: +7 (922) 773-22-55" className={styles.phoneContainer}>
-        <div className={styles.photoIcon}>
-          <PhoneIcon color="#262626" fontSize="large" boxSize="45%" />
-        </div>
-        <span className={styles.phone}>+7 (922) 773-22-55</span>
-      </Link>
+      <HeaderContacts />
       <div className={styles.favoriteRelative}>
         <div
           id="favoriteIcon"
