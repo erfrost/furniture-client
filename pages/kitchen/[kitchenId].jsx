@@ -10,7 +10,6 @@ import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/kitchenItem.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
 
@@ -83,9 +82,7 @@ const Index = ({ kitchen, error }) => {
           <div className={styles.item}>
             <div className={styles.photosContainer}>
               <Image
-                src={
-                  BACKEND_IMAGES_URL + kitchen.photo_names[currentImageIndex]
-                }
+                src={kitchen.photo_names[currentImageIndex]}
                 alt="photo"
                 width={300}
                 height={300}
@@ -97,7 +94,7 @@ const Index = ({ kitchen, error }) => {
               <div className={styles.list}>
                 {kitchen.photo_names.map((img, index) => (
                   <Image
-                    src={BACKEND_IMAGES_URL + img}
+                    src={img}
                     alt="photo"
                     width={300}
                     height={300}

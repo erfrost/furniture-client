@@ -1,4 +1,3 @@
-import { BACKEND_IMAGES_URL } from "@/config";
 import styles from "./OurWorksSwiper.module.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import cancelAction from "@/utils/cancelAction";
@@ -93,7 +92,7 @@ const OurWorksSwiper = ({ images }) => {
       <div className={styles.swiper}>
         {images?.map((img, index) => (
           <Image
-            src={BACKEND_IMAGES_URL + img.photo_name}
+            src={img.photo_name}
             alt="work"
             className={styles.image}
             draggable={false}

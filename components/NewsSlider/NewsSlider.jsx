@@ -3,7 +3,6 @@ import styles from "./NewsSlider.module.css";
 import cancelAction from "@/utils/cancelAction";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { BACKEND_IMAGES_URL } from "@/config";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -100,7 +99,7 @@ const NewsSlider = ({ news }) => {
               )}
             </div>
             <Image
-              src={BACKEND_IMAGES_URL + item.photo_name}
+              src={item.photo_name}
               alt="slide image"
               width={300}
               height={300}
@@ -120,7 +119,7 @@ const NewsSlider = ({ news }) => {
             <div className={styles.texts}>
               <span className={styles.titleMain}>{item.title}</span>
               <Image
-                src={BACKEND_IMAGES_URL + item.photo_name}
+                src={item.photo_name}
                 alt="slide image"
                 width={300}
                 height={300}

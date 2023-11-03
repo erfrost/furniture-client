@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
-import { BACKEND_IMAGES_URL } from "@/config";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
@@ -114,7 +113,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                   onClick={() => setIsOpen(false)}
                 >
                   <Image
-                    src={BACKEND_IMAGES_URL + cat.photo_name}
+                    src={cat.photo_name}
                     alt="photo"
                     width={100}
                     height={75}

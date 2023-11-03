@@ -8,32 +8,49 @@ import AlertInfo from "../AlertInfo/AlertInfo";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import cancelAction from "@/utils/cancelAction";
-import { BACKEND_IMAGES_URL } from "@/config";
+import { useRecoilState } from "recoil";
+import { categoriesState, subcategoriesState } from "@/storage/atoms";
 
 const CategoryItem = ({ category }) => {
   const [reqError, setReqError] = useState(null);
+  const [categoriesRecoil, setCategoriesRecoil] =
+    useRecoilState(categoriesState);
+  const [subcategoriesRecoil, setSubcategoriesRecoil] =
+    useRecoilState(subcategoriesState);
   const [subcategories, setSubcategories] = useState([]);
   const [screenWidth, setScreenWidth] = useState(null);
 
   const router = useRouter();
 
   useEffect(() => {
-    async function fetchSubcategories() {
-      try {
-        const subcategories = await axiosInstance.get(
-          `subcategories/${category._id}`
-        );
+    if (!categoriesRecoil.length || !subcategoriesRecoil.length) {
+      async function fetchCategoriesAndSubcategories() {
+        try {
+          const categoriesAndSubcategories = await axiosInstance.get(
+            "categoriesAndSubcategories"
+          );
+          const categories = categoriesAndSubcategories.data.categories;
+          const subcategories = categoriesAndSubcategories.data.subcategories;
 
-        setSubcategories(subcategories.data);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
+          setCategoriesRecoil(categories);
+          setSubcategoriesRecoil(subcategories);
+        } catch (error) {
+          setReqError(
+            error?.response?.data?.message ||
+              "Произошла ошибка запроса. Попробуйте позднее"
+          );
+        }
       }
+
+      fetchCategoriesAndSubcategories();
     }
 
-    fetchSubcategories();
+    const currentCategoryId = category._id;
+
+    const currentSubcategories = subcategoriesRecoil.filter(
+      (subcat) => subcat.category_id === currentCategoryId
+    );
+    setSubcategories(currentSubcategories);
   }, []);
 
   useEffect(() => {
@@ -65,7 +82,7 @@ const CategoryItem = ({ category }) => {
   return (
     <div className={styles.container}>
       <Image
-        src={BACKEND_IMAGES_URL + category.photo_name}
+        src={category.photo_name}
         alt="category"
         width={100}
         height={100}

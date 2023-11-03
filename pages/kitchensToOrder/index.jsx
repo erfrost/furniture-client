@@ -11,7 +11,6 @@ import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/KitchensToOrder.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { BACKEND_IMAGES_URL } from "@/config";
 import cancelAction from "@/utils/cancelAction";
 import Link from "next/link";
 import Image from "next/image";
@@ -95,7 +94,7 @@ const Index = ({ images, kitchens, error }) => {
                 <div className={styles.item} key={item._id}>
                   <Link className={styles.link} href={`/kitchen/${item._id}`}>
                     <Image
-                      src={BACKEND_IMAGES_URL + item.photo_names[0]}
+                      src={item.photo_names[0]}
                       alt="preview"
                       width={300}
                       height={300}
