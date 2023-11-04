@@ -8,30 +8,30 @@ import image3 from "@/assets/categoriesPreview3.png";
 import Image from "next/image";
 
 const CategoriesPreview = ({ news }) => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const goToCategories = async () => {
-    const dicountCatalog = document.querySelector(
-      ".homePage_catalogContainer___xOwi"
-    );
-    if (dicountCatalog) {
-      dicountCatalog.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const goToCategories = async () => {
+  //   const dicountCatalog = document.querySelector(
+  //     ".homePage_catalogContainer___xOwi"
+  //   );
+  //   if (dicountCatalog) {
+  //     dicountCatalog.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
-  const mockText = [
-    {
-      text: "Кухни на заказ",
-      function: () => router.push("/kitchensToOrder"),
-      image: image1.src,
-    },
-    {
-      text: "Салоны продаж",
-      function: () => router.push("/salons"),
-      image: image2.src,
-    },
-    { text: "Мебель со скидкой", function: goToCategories, image: image3.src },
-  ];
+  // const mockText = [
+  //   {
+  //     text: "Кухни на заказ",
+  //     function: () => router.push("/kitchensToOrder"),
+  //     image: image1.src,
+  //   },
+  //   {
+  //     text: "Салоны продаж",
+  //     function: () => router.push("/salons"),
+  //     image: image2.src,
+  //   },
+  //   { text: "Мебель со скидкой", function: goToCategories, image: image3.src },
+  // ];
 
   return (
     <div className={styles.container}>

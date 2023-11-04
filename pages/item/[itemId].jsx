@@ -78,7 +78,14 @@ const Index = ({ item, error }) => {
 
   return (
     <>
-      <ItemInfoSEO title={item.title + " | Дом"} />
+      <ItemInfoSEO
+        title={item.title + " | Дом"}
+        description={
+          item.description.length > 100
+            ? item.description.slice(0, 100) + "..."
+            : item.description
+        }
+      />
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>

@@ -14,6 +14,7 @@ import { useRecoilState } from "recoil";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { useRouter } from "next/router";
+import NewsSlider from "@/components/NewsSlider/NewsSlider";
 
 const Index = ({ categories, subcategories, discountItems, news, error }) => {
   const [categoriesRecoil, setCategoriesRecoil] =
@@ -77,7 +78,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
             <MobileNav />
-            <CategoriesPreview news={news} />
+            <NewsSlider news={news} />
           </div>
         ) : (
           <div className={styles.fullScreen}>
@@ -86,7 +87,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
               categories={categoriesRecoil}
               subcategories={subcategoriesRecoil}
             />
-            <CategoriesPreview news={news} />
+            <NewsSlider news={news} />
           </div>
         )}
 
