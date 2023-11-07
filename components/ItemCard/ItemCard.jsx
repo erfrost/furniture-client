@@ -10,6 +10,7 @@ import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CheckIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 
 const ItemCard = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -65,13 +66,10 @@ const ItemCard = ({ item }) => {
       ) : (
         <span className={styles.price}>{formattedNumber(item.price)} ₽</span>
       )}
-      <span
-        className={styles.title}
-        onClick={() => router.push(`/item/${item._id}`)}
-      >
+      <Link className={styles.title} href={`/item/${item._id}`}>
         {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."},{" "}
         {item.furnisherId}
-      </span>
+      </Link>
       {item.specifications.length ? (
         <span className={styles.specification}>
           {item.specifications[0].title}:{" "}
@@ -81,12 +79,9 @@ const ItemCard = ({ item }) => {
         </span>
       ) : null}
       <div className={styles.btnsContainer}>
-        <div
-          className={styles.moreBtn}
-          onClick={() => router.push(`/item/${item._id}`)}
-        >
+        <Link className={styles.moreBtn} href={`/item/${item._id}`}>
           ПОДРОБНЕЕ
-        </div>
+        </Link>
         <div
           className={`${styles.inCartBtn} ${
             activeBtn ? styles.activeCart : null
