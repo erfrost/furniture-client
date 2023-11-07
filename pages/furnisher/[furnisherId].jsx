@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
 import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
@@ -9,13 +8,13 @@ import Header from "@/components/Header/Header";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/catalog.module.css";
+import styles from "@/styles/Furnishers.module.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
-  const [categoryTitle, setCategoryTitle] = useState(undefined);
+  const [furnisherTitle, setFurnisherTitle] = useState(undefined);
   const [itemsState, setItemsState] = useState(items);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -24,19 +23,17 @@ const Index = ({ items, itemsCount, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
-  const { categoryId } = router.query;
+  const { furnisherId } = router.query;
 
   useEffect(() => {
-    const currentCategory = categories.find((cat) => cat._id === categoryId);
-
-    setCategoryTitle(currentCategory?.title);
-  }, [categoryId]);
+    setFurnisherTitle(furnisherId);
+  }, [furnisherId]);
 
   useEffect(() => {
     async function fetchItems() {
       try {
         const response = await axiosInstance.get(
-          `items/by_category/${categoryId}?limit=25`
+          `/items/by_furnisher/${furnisherId}?limit=25`
         );
         setItemsState(response.data.items);
         setCountState(response.data.count);
@@ -49,7 +46,7 @@ const Index = ({ items, itemsCount, error }) => {
     }
 
     fetchItems();
-  }, [categoryId]);
+  }, [furnisherId]);
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -61,10 +58,6 @@ const Index = ({ items, itemsCount, error }) => {
           const categories = categoriesAndSubcategories.data.categories;
           const subcategories = categoriesAndSubcategories.data.subcategories;
 
-          const currentCategory = categories.find(
-            (cat) => cat._id === categoryId
-          );
-          setCategoryTitle(currentCategory?.title);
           setCategories(categories);
           setSubcategories(subcategories);
         } catch (error) {
@@ -73,11 +66,6 @@ const Index = ({ items, itemsCount, error }) => {
               "Произошла ошибка запроса. Попробуйте позднее"
           );
         }
-      } else {
-        const currentCategory = categories.find(
-          (cat) => cat._id === categoryId
-        );
-        setCategoryTitle(currentCategory?.title);
       }
     }
 
@@ -102,41 +90,36 @@ const Index = ({ items, itemsCount, error }) => {
   }, []);
 
   return (
-    <>
-      <CatalogSEO
-        title={(categoryTitle ? categoryTitle : "Каталог") + " | Дом"}
-      />
-      <div className={styles.container}>
-        {screenWidth < 768 ? (
-          <div className={styles.fullScreen}>
-            <MobileNav />
-          </div>
-        ) : (
-          <div className={styles.fullScreen}>
-            <Header />
-            <CategoriesSelect
-              categories={categories}
-              subcategories={subcategories}
-            />
-          </div>
-        )}
-        <div className={styles.content}>
-          <CatalogTitle
-            title={categoryTitle}
-            items={items}
-            setSortedItems={setItemsState}
-          />
-          <span className={styles.itemsCount}>
-            Найдено: {countState} товаров
-          </span>
-          <ItemsCatalog
-            items={itemsState}
-            isDiscountPage={false}
-            queryCategoryId={categoryId}
+    <div className={styles.container}>
+      {screenWidth < 768 ? (
+        <div className={styles.fullScreen}>
+          <MobileNav />
+        </div>
+      ) : (
+        <div className={styles.fullScreen}>
+          <Header />
+          <CategoriesSelect
+            categories={categories}
+            subcategories={subcategories}
           />
         </div>
-        <Footer />
+      )}
+      <div className={styles.content}>
+        <CatalogTitle
+          title={furnisherTitle}
+          items={items}
+          setSortedItems={setItemsState}
+        />
+        <span className={styles.itemsCount}>
+          Найдено: {countState ? countState : 0} товаров
+        </span>
+        <ItemsCatalog
+          items={itemsState}
+          isDiscountPage={false}
+          queryFurnisherId={furnisherId}
+        />
       </div>
+      <Footer />
       {reqError && (
         <AlertInfo
           title="Произошла ошибка:"
@@ -144,20 +127,20 @@ const Index = ({ items, itemsCount, error }) => {
           type="error"
         />
       )}
-    </>
+    </div>
   );
 };
 
 export async function getServerSideProps({ query }) {
   try {
-    const items = await axiosInstance.get(
-      `/items/by_category/${query.categoryId}?limit=25`
+    const res = await axiosInstance.get(
+      `/items/by_furnisher/${query.furnisherId}?limit=25`
     );
 
     return {
       props: {
-        items: items.data.items,
-        itemsCount: items.data.count,
+        items: res.data.items,
+        itemsCount: res.data.count,
       },
     };
   } catch (error) {

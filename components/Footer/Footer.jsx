@@ -37,6 +37,9 @@ const Footer = () => {
             <Link href="/kitchensToOrder" className={styles.link}>
               Кухни на заказ
             </Link>
+            <Link href="/furnishers" className={styles.link}>
+              Поставщики
+            </Link>
           </div>
           <div className={styles.listContainer}>
             <span className={styles.title}>Контакты</span>

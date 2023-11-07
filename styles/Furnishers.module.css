@@ -1,0 +1,40 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 55px;
+    flex-grow: 1;
+    padding: 55px 40px;
+}
+.list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.item:hover .id {
+    color: rgb(130, 130, 130);
+}
+.item:hover .title {
+    color: rgb(121, 121, 121);
+}
+.id {
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.title {
+    transition: all 0.3s ease;
+}
