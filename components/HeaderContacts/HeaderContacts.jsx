@@ -14,7 +14,6 @@ const HeaderContacts = () => {
         list.style.opacity = "1";
       }, 0);
     } else {
-      console.log("close");
       list.style.opacity = "0";
       setTimeout(() => {
         list.style.display = "none";

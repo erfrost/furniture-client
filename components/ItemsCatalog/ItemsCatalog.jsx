@@ -13,6 +13,7 @@ const ItemsCatalog = ({
   querySubcategoryId,
   querySearch,
   queryFurnisherId,
+  loadFunc,
 }) => {
   const [allItems, setAllItems] = useState(items);
   const [reqError, setReqError] = useState(null);
@@ -49,11 +50,11 @@ const ItemsCatalog = ({
               `items/search?search=${querySearch}&limit=25&offset=${offset}`
             );
           } else if (queryFurnisherId) {
-            console.log("requst");
-            items = await axiosInstance.get(
-              `items/by_furnisher/${queryFurnisherId}?limit=25&offset=${offset}`
-            );
-            console.log(items);
+            try {
+              items = await loadFunc(offset);
+            } catch (error) {
+              console.log(error);
+            }
           }
           if (!items.data.items.length) nullMoreItems = true;
           setAllItems((prevState) => [...prevState, ...items.data.items]);

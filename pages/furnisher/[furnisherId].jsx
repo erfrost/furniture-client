@@ -9,6 +9,7 @@ import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/Furnishers.module.css";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -24,6 +25,21 @@ const Index = ({ items, itemsCount, error }) => {
 
   const router = useRouter();
   const { furnisherId } = router.query;
+
+  const loadFunc = async (offset) => {
+    try {
+      const res = await axiosInstance.get(
+        `items/by_furnisher/${furnisherId}?limit=25&offset=${offset}`
+      );
+
+      return res;
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
 
   useEffect(() => {
     setFurnisherTitle(furnisherId);
@@ -117,6 +133,7 @@ const Index = ({ items, itemsCount, error }) => {
           items={itemsState}
           isDiscountPage={false}
           queryFurnisherId={furnisherId}
+          loadFunc={loadFunc}
         />
       </div>
       <Footer />

@@ -1,7 +1,7 @@
 const furnishers = [
   {
     title: "Султан Диван",
-    id: "1С",
+    id: "1C",
   },
   {
     title: "Мягко Мурашкин",
