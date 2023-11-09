@@ -17,6 +17,7 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [reqError, setReqError] = useState(null);
+  console.log(categories.length, subcategories.length);
   const categoryTitle = categories.find(
     (cat) => cat._id === item.category_id
   )?.title;

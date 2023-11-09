@@ -4,14 +4,13 @@
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    background-color: #E2E8CE;
     padding: 10px 50px;
     margin-top: 10px;
     position: relative;
 }
 .catalogBtn {
     padding: 10px 20px;
-    background-color: #ADBFA4;
+    background-color: #E2E8CE;
     border-radius: 5px;
     display: flex;
     flex-direction: row;
@@ -22,12 +21,12 @@
     transition: all 0.3s ease;
 }
 .catalogBtn:hover {
-    background-color: #8d9c86;
+    background-color: #ccd2b0;
 }
 .catalogBtnText {
     font-weight: 600;
     font-size: 20px;
-    color: white;
+    color: black;
 }
 .categories {
     display: flex;
@@ -38,11 +37,14 @@
 .link {
     font-weight: 500;
     font-size: 18px;
+    background: #EBEBEB;
+    padding: 5px 15px;
+    border-radius: 28px;
     white-space: break-spaces;
     transition: all 0.3s ease;
 }
 .link:hover {
-    color: #797979;
+    background-color: #dedede;
 }
 .selectContainer {
     width: 100%;
