@@ -8,7 +8,7 @@ import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import furnishers from "@/mock/furnishers";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/Furnishers.module.css";
+import styles from "@/styles/furnishers.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -84,8 +84,7 @@ const Index = () => {
               className={styles.item}
               key={item.id}
             >
-              <span className={styles.id}>{item.id}:</span>
-              <span className={styles.title}>{item.title}</span>
+              {item.id}
             </Link>
           ))}
         </div>

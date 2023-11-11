@@ -2,7 +2,8 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open("cache").then((cache) => {
       return cache.addAll([
-        "/styles/KitchensToOrder.module.css",
+        "/styles/ktchensToOrder.module.css",
+        "/styles/furnishers.module.css",
         "/styles/aboutUs.module.css",
         "/styles/cartPage.module.css",
         "/styles/catalog.module.css",

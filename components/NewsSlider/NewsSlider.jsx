@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./NewsSlider.module.css";
 import cancelAction from "@/utils/cancelAction";
@@ -72,11 +73,9 @@ const NewsSlider = ({ news }) => {
       <Slider {...sliderSettings} className={styles.slickSlider}>
         {news?.map((item) => (
           <div className={styles.slide} key={item._id}>
-            <Image
+            <img
               src={item.photo_name}
               alt="slide image"
-              width={300}
-              height={300}
               className={styles.sliderImage}
               onDragStart={cancelAction}
               onContextMenu={cancelAction}

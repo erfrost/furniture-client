@@ -22,30 +22,6 @@
     background-color: #E2E8CE;
     padding: 10px 30px;
 }
-.phoneContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-}
-.photoIcon {
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #E2E8CE;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.phone {
-    font-size: 18px;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-}
-.phone:hover {
-    color: #797979;
-}
 .logo {
     min-width: 105px;
     width: 105px;

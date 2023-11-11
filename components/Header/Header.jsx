@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./Header.module.css";
-import { PhoneIcon } from "@chakra-ui/icons";
 import cartIcon from "@/assets/cartIcon.svg";
 import Search from "../Search/Search";
 import heartIcon from "@/assets/heartIcon.svg";

@@ -14,7 +14,7 @@
 .list {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 15px;
 }
 .item {
@@ -28,13 +28,26 @@
 .item:hover .id {
     color: rgb(130, 130, 130);
 }
-.item:hover .title {
-    color: rgb(121, 121, 121);
-}
 .id {
     font-weight: 600;
     transition: all 0.3s ease;
 }
-.title {
-    transition: all 0.3s ease;
+
+@media screen and (max-width: 700px) {
+    .list {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+@media screen and (max-width: 600px) {
+    .item {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .item {
+        font-size: 16px;
+    }
 }
