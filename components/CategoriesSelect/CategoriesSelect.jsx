@@ -56,10 +56,11 @@ const CategoriesSelect = ({ categories, subcategories }) => {
   }, [isOpen]);
 
   const calculatedCount = () => {
-    if (screenWidth > 1250) return 5;
-    else if (screenWidth > 1100) return 4;
-    else if (screenWidth > 850) return 3;
-    else return 2;
+    if (screenWidth > 1250) return 8;
+    else if (screenWidth > 1150) return 7;
+    else if (screenWidth > 950) return 6;
+    else if (screenWidth > 800) return 5;
+    else return 4;
   };
 
   return (
