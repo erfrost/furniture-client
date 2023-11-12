@@ -90,7 +90,7 @@ const CategoryItem = ({ category }) => {
         draggable={false}
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
-        quality={100}
+        unoptimized
         onClick={() => router.push(`category/${category._id}`)}
       />
       <Link href={`/category/${category._id}`} className={styles.title}>
