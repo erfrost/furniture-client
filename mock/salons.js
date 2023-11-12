@@ -10,12 +10,6 @@ const salons = [
     phone: "+7 (922) 773-22-55",
   },
   {
-    img: nizhnevartovsk2,
-    city: "Г. Нижневартовск",
-    address: "ИЦ Гулливер Индустриальная 46 стр.1 ",
-    phone: "+7 (922) 772-04-62",
-  },
-  {
     img: langepas,
     city: "Г. Лангепаc",
     address: "Отдел Кухонька Мира 7",
