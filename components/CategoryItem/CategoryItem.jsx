@@ -90,6 +90,7 @@ const CategoryItem = ({ category }) => {
         draggable={false}
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
+        quality={100}
         onClick={() => router.push(`category/${category._id}`)}
       />
       <Link href={`/category/${category._id}`} className={styles.title}>
@@ -100,7 +101,6 @@ const CategoryItem = ({ category }) => {
           <Image
             src={Icon}
             alt="icon"
-            priority
             onDragStart={cancelAction}
             onContextMenu={cancelAction}
           />
