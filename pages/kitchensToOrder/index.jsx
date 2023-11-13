@@ -14,12 +14,21 @@ import { useRecoilState } from "recoil";
 import cancelAction from "@/utils/cancelAction";
 import Link from "next/link";
 import Image from "next/image";
+import { Divider, useDisclosure } from "@chakra-ui/react";
+import KitchenForm from "@/components/KitchenForm/KitchenForm";
 
 const Index = ({ images, kitchens, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [projectIsOpen, setProjectIsOpen] = useState(false);
+  const [sizerIsOpen, setSizerIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
+  const [success, setSuccess] = useState(false);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -62,11 +71,34 @@ const Index = ({ images, kitchens, error }) => {
     };
   }, []);
 
-  const transformDescriptionLength = (value) => {
-    const maxLength = 300;
-    return value.length > maxLength
-      ? value.substring(0, maxLength) + "..."
-      : value;
+  const projectRequest = async (name, phone) => {
+    try {
+      await axiosInstance.post("telegram/send", {
+        text: `Новая заявка на бесплатный проект!\nИмя: ${name}\nНомер телефона: ${phone}`,
+      });
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
+
+  const sizerRequest = async (name, phone) => {
+    try {
+      await axiosInstance.post("telegram/send", {
+        text: `Новая заявка на вызов замерщика!\nИмя: ${name}\nНомер телефона: ${phone}`,
+      });
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
   };
 
   return (
@@ -88,6 +120,33 @@ const Index = ({ images, kitchens, error }) => {
         <div className={styles.content}>
           <RouteToHome />
           {images.length ? <OurWorksSwiper images={images} /> : null}
+          <div className={styles.btns}>
+            <div
+              className={styles.btn}
+              onClick={() => {
+                onOpen(true);
+                setProjectIsOpen(true);
+              }}
+            >
+              Заказать бесплатный проект
+            </div>
+            <div
+              className={styles.btn}
+              onClick={() => {
+                onOpen(true);
+                setSizerIsOpen(true);
+              }}
+            >
+              Вызвать замерщика бесплатно
+            </div>
+            <Link
+              href="https://dsv-mebel.ru/constructor-3d/"
+              className={styles.btn}
+            >
+              3D онлайн конструктор
+            </Link>
+          </div>
+          <Divider />
           <div className={styles.list}>
             {kitchens.length ? (
               kitchens?.map((item) => (
@@ -107,9 +166,6 @@ const Index = ({ images, kitchens, error }) => {
                   <Link href={`/kitchen/${item._id}`} className={styles.title}>
                     {item.title}
                   </Link>
-                  <span className={styles.text}>
-                    {transformDescriptionLength(item.description)}
-                  </span>
                   <Link className={styles.link} href={`/kitchen/${item._id}`}>
                     <div className={styles.btn}>Подробнее</div>
                   </Link>
@@ -121,11 +177,44 @@ const Index = ({ images, kitchens, error }) => {
           </div>
         </div>
         <Footer />
+        {projectIsOpen ? (
+          <KitchenForm
+            name={name}
+            setName={setName}
+            phone={phone}
+            setPhone={setPhone}
+            setProjectIsOpen={setProjectIsOpen}
+            setSizerIsOpen={setSizerIsOpen}
+            tgRequestFunction={projectRequest}
+            isOpen={isOpen}
+            onClose={onClose}
+          />
+        ) : null}
+        {sizerIsOpen ? (
+          <KitchenForm
+            name={name}
+            setName={setName}
+            phone={phone}
+            setPhone={setPhone}
+            setProjectIsOpen={setProjectIsOpen}
+            setSizerIsOpen={setSizerIsOpen}
+            tgRequestFunction={sizerRequest}
+            isOpen={isOpen}
+            onClose={onClose}
+          />
+        ) : null}
         {reqError && (
           <AlertInfo
             title="Произошла ошибка:"
             description={reqError}
             type="error"
+          />
+        )}
+        {success && (
+          <AlertInfo
+            title="Успешно! "
+            description={"Заявка отправлена"}
+            type="success"
           />
         )}
       </div>

@@ -1,0 +1,88 @@
+.content {
+    width: 506px !important;
+    min-width: 506px !important;
+    max-width: 506px !important;
+    border-radius: 29px !important;
+}
+.closebtn {
+    border-radius: 50% !important;
+}
+.header {
+    text-align: center;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: black;
+    padding-bottom: 0 !important;
+}
+.body {
+    display: flex !important;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px !important;
+}
+.text {
+    text-align: center;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+.formTitle {
+    font-size: 16px;
+}
+.input {
+    border: 1px solid black !important;
+    border-radius: 10px !important;
+}
+.btn {
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(132, 200, 100);
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background-color: rgb(106, 160, 82);
+}
+.disabled {
+    opacity: 0.7;
+    background-color: rgb(46, 70, 36);
+    cursor: default;
+}
+.disabled:hover {
+    background-color: rgb(46, 70, 36);
+}
+
+@media screen and (max-width: 550px) {
+    .content {
+        width: 400px !important;
+        min-width: 400px !important;
+        max-width: 400px !important;
+    }
+    .header {
+        font-size: 22px !important;
+    }
+}
+@media screen and (max-width: 435px) {
+    .content {
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+    }
+    .header {
+        font-size: 22px !important;
+    }
+    .btn {
+        font-size: 13px;
+    }
+}

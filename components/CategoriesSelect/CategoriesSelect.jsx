@@ -56,92 +56,109 @@ const CategoriesSelect = ({ categories, subcategories }) => {
   }, [isOpen]);
 
   const calculatedCount = () => {
-    if (screenWidth > 1250) return 8;
-    else if (screenWidth > 1150) return 7;
-    else if (screenWidth > 950) return 6;
-    else if (screenWidth > 800) return 5;
-    else return 4;
+    if (screenWidth > 1500) return 7;
+    else if (screenWidth > 1200) return 6;
+    else if (screenWidth > 1100) return 5;
+    else if (screenWidth > 975) return 4;
+    else if (screenWidth > 768) return 3;
   };
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.catalogBtn}
-        onClick={() => setIsOpen((prevState) => !prevState)}
-      >
-        <Image
-          src={catalogIcon}
-          alt="catalogIcon"
-          draggable={false}
-          onDragStart={cancelAction}
-          onContextMenu={cancelAction}
-        />
-        <span className={styles.catalogBtnText}>Каталог</span>
-      </div>
-      <div className={styles.categories}>
-        {categories?.slice(0, calculatedCount())?.map((cat) => (
-          <Link
-            href={`/category/${cat._id}`}
-            key={cat._id}
-            className={styles.link}
-          >
-            {cat.title}
-          </Link>
-        ))}
-      </div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className={styles.selectContainer}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.25 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className={styles.column}>
-              {categories?.map((cat) => (
-                <Link
-                  className={styles.catTitle}
-                  key={cat._id}
-                  onMouseEnter={() =>
-                    setCurrentSubcategories(
-                      subcategories.filter(
-                        (subcat) => subcat.category_id === cat._id
+      <div className={styles.content}>
+        <div
+          className={styles.catalogBtn}
+          onClick={() => setIsOpen((prevState) => !prevState)}
+        >
+          <Image
+            src={catalogIcon}
+            alt="catalogIcon"
+            draggable={false}
+            onDragStart={cancelAction}
+            onContextMenu={cancelAction}
+          />
+          <span className={styles.catalogBtnText}>Каталог</span>
+        </div>
+        <div className={styles.categories}>
+          {categories?.slice(0, calculatedCount())?.map((cat) => (
+            <Link
+              href={`/category/${cat._id}`}
+              key={cat._id}
+              className={styles.link}
+            >
+              {cat.title}
+            </Link>
+          ))}
+        </div>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className={styles.selectContainer}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.25 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className={styles.column}>
+                {categories?.map((cat) => (
+                  <Link
+                    className={styles.catTitle}
+                    key={cat._id}
+                    onMouseEnter={() =>
+                      setCurrentSubcategories(
+                        subcategories.filter(
+                          (subcat) => subcat.category_id === cat._id
+                        )
                       )
-                    )
-                  }
-                  href={`/category/${cat._id}`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <Image
-                    src={cat.photo_name}
-                    alt="photo"
-                    width={100}
-                    height={75}
-                    className={styles.categoryImage}
-                    draggable={false}
-                    onDragStart={cancelAction}
-                    onContextMenu={cancelAction}
-                  />
-                  {cat.title}
-                </Link>
-              ))}
-            </div>
-            <div className={styles.column}>
-              {currentSubcategories?.map((subcat) => (
-                <Link
-                  className={styles.subcategoryTitle}
-                  key={subcat._id}
-                  href={`/subcategory/${subcat._id}`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {subcat.title}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    }
+                    href={`/category/${cat._id}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Image
+                      src={cat.photo_name}
+                      alt="photo"
+                      width={100}
+                      height={75}
+                      className={styles.categoryImage}
+                      draggable={false}
+                      onDragStart={cancelAction}
+                      onContextMenu={cancelAction}
+                    />
+                    {cat.title}
+                  </Link>
+                ))}
+              </div>
+              <div className={styles.column}>
+                {currentSubcategories?.map((subcat) => (
+                  <Link
+                    className={styles.subcategoryTitle}
+                    key={subcat._id}
+                    href={`/subcategory/${subcat._id}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {subcat.title}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <Link href="/kitchensToOrder" className={styles.kitchenBtn}>
+        Кухни на заказ
+        <svg
+          width="32"
+          height="9"
+          viewBox="0 0 32 9"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31 5.1C31.3314 5.1 31.6 4.83137 31.6 4.5C31.6 4.16863 31.3314 3.9 31 3.9V5.1ZM0.575733 4.07574C0.341419 4.31005 0.341419 4.68995 0.575733 4.92426L4.39411 8.74264C4.62843 8.97696 5.00832 8.97696 5.24264 8.74264C5.47695 8.50833 5.47695 8.12843 5.24264 7.89411L1.84853 4.5L5.24264 1.10589C5.47695 0.871573 5.47695 0.491674 5.24264 0.257359C5.00832 0.0230446 4.62843 0.0230446 4.39411 0.257359L0.575733 4.07574ZM31 3.9L0.999998 3.9V5.1L31 5.1V3.9Z"
+            fill="#656565"
+          />
+        </svg>
+      </Link>
     </div>
   );
 };

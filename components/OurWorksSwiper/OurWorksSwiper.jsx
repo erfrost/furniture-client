@@ -94,6 +94,8 @@ const OurWorksSwiper = ({ images }) => {
           <Image
             src={img.photo_name}
             alt="work"
+            width={300}
+            height={300}
             className={styles.image}
             draggable={false}
             onDragStart={cancelAction}
