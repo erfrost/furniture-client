@@ -73,8 +73,11 @@ const NewsSlider = ({ news }) => {
       <Slider {...sliderSettings} className={styles.slickSlider}>
         {news?.map((item) => (
           <div className={styles.slide} key={item._id}>
-            <img
+            <Image
               src={item.photo_name}
+              width={300}
+              height={470}
+              unoptimized
               alt="slide image"
               className={styles.sliderImage}
               onDragStart={cancelAction}

@@ -3,6 +3,7 @@
     min-width: 506px !important;
     max-width: 506px !important;
     border-radius: 29px !important;
+    z-index: 999999999 !important;
 }
 .closebtn {
     border-radius: 50% !important;
