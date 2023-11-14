@@ -52,6 +52,28 @@
     align-self: center;
     margin-bottom: 15px;
 }
+.downloadLink {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border: 3px dashed green;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.downloadLink svg {
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+.downloadLink svg path {
+    fill: green;
+}
+.downloadLink:hover svg {
+    scale: 1.2;
+}
 
 @media screen and (max-width: 900px) {
     .content {

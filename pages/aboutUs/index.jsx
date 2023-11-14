@@ -10,6 +10,7 @@ import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/aboutUs.module.css";
 import homePageStyles from "@/styles/homePage.module.css";
+import { DownloadIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -134,6 +135,14 @@ const Index = () => {
               <span className={styles.text}>
                 Контактный e-mail: 89227720462@mail.ru
               </span>
+              <span className={styles.orgTitle}>Оферта</span>
+              <a
+                className={styles.downloadLink}
+                href="https://disk.yandex.ru/i/ecrBaX4-CkAwaw"
+                download
+              >
+                <DownloadIcon boxSize="40%" />
+              </a>
             </div>
           </div>
         </div>
