@@ -107,7 +107,7 @@ const Header = () => {
           <Image
             className={styles.heartIcon}
             src={heartIcon}
-            alt="heartIcon"
+            alt="Главная"
             draggable={false}
             onDragStart={cancelAction}
             onContextMenu={cancelAction}
