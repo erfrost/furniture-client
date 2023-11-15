@@ -107,6 +107,7 @@ const Index = ({ items, itemsCount, error }) => {
     <>
       <CatalogSEO
         title={(subcategoryTitle ? subcategoryTitle : "Каталог") + " | Дом"}
+        description={subcategoryTitle ? subcategoryTitle : undefined}
       />
       <div className={styles.container}>
         {screenWidth < 768 ? (
