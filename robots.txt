@@ -1,0 +1,9 @@
+User-agent: *
+Crawl-delay: 1
+Host: https://dom888.ru
+Disallow: /cart
+Disallow: /aboutUs
+Disallow: /refund
+Disallow: /deliveryAndPayment
+Disallow: /salons
+Disallow: /furnishers

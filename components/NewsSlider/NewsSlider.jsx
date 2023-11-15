@@ -13,7 +13,7 @@ const sliderSettings = {
   infinite: true,
   arrows: false,
   speed: 400,
-  // autoplay: true,
+  autoplay: true,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -40,31 +40,10 @@ const NewsSlider = ({ news }) => {
 
   useEffect(() => {
     if (!news?.length) {
-      // const fullScreen = document.querySelector(".homePage_fullScreen___a3rE");
       const previewContainer = document.querySelector(
         ".CategoriesPreview_container__IL_QJ"
       );
-      // const categoriesList = document.querySelector(
-      //   ".CategoriesPreview_categoriesList__IdTxo"
-      // );
-      // const catalog = document.querySelector(
-      //   ".CategoriesCatalog_container__4lSB5"
-      // );
-
-      // fullScreen.style.minHeight = "auto";
-      // fullScreen.style.paddingBottom = "50px";
-      // categoriesList.style.minWidth = "100%";
-      // categoriesList.style.flexDirection = "row";
-      // categoriesList.style.justifyContent = "space-between";
       previewContainer.style.display = "none";
-
-      // if (screenWidth < 1100) {
-      //   fullScreen.style.paddingBottom = "0";
-      //   previewContainer.style.display = "none";
-      // }
-      // if (screenWidth < 768) {
-      //   catalog.style.marginTop = "25px";
-      // }
     }
   }, [screenWidth]);
 

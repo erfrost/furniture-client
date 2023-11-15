@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
+import KitchenInfoSEO from "@/SEO/KitchenInfoSEO";
 
 const Index = ({ kitchen, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -63,6 +64,14 @@ const Index = ({ kitchen, error }) => {
 
   return (
     <>
+      <KitchenInfoSEO
+        title={kitchen.title + " | Дом"}
+        description={
+          kitchen.description.length > 100
+            ? kitchen.description.slice(0, 100) + "..."
+            : kitchen.description
+        }
+      />
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
