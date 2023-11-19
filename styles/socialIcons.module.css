@@ -1,0 +1,11 @@
+.svg {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+.path {
+    transition: all 0.3s ease;
+}
+.svg:hover .path {
+    fill: rgb(182, 182, 182);
+}

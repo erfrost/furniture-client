@@ -86,11 +86,12 @@ const CategoryItem = ({ category }) => {
         alt="category"
         width={100}
         height={100}
-        quality={100}
+        // quality={100}
         className={styles.image}
         draggable={false}
         onDragStart={cancelAction}
         onContextMenu={cancelAction}
+        unoptimized
         onClick={() => router.push(`category/${category._id}`)}
       />
       <Link href={`/category/${category._id}`} className={styles.title}>

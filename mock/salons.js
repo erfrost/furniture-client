@@ -1,4 +1,4 @@
-import nizhnevartovsk from "@/assets/Нижневартовск.jpeg";
+import nizhnevartovsk from "@/assets/Нижневартовск1.jpeg";
 import langepas from "@/assets/Лангепас.jpeg";
 
 const salons = [

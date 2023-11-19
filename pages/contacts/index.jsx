@@ -9,8 +9,13 @@ import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/contacts.module.css";
 import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import niznevartovsk1 from "@/assets/Нижневартовск1.jpeg";
+import niznevartovsk2 from "@/assets/Нижневартовск2.jpeg";
+import niznevartovsk3 from "@/assets/Нижневартовск3.jpeg";
+import langepas1 from "@/assets/Лангепас.jpeg";
 
 const Contacts = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -76,13 +81,15 @@ const Contacts = () => {
       )}
       <div className={styles.content}>
         <RouteToHome />
-        <div className={styles.items}>
-          <div className={styles.item}>
-            <div className={styles.adress}>
-              г.Нижневартовск МЦ Дом ул. Кузоваткина 3 стр. 9
-            </div>
-            <YMaps>
+        <YMaps>
+          <div className={styles.items}>
+            <div className={styles.item}>
+              <span className={styles.adress}>
+                Г. Нижневартовск МЦ Дом ул. Кузоваткина 3 стр. 9
+              </span>
+              <span>+7 (922) 773-22-55</span>
               <Map
+                id="map1"
                 width="100%"
                 height="500px"
                 defaultState={{ center: [60.931377, 76.54222], zoom: 16 }}
@@ -94,13 +101,35 @@ const Contacts = () => {
                   geometry={[60.931377, 76.54222]}
                 />
               </Map>
-            </YMaps>
-          </div>
-          <div className={styles.item}>
-            <div className={styles.adress}>
-              г.Лангепас Отдел Кухонька Мира 7
+              <div className={styles.imagesContainer}>
+                <Image
+                  src={niznevartovsk1}
+                  alt="photo"
+                  width={400}
+                  height={200}
+                  className={styles.image}
+                />
+                <Image
+                  src={niznevartovsk2}
+                  alt="photo"
+                  width={400}
+                  height={200}
+                  className={styles.image}
+                />
+                <Image
+                  src={niznevartovsk3}
+                  alt="photo"
+                  width={400}
+                  height={200}
+                  className={styles.image}
+                />
+              </div>
             </div>
-            <YMaps>
+            <div className={styles.item}>
+              <span className={styles.adress}>
+                Г. Лангепас Отдел Кухонька Мира 7
+              </span>
+              <span>+7 (932) 409-99-18</span>
               <Map
                 width="100%"
                 height="500px"
@@ -113,9 +142,18 @@ const Contacts = () => {
                   geometry={[61.247656, 75.178668]}
                 />
               </Map>
-            </YMaps>
+              <div className={styles.imagesContainer}>
+                <Image
+                  src={langepas1}
+                  alt="photo"
+                  width={400}
+                  height={200}
+                  className={styles.image}
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </YMaps>
       </div>
       <Footer />
       {reqError && (

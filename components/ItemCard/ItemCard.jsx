@@ -4,7 +4,6 @@ import cartIcon from "@/assets/cartIcon.svg";
 import DiscountPrice from "../DiscountPrice/DiscountPrice";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRouter } from "next/router";
 import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import { useEffect, useState } from "react";

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Divider } from "@chakra-ui/react";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
+import WhatsappIcon from "@/assets/whatsappIcon";
+import TelegrammIcon from "@/assets/telegrammIcon";
 
 const Footer = () => {
   return (
@@ -31,9 +33,9 @@ const Footer = () => {
             <Link href="/deliveryAndPayment" className={styles.link}>
               Доставка и оплата
             </Link>
-            <Link href="/salons" className={styles.link}>
+            {/* <Link href="/salons" className={styles.link}>
               Салоны продаж
-            </Link>
+            </Link> */}
             <Link href="/kitchensToOrder" className={styles.link}>
               Кухни на заказ
             </Link>
@@ -41,7 +43,7 @@ const Footer = () => {
               Поставщики
             </Link>
             <Link href="/contacts" className={styles.link}>
-              Контакты
+              Салоны продаж
             </Link>
           </div>
           <div className={styles.listContainer}>
@@ -52,6 +54,10 @@ const Footer = () => {
             <Link href="tel:+7 (929) 298-01-23">
               <span className={styles.socialLink}>+7 (922) 773-22-55</span>
             </Link>
+            <div className={styles.socials}>
+              <TelegrammIcon />
+              <WhatsappIcon />
+            </div>
           </div>
         </div>
       </div>
