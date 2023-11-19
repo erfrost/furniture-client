@@ -2,6 +2,7 @@ import Head from "next/head";
 import "@/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
+import Script from "next/script";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -50,11 +51,11 @@ export default function App({ Component, pageProps }) {
 , Аксессуары для интерьера, аксессуары, зеркала, лампы, кресла, стулья, онлайн, для дачи, комоды, кухонные гарнитуры, кухни, раковины, тумбы, для подростка, для девочки, для мальчика, скидки на мебель, мебель по акции, распродажа, рассрочка"
         />
         <meta name="yandex-verification" content="23c981ccac8729f6" />
-        <script src="//code.jivo.ru/widget/78D5IbCyIB" async></script>
       </Head>
       <RecoilRoot>
         <ChakraProvider>
           <Component {...pageProps} />
+          <Script src="//code.jivo.ru/widget/78D5IbCyIB" async></Script>
         </ChakraProvider>
       </RecoilRoot>
     </>

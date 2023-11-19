@@ -57,6 +57,7 @@ const NewsSlider = ({ news }) => {
               width={300}
               height={470}
               unoptimized
+              priority
               alt="slide image"
               className={styles.sliderImage}
               onDragStart={cancelAction}
