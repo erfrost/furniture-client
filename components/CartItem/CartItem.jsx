@@ -17,7 +17,7 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [reqError, setReqError] = useState(null);
-  console.log(categories.length, subcategories.length);
+
   const categoryTitle = categories.find(
     (cat) => cat._id === item.category_id
   )?.title;
@@ -52,7 +52,11 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
-        <Link href={`item/${item._id}`} className={styles.imageLink}>
+        <Link
+          href="/item/[itemId]"
+          as={`/item/${item._id}`}
+          className={styles.imageLink}
+        >
           <Image
             src={item.photo_names[0]}
             alt="photo"
@@ -66,7 +70,7 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
         </Link>
         <div className={styles.info}>
           <div className={styles.texts}>
-            <Link href={`item/${item._id}`}>
+            <Link href="/item/[itemId]" as={`/item/${item._id}`}>
               <span
                 className={
                   item.title.length > 35

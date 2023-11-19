@@ -65,7 +65,11 @@ const ItemCard = ({ item }) => {
       ) : (
         <span className={styles.price}>{formattedNumber(item.price)} ₽</span>
       )}
-      <Link className={styles.title} href={`/item/${item._id}`}>
+      <Link
+        className={styles.title}
+        href="/item/[itemId]"
+        as={`/item/${item._id}`}
+      >
         {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."},{" "}
         {item.furnisherId}
       </Link>
@@ -78,7 +82,11 @@ const ItemCard = ({ item }) => {
         </span>
       ) : null}
       <div className={styles.btnsContainer}>
-        <Link className={styles.moreBtn} href={`/item/${item._id}`}>
+        <Link
+          className={styles.moreBtn}
+          href="/item/[itemId]"
+          as={`/item/${item._id}`}
+        >
           ПОДРОБНЕЕ
         </Link>
         <div

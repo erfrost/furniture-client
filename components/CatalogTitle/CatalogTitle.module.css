@@ -19,9 +19,40 @@
 }
 .filterContainer {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+.sort {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+}
+.filter {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    user-select: none;
+}
+.filter:hover span {
+    color: black;
+}
+.filter:hover path {
+    fill: black;
+}
+.filterIcon {
+    width: 8px !important;
+    height: 10px !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+}
+.filterIcon path {
+    fill: rgb(160, 160, 160);
+    transition: all 0.3s ease;
 }
 .text {
     color: #656565;
@@ -29,6 +60,8 @@
     font-size: 14px;
     font-weight: 500;
     white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 .btn {
@@ -50,10 +83,50 @@
     color: black;
 }
 .up {
+    opacity: 1 !important;
     transform: rotate(180deg);
 }
 .displayNone {
-    display: none !important;
+    opacity: 0 !important;
+}
+.furnishersList {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    padding: 20px;
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    transition: all 0.3s ease;
+}
+.active {
+    display: grid;
+}
+.furnisherItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.furnisherTitle {
+    white-space: nowrap;
+}
+.square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.square:hover {
+    border-color: rgb(146, 146, 146);
 }
 
 @media screen and (max-width: 1000px) {
@@ -87,6 +160,19 @@
         align-items: flex-start;
     }
 }
+@media screen and (max-width: 550px) {
+    .furnishersList {
+        padding: 10px;
+        grid-gap: 15px;
+    }
+    .furnisherTitle {
+        font-size: 14px;
+    }
+    .square {
+        width: 15px;
+        height: 15px;
+    }
+}
 @media screen and (max-width: 430px) {
     .searchText {
         font-size: 18px;
@@ -100,6 +186,9 @@
     }
     .itemsCount {
         font-size: 10px;
+    }
+    .furnishersList {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 @media screen and (max-width: 375px) {

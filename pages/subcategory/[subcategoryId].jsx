@@ -124,16 +124,13 @@ const Index = ({ items, itemsCount, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <CatalogTitle
-            title={subcategoryTitle}
-            items={items}
-            setSortedItems={setItemsState}
-          />
+          <CatalogTitle title={subcategoryTitle} />
           <span className={styles.itemsCount}>
             Найдено: {countState} товаров
           </span>
           <ItemsCatalog
             items={itemsState}
+            setCountState={setCountState}
             isDiscountPage={false}
             querySubcategoryId={subcategoryId}
           />

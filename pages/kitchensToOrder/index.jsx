@@ -154,7 +154,11 @@ const Index = ({ images, kitchens, error }) => {
             {kitchens.length ? (
               kitchens?.map((item) => (
                 <div className={styles.item} key={item._id}>
-                  <Link className={styles.link} href={`/kitchen/${item._id}`}>
+                  <Link
+                    className={styles.link}
+                    href="/kitchen/[kitchenId]"
+                    as={`/kitchen/${item._id}`}
+                  >
                     <Image
                       src={item.photo_names[0]}
                       alt="preview"
@@ -166,10 +170,18 @@ const Index = ({ images, kitchens, error }) => {
                       onContextMenu={cancelAction}
                     />
                   </Link>
-                  <Link href={`/kitchen/${item._id}`} className={styles.title}>
+                  <Link
+                    href="/kitchen/[kitchenId]"
+                    as={`/kitchen/${item._id}`}
+                    className={styles.title}
+                  >
                     {item.title}
                   </Link>
-                  <Link className={styles.link} href={`/kitchen/${item._id}`}>
+                  <Link
+                    className={styles.link}
+                    href="/kitchen/[kitchenId]"
+                    as={`/kitchen/${item._id}`}
+                  >
                     <div className={styles.btn}>Подробнее</div>
                   </Link>
                 </div>

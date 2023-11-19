@@ -7,11 +7,8 @@ import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
 import {
   Popover,
-  PopoverArrow,
   PopoverBody,
-  PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
 } from "@chakra-ui/react";
 
@@ -97,8 +94,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               <PopoverContent className={styles.popoverContent}>
                 <PopoverBody className={styles.popoverBody}>
                   <Link
-                    href={`/category/${cat._id}`}
-                    nk
+                    href="/category/[categoryId]"
+                    as={`/category/${cat._id}`}
                     className={`${styles.link} ${styles.catLink}`}
                   >
                     {cat.title}
@@ -107,7 +104,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     .filter((subcat) => subcat.category_id === cat._id)
                     .map((subcat) => (
                       <Link
-                        href={`/subcategory/${subcat._id}`}
+                        href="/subcategory/[subcategoryId]"
+                        as={`/subcategory/${subcat._id}`}
                         className={`${styles.link} ${styles.subcatLink}`}
                         key={subcat._id}
                       >
@@ -140,7 +138,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                         )
                       )
                     }
-                    href={`/category/${cat._id}`}
+                    href="/category/[categoryId]"
+                    as={`/category/${cat._id}`}
                     onClick={() => setIsOpen(false)}
                   >
                     <Image
@@ -162,7 +161,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                   <Link
                     className={styles.subcategoryTitle}
                     key={subcat._id}
-                    href={`/subcategory/${subcat._id}`}
+                    href="/subcategory/[subcategoryId]"
+                    as={`/subcategory/${subcat._id}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {subcat.title}

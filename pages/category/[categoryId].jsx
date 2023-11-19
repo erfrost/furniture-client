@@ -122,11 +122,7 @@ const Index = ({ items, itemsCount, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <CatalogTitle
-            title={categoryTitle}
-            items={items}
-            setSortedItems={setItemsState}
-          />
+          <CatalogTitle title={categoryTitle} />
           <span className={styles.itemsCount}>
             Найдено: {countState} товаров
           </span>
@@ -134,6 +130,7 @@ const Index = ({ items, itemsCount, error }) => {
             items={itemsState}
             isDiscountPage={false}
             queryCategoryId={categoryId}
+            setCountState={setCountState}
           />
         </div>
         <Footer />

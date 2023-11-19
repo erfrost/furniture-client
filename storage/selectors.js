@@ -1,5 +1,10 @@
 import { selector } from "recoil";
-import { categoriesState, sortState, subcategoriesState } from "./atoms";
+import {
+  categoriesState,
+  furnishersFilterState,
+  sortState,
+  subcategoriesState,
+} from "./atoms";
 
 export const categoriesSelector = selector({
   key: "categoriesSelector",
@@ -20,4 +25,11 @@ export const sortSelector = selector({
   get: ({ get }) => get(sortState),
   set: ({ set }, value) =>
     set(sortState, (state) => ({ ...state, value: value })),
+});
+
+export const furnishersFilterSelector = selector({
+  key: "furnishersFilterSelector",
+  get: ({ get }) => get(furnishersFilterState),
+  set: ({ set }, value) =>
+    set(furnishersFilterState, (state) => ({ ...state, value: value })),
 });

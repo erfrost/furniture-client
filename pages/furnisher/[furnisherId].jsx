@@ -21,7 +21,7 @@ const Index = ({ items, itemsCount, error }) => {
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-  console.log(itemsCount);
+
   const router = useRouter();
   const { furnisherId } = router.query;
 
@@ -120,16 +120,11 @@ const Index = ({ items, itemsCount, error }) => {
         </div>
       )}
       <div className={styles.content}>
-        <CatalogTitle
-          title={furnisherTitle}
-          items={items}
-          setSortedItems={setItemsState}
-        />
-        <span className={styles.itemsCount}>
-          Найдено: {countState ? countState : 0} товаров
-        </span>
+        <CatalogTitle title={furnisherTitle} />
+        <span className={styles.itemsCount}>Найдено: {countState} товаров</span>
         <ItemsCatalog
           items={itemsState}
+          setCountState={setCountState}
           isDiscountPage={false}
           queryFurnisherId={furnisherId}
           loadFunc={loadFunc}

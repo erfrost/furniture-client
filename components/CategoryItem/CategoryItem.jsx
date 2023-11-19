@@ -94,7 +94,11 @@ const CategoryItem = ({ category }) => {
         unoptimized
         onClick={() => router.push(`category/${category._id}`)}
       />
-      <Link href={`/category/${category._id}`} className={styles.title}>
+      <Link
+        href="/category/[categoryId]"
+        as={`/category/${category._id}`}
+        className={styles.title}
+      >
         {category.title}
       </Link>
       {subcategories?.map((subcat) => (
@@ -106,7 +110,8 @@ const CategoryItem = ({ category }) => {
             onContextMenu={cancelAction}
           />
           <Link
-            href={`/subcategory/${subcat._id}`}
+            href="/subcategory/[subcategoryId]"
+            as={`/subcategory/${subcat._id}`}
             className={styles.subcatTitle}
           >
             {subcat.title}

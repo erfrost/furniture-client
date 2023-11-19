@@ -80,7 +80,8 @@ const Index = () => {
         <div className={styles.list}>
           {furnishers.map((item) => (
             <Link
-              href={`furnisher/${item.id}`}
+              href="/furnisher/[furnisherId]"
+              as={`/furnisher/${item.id}`}
               className={styles.item}
               key={item.id}
             >

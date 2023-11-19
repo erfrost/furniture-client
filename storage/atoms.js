@@ -14,3 +14,8 @@ export const sortState = atom({
   key: "sortState",
   default: "none",
 });
+
+export const furnishersFilterState = atom({
+  key: "furnishersFilterState",
+  default: [],
+});
