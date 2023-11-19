@@ -89,9 +89,9 @@ const Contacts = () => {
               </span>
               <span>+7 (922) 773-22-55</span>
               <Map
-                id="map1"
+                className={styles.map}
                 width="100%"
-                height="500px"
+                height={screenWidth > 500 ? "500px" : "250px"}
                 defaultState={{ center: [60.931377, 76.54222], zoom: 16 }}
               >
                 <Placemark
@@ -131,8 +131,9 @@ const Contacts = () => {
               </span>
               <span>+7 (932) 409-99-18</span>
               <Map
+                className={styles.map}
                 width="100%"
-                height="500px"
+                height={screenWidth > 500 ? "500px" : "250px"}
                 defaultState={{ center: [61.247656, 75.178668], zoom: 16 }}
               >
                 <Placemark

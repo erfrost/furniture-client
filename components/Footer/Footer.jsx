@@ -43,7 +43,7 @@ const Footer = () => {
               Поставщики
             </Link>
             <Link href="/contacts" className={styles.link}>
-              Салоны продаж
+              Контакты
             </Link>
           </div>
           <div className={styles.listContainer}>
