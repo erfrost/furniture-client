@@ -5,6 +5,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import cancelAction from "@/utils/cancelAction";
+import {
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+} from "@chakra-ui/react";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
@@ -81,13 +90,33 @@ const CategoriesSelect = ({ categories, subcategories }) => {
         </div>
         <div className={styles.categories}>
           {categories?.slice(0, calculatedCount())?.map((cat) => (
-            <Link
-              href={`/category/${cat._id}`}
-              key={cat._id}
-              className={styles.link}
-            >
-              {cat.title}
-            </Link>
+            <Popover key={cat._id}>
+              <PopoverTrigger>
+                <div className={styles.link}>{cat.title}</div>
+              </PopoverTrigger>
+              <PopoverContent className={styles.popoverContent}>
+                <PopoverBody className={styles.popoverBody}>
+                  <Link
+                    href={`/category/${cat._id}`}
+                    nk
+                    className={`${styles.link} ${styles.catLink}`}
+                  >
+                    {cat.title}
+                  </Link>
+                  {subcategories
+                    .filter((subcat) => subcat.category_id === cat._id)
+                    .map((subcat) => (
+                      <Link
+                        href={`/subcategory/${subcat._id}`}
+                        className={`${styles.link} ${styles.subcatLink}`}
+                        key={subcat._id}
+                      >
+                        {subcat.title}
+                      </Link>
+                    ))}
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           ))}
         </div>
         <AnimatePresence>
@@ -128,7 +157,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                   </Link>
                 ))}
               </div>
-              <div className={styles.column}>
+              <div className={`${styles.column} ${styles.subcategoriesColumn}`}>
                 {currentSubcategories?.map((subcat) => (
                   <Link
                     className={styles.subcategoryTitle}

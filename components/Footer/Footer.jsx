@@ -40,6 +40,9 @@ const Footer = () => {
             <Link href="/furnishers" className={styles.link}>
               Поставщики
             </Link>
+            <Link href="/contacts" className={styles.link}>
+              Контакты
+            </Link>
           </div>
           <div className={styles.listContainer}>
             <span className={styles.title}>Контакты</span>

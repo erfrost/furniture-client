@@ -146,7 +146,10 @@ const Index = ({ images, kitchens, error }) => {
               3D онлайн конструктор
             </Link>
           </div>
-          <Divider />
+          <div className={styles.titleContainer}>
+            <span className={styles.blockTitle}>Кухни на заказ</span>
+            <Divider />
+          </div>
           <div className={styles.list}>
             {kitchens.length ? (
               kitchens?.map((item) => (

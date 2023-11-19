@@ -41,16 +41,30 @@
     gap: 20px;
 }
 .link {
+    width: 100%;
     font-weight: 500;
     font-size: 18px;
+    text-align: center;
     background: #EBEBEB;
     padding: 5px 15px;
     border-radius: 28px;
     white-space: nowrap;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 .link:hover {
     background-color: #dedede;
+}
+.catLink {
+    background-color: #E2E8CE;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.subcatLink {
+    background-color: #E2E8CE;
+}
+.catLink:hover, .subcatLink:hover {
+    background-color: #ccd2b0;
 }
 .selectContainer {
     width: 100%;
@@ -81,6 +95,7 @@
 }
 .column:last-child {
     padding-top: 30px;
+    width: 40%;
 }
 .catTitle {
     width: 100%;
@@ -143,6 +158,25 @@
 }
 .kitchenBtn svg path {
     fill: white;
+}
+.popoverContent {
+    width: auto !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.popoverContent:focus-visible, .popoverBody:focus-visible {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.popoverBody {
+    width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 7px !important;
+    padding: 0 !important;
 }
 
 @media screen and (max-width: 1450px) {
