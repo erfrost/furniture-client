@@ -48,14 +48,15 @@ const ItemsCatalog = ({
   useEffect(() => {
     if (!furnisherFilterArr.length) {
       setFilteredItems(allItems);
-      if (setCountState && allCount > 0) return setCountState(allCount);
+      if (setCountState && allCount > 0) setCountState(allCount);
+      return;
     }
 
     const resultArray = allItems.filter((item) =>
       furnisherFilterArr.includes(item.furnisherId)
     );
     setFilteredItems(resultArray);
-    setCountState(resultArray.length);
+    if (setCountState) setCountState(resultArray.length);
   }, [furnisherFilterArr, allItems]);
 
   const loadMoreItems = async () => {

@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import { useRouter } from "next/router";
 import NewsSlider from "@/components/NewsSlider/NewsSlider";
 
 const Index = ({ categories, subcategories, discountItems, news, error }) => {
@@ -23,7 +22,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
     useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
 
-  const router = useRouter();
+  console.log(discountItems);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
