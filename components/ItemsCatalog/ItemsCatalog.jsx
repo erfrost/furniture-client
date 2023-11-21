@@ -61,7 +61,7 @@ const ItemsCatalog = ({
     setFilteredItems(resultArray);
 
     if (setCountState) setCountState(resultArray.length);
-  }, [furnisherFilterArr]);
+  }, [furnisherFilterArr, allItems]);
 
   const loadMoreItems = async () => {
     if (!isLoading && !nullMoreItems) {
@@ -88,16 +88,16 @@ const ItemsCatalog = ({
               `items/search?search=${querySearch}&limit=25&offset=${offset}`
             );
           } else if (queryFurnisherId) {
-            try {
-              items = await loadFunc(offset);
-            } catch (error) {
-              setReqError("Произошла ошибка запроса. Попробуйте позднее");
-            }
+            items = await axiosInstance.get(
+              `items/by_furnisher/${queryFurnisherId}?limit=25&offset=${offset}`
+            );
+            console.log(items);
           }
-          if (!items.data.items.length) nullMoreItems = true;
+          if (!items.data.items.length) return (nullMoreItems = true);
           setAllItems((prevState) => [...prevState, ...items.data.items]);
         }
       } catch (error) {
+        console.log(error);
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"
