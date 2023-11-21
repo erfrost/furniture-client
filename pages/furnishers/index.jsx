@@ -6,7 +6,6 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import furnishers from "@/mock/furnishers";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/furnishers.module.css";
 import Link from "next/link";
@@ -14,10 +13,28 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Index = () => {
+  const [furnishers, setFurnishers] = useState([]);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState();
+
+  useEffect(() => {
+    async function fetchFurnishers() {
+      try {
+        const res = await axiosInstance.get("/furnishers");
+
+        setFurnishers(res.data.furnishers);
+      } catch (error) {
+        setReqError(
+          error?.response?.data?.message ||
+            "Произошла ошибка запроса. Попробуйте позднее"
+        );
+      }
+    }
+
+    fetchFurnishers();
+  }, []);
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -81,11 +98,11 @@ const Index = () => {
           {furnishers.map((item) => (
             <Link
               href="/furnisher/[furnisherId]"
-              as={`/furnisher/${item.id}`}
+              as={`/furnisher/${item.title}`}
               className={styles.item}
-              key={item.id}
+              key={item._id}
             >
-              {item.id}
+              {item.title}
             </Link>
           ))}
         </div>
