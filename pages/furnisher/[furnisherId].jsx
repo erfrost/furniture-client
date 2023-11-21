@@ -16,6 +16,7 @@ import { useRecoilState } from "recoil";
 const Index = ({ items, itemsCount, error }) => {
   const [furnisherTitle, setFurnisherTitle] = useState(undefined);
   const [itemsState, setItemsState] = useState(items);
+  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -52,6 +53,7 @@ const Index = ({ items, itemsCount, error }) => {
           `/items/by_furnisher/${furnisherId}?limit=25`
         );
         setItemsState(response.data.items);
+        setAllCount(response.data.count);
         setCountState(response.data.count);
       } catch (error) {
         setReqError(
@@ -121,13 +123,13 @@ const Index = ({ items, itemsCount, error }) => {
         </div>
       )}
       <div className={styles.content}>
-        <CatalogTitle title={furnisherTitle} />
+        <CatalogTitle title={furnisherTitle} isFurnishersPage={true} />
         <span className={styles.itemsCount}>Найдено: {countState} товаров</span>
         <ItemsCatalog
           items={itemsState}
+          allCount={allCount}
           setCountState={setCountState}
           isDiscountPage={false}
-          queryFurnisherId={furnisherId}
           loadFunc={loadFunc}
         />
       </div>

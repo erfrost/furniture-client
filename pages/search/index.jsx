@@ -15,6 +15,8 @@ import { useRecoilState } from "recoil";
 
 const SearchPage = ({ items, itemsCount, error }) => {
   const [itemsState, setItemsState] = useState(items);
+  const [allCount, setAllCount] = useState(itemsCount);
+  const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
@@ -27,6 +29,21 @@ const SearchPage = ({ items, itemsCount, error }) => {
   useEffect(() => {
     setItemsState(items);
   }, [items]);
+
+  const loadFunc = async (offset) => {
+    try {
+      const res = await axiosInstance.get(
+        `items/search?search=${searchText}&limit=25&offset=${offset}`
+      );
+
+      return res;
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -87,11 +104,13 @@ const SearchPage = ({ items, itemsCount, error }) => {
           items={items}
           setSortedItems={setItemsState}
         />
-        <span className={styles.itemsCount}>Найдено: {itemsCount} товаров</span>
+        <span className={styles.itemsCount}>Найдено: {countState} товаров</span>
         <ItemsCatalog
           items={itemsState}
           isDiscountPage={false}
-          querySearch={searchText}
+          allCount={allCount}
+          setCountState={setCountState}
+          loadFunc={loadFunc}
         />
       </div>
       <Footer />

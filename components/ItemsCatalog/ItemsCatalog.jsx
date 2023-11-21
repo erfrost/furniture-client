@@ -10,12 +10,9 @@ import { furnishersFilterState, sortState } from "@/storage/atoms";
 
 const ItemsCatalog = ({
   items,
+  allCount,
   setCountState,
   isDiscountPage,
-  queryCategoryId,
-  querySubcategoryId,
-  querySearch,
-  queryFurnisherId,
   loadFunc,
 }) => {
   const [allItems, setAllItems] = useState(items);
@@ -33,7 +30,7 @@ const ItemsCatalog = ({
 
   useEffect(() => {
     if (sort === "none") {
-      setFilteredItems(filteredItems);
+      setFilteredItems(allItems);
     }
     if (sort === "up") {
       const result = [...filteredItems].sort(
@@ -51,53 +48,34 @@ const ItemsCatalog = ({
   useEffect(() => {
     if (!furnisherFilterArr.length) {
       setFilteredItems(allItems);
-      if (setCountState) setCountState(allItems.length);
-      return;
+      if (setCountState && allCount > 0) return setCountState(allCount);
     }
 
     const resultArray = allItems.filter((item) =>
       furnisherFilterArr.includes(item.furnisherId)
     );
     setFilteredItems(resultArray);
-
-    if (setCountState) setCountState(resultArray.length);
+    setCountState(resultArray.length);
   }, [furnisherFilterArr, allItems]);
 
   const loadMoreItems = async () => {
     if (!isLoading && !nullMoreItems) {
       isLoading = true;
       try {
+        let items;
+
         if (isDiscountPage) {
-          const items = await axiosInstance.get(
+          items = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
           );
-          if (!items.data.length) nullMoreItems = true;
-          setAllItems((prevState) => [...prevState, ...items.data.items]);
         } else {
-          let items;
-          if (queryCategoryId) {
-            items = await axiosInstance.get(
-              `items/by_category/${queryCategoryId}?limit=25&offset=${offset}`
-            );
-          } else if (querySubcategoryId) {
-            items = await axiosInstance.get(
-              `items/by_subcategory/${querySubcategoryId}?limit=25&offset=${offset}`
-            );
-          } else if (querySearch) {
-            items = await axiosInstance.get(
-              `items/search?search=${querySearch}&limit=25&offset=${offset}`
-            );
-          } else if (queryFurnisherId) {
-            items = await axiosInstance.get(
-              `items/by_furnisher/${queryFurnisherId}?limit=25&offset=${offset}`
-            );
-            console.log(items);
-          }
-          if (!items.data.items.length) return (nullMoreItems = true);
-          setAllItems((prevState) => [...prevState, ...items.data.items]);
+          items = await loadFunc(offset);
         }
+        console.log(items);
+        if (!items.data.items.length) return (nullMoreItems = true);
+        console.log(items.data.items);
+        setAllItems((prevState) => [...prevState, ...items.data.items]);
       } catch (error) {
-        console.log(error);
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"

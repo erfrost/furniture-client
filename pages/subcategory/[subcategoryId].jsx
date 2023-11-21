@@ -17,6 +17,7 @@ import { useRecoilState } from "recoil";
 const Index = ({ items, itemsCount, error }) => {
   const [subcategoryTitle, setSubcategoryTitle] = useState(undefined);
   const [itemsState, setItemsState] = useState(items);
+  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -34,13 +35,30 @@ const Index = ({ items, itemsCount, error }) => {
     setSubcategoryTitle(currentSubcategory?.title);
   }, [subcategoryId]);
 
+  const loadFunc = async (offset) => {
+    try {
+      const res = await axiosInstance.get(
+        `items/by_subcategory/${subcategoryId}?limit=25&offset=${offset}`
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
+
   useEffect(() => {
     async function fetchItems() {
       try {
         const response = await axiosInstance.get(
           `items/by_subcategory/${subcategoryId}?limit=25`
         );
+        console.log(response);
         setItemsState(response.data.items);
+        setAllCount(response.data.count);
         setCountState(response.data.count);
       } catch (error) {
         setReqError(
@@ -130,9 +148,10 @@ const Index = ({ items, itemsCount, error }) => {
           </span>
           <ItemsCatalog
             items={itemsState}
+            allCount={allCount}
             setCountState={setCountState}
             isDiscountPage={false}
-            querySubcategoryId={subcategoryId}
+            loadFunc={loadFunc}
           />
         </div>
         <Footer />

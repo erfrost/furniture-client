@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { CheckIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import furnishers from "@/mock/furnishers";
 
-const CatalogTitle = ({ title }) => {
+const CatalogTitle = ({ title, isFurnishersPage }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [furnisherFilterArr, setFurnisherFilterArr] = useRecoilState(
     furnishersFilterState
@@ -98,42 +98,44 @@ const CatalogTitle = ({ title }) => {
             />
           </div>
         </div>
-        <div className={styles.filter}>
-          <span
-            className={styles.text}
-            onClick={() => setIsFilterOpen((prevState) => !prevState)}
-          >
-            Фильтр по поставщикам
-          </span>
-          <TriangleDownIcon
-            className={styles.filterIcon}
-            onClick={() => setIsFilterOpen((prevState) => !prevState)}
-          />
-          <div
-            className={`${styles.furnishersList} ${
-              isFilterOpen ? styles.active : null
-            }`}
-          >
-            {furnishers.map((item) => (
-              <div className={styles.furnisherItem} key={item.id}>
-                <div
-                  className={styles.square}
-                  onClick={() =>
-                    furnisherFilterAdd(item.id, "checkIcon-" + item.id)
-                  }
-                >
-                  <CheckIcon
-                    boxSize="70%"
-                    opacity={0}
-                    transition="all 0.3s ease"
-                    id={"checkIcon-" + item.id}
-                  />
+        {!isFurnishersPage ? (
+          <div className={styles.filter}>
+            <span
+              className={styles.text}
+              onClick={() => setIsFilterOpen((prevState) => !prevState)}
+            >
+              Фильтр по поставщикам
+            </span>
+            <TriangleDownIcon
+              className={styles.filterIcon}
+              onClick={() => setIsFilterOpen((prevState) => !prevState)}
+            />
+            <div
+              className={`${styles.furnishersList} ${
+                isFilterOpen ? styles.active : null
+              }`}
+            >
+              {furnishers.map((item) => (
+                <div className={styles.furnisherItem} key={item.id}>
+                  <div
+                    className={styles.square}
+                    onClick={() =>
+                      furnisherFilterAdd(item.id, "checkIcon-" + item.id)
+                    }
+                  >
+                    <CheckIcon
+                      boxSize="70%"
+                      opacity={0}
+                      transition="all 0.3s ease"
+                      id={"checkIcon-" + item.id}
+                    />
+                  </div>
+                  <span className={styles.furnisherTitle}>{item.id}</span>
                 </div>
-                <span className={styles.furnisherTitle}>{item.id}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );

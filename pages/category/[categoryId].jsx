@@ -17,6 +17,7 @@ import { useRecoilState } from "recoil";
 const Index = ({ items, itemsCount, error }) => {
   const [categoryTitle, setCategoryTitle] = useState(undefined);
   const [itemsState, setItemsState] = useState(items);
+  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -32,6 +33,21 @@ const Index = ({ items, itemsCount, error }) => {
     setCategoryTitle(currentCategory?.title);
   }, [categoryId]);
 
+  const loadFunc = async (offset) => {
+    try {
+      const res = await axiosInstance.get(
+        `items/by_category/${categoryId}?limit=25&offset=${offset}`
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
+
   useEffect(() => {
     async function fetchItems() {
       try {
@@ -39,6 +55,7 @@ const Index = ({ items, itemsCount, error }) => {
           `items/by_category/${categoryId}?limit=25`
         );
         setItemsState(response.data.items);
+        setAllCount(response.data.count);
         setCountState(response.data.count);
       } catch (error) {
         setReqError(
@@ -130,7 +147,9 @@ const Index = ({ items, itemsCount, error }) => {
             items={itemsState}
             isDiscountPage={false}
             queryCategoryId={categoryId}
+            allCount={allCount}
             setCountState={setCountState}
+            loadFunc={loadFunc}
           />
         </div>
         <Footer />
