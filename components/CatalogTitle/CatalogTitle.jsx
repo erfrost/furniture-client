@@ -32,6 +32,29 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const popoverContent = document.querySelector(
+        ".CatalogTitle_furnishersList__RHF9N"
+      );
+      const icon = document.querySelector(".CatalogTitle_filter__di3tg");
+
+      if (
+        popoverContent &&
+        !popoverContent.contains(e.target) &&
+        !icon.contains(e.target)
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   const onChangeSort = () => {
     if (sort === "none") {
       setSort("up");
