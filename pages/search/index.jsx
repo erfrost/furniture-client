@@ -9,6 +9,7 @@ import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
+import formatItemsCount from "@/utils/caseFormatted";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -29,6 +30,10 @@ const SearchPage = ({ items, itemsCount, error }) => {
   useEffect(() => {
     setItemsState(items);
   }, [items]);
+
+  useEffect(() => {
+    setAllCount(itemsCount);
+  }, [itemsCount]);
 
   const loadFunc = async (offset) => {
     try {
@@ -104,7 +109,9 @@ const SearchPage = ({ items, itemsCount, error }) => {
           items={items}
           setSortedItems={setItemsState}
         />
-        <span className={styles.itemsCount}>Найдено: {countState} товаров</span>
+        <span className={styles.itemsCount}>
+          Найдено: {allCount} {formatItemsCount(allCount)}
+        </span>
         <ItemsCatalog
           items={itemsState}
           isDiscountPage={false}

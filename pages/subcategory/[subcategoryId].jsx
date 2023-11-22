@@ -10,6 +10,7 @@ import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
+import formatItemsCount from "@/utils/caseFormatted";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -144,7 +145,7 @@ const Index = ({ items, itemsCount, error }) => {
         <div className={styles.content}>
           <CatalogTitle title={subcategoryTitle} />
           <span className={styles.itemsCount}>
-            Найдено: {countState} товаров
+            Найдено: {countState} {formatItemsCount(countState)}
           </span>
           <ItemsCatalog
             items={itemsState}
