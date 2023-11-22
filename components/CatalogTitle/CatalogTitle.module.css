@@ -173,17 +173,23 @@
         height: 15px;
     }
 }
+@media screen and (max-width: 460px) {
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .furnishersList {
+        left: 0;
+        right: auto;
+    }
+}
 @media screen and (max-width: 430px) {
     .searchText {
         font-size: 18px;
     }
 }
 @media screen and (max-width: 400px) {
-    .filterContainer {
-        position: absolute;
-        right: 0;
-        bottom: -31px;
-    }
     .itemsCount {
         font-size: 10px;
     }

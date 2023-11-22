@@ -20,15 +20,25 @@
     gap: 10px;
     overflow: hidden;
 }
+.navContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navItem {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+}
+.navItem:hover {
+    color: black;
+}
 .title {
     color: black;
     font-size: 20px;
     font-weight: 600;
-}
-.categoryTitle {
-    color: #4B4B4B;
-    font-size: 14px;
-    font-weight: 500;
 }
 .description {
     color: black;

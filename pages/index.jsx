@@ -3,7 +3,6 @@ import MainPageSEO from "@/SEO/MainPageSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
 import CategoriesCatalog from "@/components/CategoriesCatalog/CategoriesCatalog";
-import CategoriesPreview from "@/components/CategoriesPreview/CategoriesPreview";
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
@@ -21,8 +20,6 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
   const [subcategoriesRecoil, setSubcategoriesRecoil] =
     useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
-
-  console.log(discountItems);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {

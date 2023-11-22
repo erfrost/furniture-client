@@ -7,6 +7,8 @@ import AlertInfo from "../AlertInfo/AlertInfo";
 import { throttle } from "lodash";
 import { useRecoilValue } from "recoil";
 import { furnishersFilterState, sortState } from "@/storage/atoms";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 const ItemsCatalog = ({
   items,
@@ -17,12 +19,18 @@ const ItemsCatalog = ({
 }) => {
   const [allItems, setAllItems] = useState(items);
   const [filteredItems, setFilteredItems] = useState(items);
+  const [subcategoryId, setSubcategoryId] = useState(undefined);
   const furnisherFilterArr = useRecoilValue(furnishersFilterState);
   const sort = useRecoilValue(sortState);
   const [reqError, setReqError] = useState(null);
   let isLoading = false;
   let offset = 25;
   let nullMoreItems = false;
+
+  const router = useRouter();
+  useEffect(() => {
+    setSubcategoryId(router.query.subcategoryId);
+  }, [router.query.subcategoryId]);
 
   useEffect(() => {
     setAllItems(items);
@@ -72,9 +80,8 @@ const ItemsCatalog = ({
         } else {
           items = await loadFunc(offset);
         }
-        console.log(items);
+
         if (!items.data.items.length) return (nullMoreItems = true);
-        console.log(items.data.items);
         setAllItems((prevState) => [...prevState, ...items.data.items]);
       } catch (error) {
         setReqError(
@@ -114,9 +121,20 @@ const ItemsCatalog = ({
   return (
     <>
       <div className={styles.list}>
-        {filteredItems?.map((item) => (
-          <ItemCard item={item} key={item._id} />
-        ))}
+        {subcategoryId === "654f52db3cef74b2b79bc645"
+          ? items.map((item) => (
+              <Image
+                className={styles.image}
+                key={item._id}
+                src={item.photo_name}
+                alt="photo"
+                width={300}
+                height={100}
+              />
+            ))
+          : filteredItems?.map((item) => (
+              <ItemCard item={item} key={item._id} />
+            ))}
       </div>
       {reqError && (
         <AlertInfo

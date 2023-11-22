@@ -2,74 +2,21 @@
 import CatalogSEO from "@/SEO/CatalogSEO";
 import axiosInstance from "@/axios.config";
 import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
-import { useRouter } from "next/router";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
-  const [subcategoryTitle, setSubcategoryTitle] = useState(undefined);
-  const [itemsState, setItemsState] = useState(items);
-  const [allCount, setAllCount] = useState(0);
-  const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-
-  const router = useRouter();
-  const { subcategoryId } = router.query;
-
-  useEffect(() => {
-    const currentSubcategory = subcategories.find(
-      (cat) => cat._id === subcategoryId
-    );
-
-    setSubcategoryTitle(currentSubcategory?.title);
-  }, [subcategoryId]);
-
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/by_subcategory/${subcategoryId}?limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        const response = await axiosInstance.get(
-          `items/by_subcategory/${subcategoryId}?limit=25`
-        );
-
-        setItemsState(response.data.items);
-        setAllCount(response.data.count);
-        setCountState(response.data.count);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      }
-    }
-
-    fetchItems();
-  }, [subcategoryId]);
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -81,10 +28,6 @@ const Index = ({ items, itemsCount, error }) => {
           const categories = categoriesAndSubcategories.data.categories;
           const subcategories = categoriesAndSubcategories.data.subcategories;
 
-          const currentSubcategory = subcategories.find(
-            (cat) => cat._id === subcategoryId
-          );
-          setSubcategoryTitle(currentSubcategory?.title);
           setCategories(categories);
           setSubcategories(subcategories);
         } catch (error) {
@@ -93,11 +36,6 @@ const Index = ({ items, itemsCount, error }) => {
               "Произошла ошибка запроса. Попробуйте позднее"
           );
         }
-      } else {
-        const currentSubcategory = subcategories.find(
-          (cat) => cat._id === subcategoryId
-        );
-        setSubcategoryTitle(currentSubcategory?.title);
       }
     }
 
@@ -123,10 +61,7 @@ const Index = ({ items, itemsCount, error }) => {
 
   return (
     <>
-      <CatalogSEO
-        title={(subcategoryTitle ? subcategoryTitle : "Каталог") + " | Дом"}
-        description={subcategoryTitle ? subcategoryTitle : undefined}
-      />
+      <CatalogSEO title={"Наши работы | Дом"} description="Кухни на заказ" />
       <div className={styles.container}>
         {screenWidth < 768 ? (
           <div className={styles.fullScreen}>
@@ -142,17 +77,22 @@ const Index = ({ items, itemsCount, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <CatalogTitle title={subcategoryTitle} />
+          <span className={styles.catalogTitle}>Наши работы</span>
           <span className={styles.itemsCount}>
-            Найдено: {countState} товаров
+            Найдено: {itemsCount} фотографий
           </span>
-          <ItemsCatalog
-            items={itemsState}
-            allCount={allCount}
-            setCountState={setCountState}
-            isDiscountPage={false}
-            loadFunc={loadFunc}
-          />
+          <div className={styles.list}>
+            {items.map((item) => (
+              <Image
+                key={item._id}
+                src={item.photo_name}
+                alt="photo"
+                width={300}
+                height={300}
+                className={styles.image}
+              />
+            ))}
+          </div>
         </div>
         <Footer />
       </div>
@@ -167,16 +107,14 @@ const Index = ({ items, itemsCount, error }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps() {
   try {
-    const items = await axiosInstance.get(
-      `items/by_subcategory/${query.subcategoryId}?limit=25`
-    );
+    const res = await axiosInstance.get("/kitchenWork");
 
     return {
       props: {
-        items: items.data.items,
-        itemsCount: items.data.count,
+        items: res.data,
+        itemsCount: res.data.length,
       },
     };
   } catch (error) {

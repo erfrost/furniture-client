@@ -14,6 +14,7 @@ import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
@@ -68,13 +69,12 @@ const Index = ({ item, error }) => {
   if (!item) {
     return null;
   }
-
-  const currentCategoryTitle = categories.find(
+  const currentCategory = categories.find(
     (cat) => cat._id === item.category_id
-  )?.title;
-  const currentSubcategoryTitle = subcategories.find(
+  );
+  const currentSubcategory = subcategories.find(
     (subcat) => subcat._id === item.subcategory_id
-  )?.title;
+  );
 
   return (
     <>
@@ -124,14 +124,35 @@ const Index = ({ item, error }) => {
             )}
             <div className={styles.infoContainer}>
               <span className={styles.title}>{item.title}</span>
-              <span className={styles.categoryTitle}>
-                {currentCategoryTitle && currentSubcategoryTitle
-                  ? currentCategoryTitle +
-                    ", " +
-                    currentSubcategoryTitle +
-                    (item.furnisherId ? ", " + item.furnisherId : "")
-                  : "Загрузка..."}
-              </span>
+              <div className={styles.navContainer}>
+                {currentCategory ? (
+                  <Link
+                    href="/category/[categoryId]"
+                    as={`/category/${currentCategory._id}`}
+                    className={styles.navItem}
+                  >
+                    {currentCategory.title}
+                  </Link>
+                ) : null}
+                {currentSubcategory ? (
+                  <Link
+                    href="/subcategory/[subcategoryId]"
+                    as={`/subcategory/${currentSubcategory._id}`}
+                    className={styles.navItem}
+                  >
+                    {", " + currentSubcategory.title}
+                  </Link>
+                ) : null}
+                {item.furnisherId ? (
+                  <Link
+                    href="/furnisher/[furnisherId]"
+                    as={`/furnisher/${item.furnisherId}`}
+                    className={styles.navItem}
+                  >
+                    {", " + item.furnisherId}
+                  </Link>
+                ) : null}
+              </div>
               {screenWidth < 1100 ? <ItemPagePriceBlock item={item} /> : null}
               <span className={styles.description}>{item.description}</span>
               {item?.specifications?.map((item, index) => (

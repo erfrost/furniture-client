@@ -38,7 +38,7 @@ const Index = ({ items, itemsCount, error }) => {
       const res = await axiosInstance.get(
         `items/by_category/${categoryId}?limit=25&offset=${offset}`
       );
-      console.log(res);
+
       return res;
     } catch (error) {
       setReqError(
