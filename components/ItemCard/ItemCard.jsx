@@ -4,7 +4,6 @@ import cartIcon from "@/assets/cartIcon.svg";
 import DiscountPrice from "../DiscountPrice/DiscountPrice";
 import cancelAction from "@/utils/cancelAction";
 import formattedNumber from "@/utils/formattedNumber";
-import { useRouter } from "next/router";
 import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -13,7 +12,6 @@ import Link from "next/link";
 
 const ItemCard = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState(false);
-  const router = useRouter();
 
   const cart = getCartFromCookie();
   const itemExists = cart.some((el) => el.itemId === item._id);
@@ -50,16 +48,17 @@ const ItemCard = ({ item }) => {
 
   return (
     <div className={styles.container}>
-      <Image
-        src={item.photo_names[0]}
-        alt="item"
-        width={300}
-        height={300}
-        className={styles.image}
-        onDragStart={cancelAction}
-        onContextMenu={cancelAction}
-        onClick={() => router.push(`/item/${item._id}`)}
-      />
+      <Link href="/item/[itemId]" as={`/item/${item._id}`} target="_blank">
+        <Image
+          src={item.photo_names[0]}
+          alt="item"
+          width={300}
+          height={300}
+          className={styles.image}
+          onDragStart={cancelAction}
+          onContextMenu={cancelAction}
+        />
+      </Link>
       {item.price > item.discountPrice ? (
         <DiscountPrice item={item} procent={procent} />
       ) : (
@@ -69,6 +68,7 @@ const ItemCard = ({ item }) => {
         className={styles.title}
         href="/item/[itemId]"
         as={`/item/${item._id}`}
+        target="_blank"
       >
         {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."},{" "}
         {item.furnisherId}
@@ -86,6 +86,7 @@ const ItemCard = ({ item }) => {
           className={styles.moreBtn}
           href="/item/[itemId]"
           as={`/item/${item._id}`}
+          target="_blank"
         >
           ПОДРОБНЕЕ
         </Link>

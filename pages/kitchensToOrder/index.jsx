@@ -158,6 +158,7 @@ const Index = ({ images, kitchens, error }) => {
                     className={styles.link}
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                   >
                     <Image
                       src={item.photo_names[0]}
@@ -173,6 +174,7 @@ const Index = ({ images, kitchens, error }) => {
                   <Link
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                     className={styles.title}
                   >
                     {item.title}
@@ -181,6 +183,7 @@ const Index = ({ images, kitchens, error }) => {
                     className={styles.link}
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                   >
                     <div className={styles.btn}>Подробнее</div>
                   </Link>

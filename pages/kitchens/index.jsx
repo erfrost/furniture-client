@@ -13,7 +13,6 @@ import { useRecoilState } from "recoil";
 import cancelAction from "@/utils/cancelAction";
 import Link from "next/link";
 import Image from "next/image";
-import { Divider } from "@chakra-ui/react";
 
 const Index = ({ kitchens, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -89,6 +88,7 @@ const Index = ({ kitchens, error }) => {
                     className={styles.link}
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                   >
                     <Image
                       src={item.photo_names[0]}
@@ -104,6 +104,7 @@ const Index = ({ kitchens, error }) => {
                   <Link
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                     className={styles.title}
                   >
                     {item.title}
@@ -112,6 +113,7 @@ const Index = ({ kitchens, error }) => {
                     className={styles.link}
                     href="/kitchen/[kitchenId]"
                     as={`/kitchen/${item._id}`}
+                    target="_blank"
                   >
                     <div className={styles.btn}>Подробнее</div>
                   </Link>
