@@ -124,7 +124,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
         {!isFurnishersPage ? (
           <div className={styles.filter}>
             <span
-              className={styles.text}
+              className={`${styles.text} ${styles.filterText}`}
               onClick={() => setIsFilterOpen((prevState) => !prevState)}
             >
               Фильтр по поставщикам

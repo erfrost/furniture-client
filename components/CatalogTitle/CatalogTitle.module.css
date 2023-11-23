@@ -61,8 +61,10 @@
     font-weight: 500;
     white-space: nowrap;
     user-select: none;
-    cursor: pointer;
     transition: all 0.3s ease;
+}
+.filterText {
+    cursor: pointer;
 }
 .btn {
     display: flex;

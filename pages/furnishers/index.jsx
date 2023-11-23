@@ -35,7 +35,7 @@ const Index = () => {
 
     fetchFurnishers();
   }, []);
-
+  console.log(furnishers);
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -98,11 +98,11 @@ const Index = () => {
           {furnishers.map((item) => (
             <Link
               href="/furnisher/[furnisherId]"
-              as={`/furnisher/${item.title}`}
+              as={`/furnisher/${item.id}`}
               className={styles.item}
               key={item._id}
             >
-              {item.title}
+              {item.id} - {item.count}шт.
             </Link>
           ))}
         </div>
