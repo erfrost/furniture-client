@@ -128,6 +128,9 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               </PopoverContent>
             </Popover>
           ))}
+          <Link href="/promotion" className={styles.link}>
+            Акция
+          </Link>
         </div>
         <AnimatePresence>
           {isOpen && (
