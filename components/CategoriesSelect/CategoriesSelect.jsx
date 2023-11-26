@@ -128,7 +128,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               </PopoverContent>
             </Popover>
           ))}
-          <Link href="/promotion" className={styles.link}>
+          <Link href="/promotion" className={`${styles.link} ${styles.bold}`}>
             Акция
           </Link>
         </div>
@@ -170,6 +170,14 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     {cat.title}
                   </Link>
                 ))}
+                <div className={styles.promotionLink}>
+                  <Link
+                    href="/promotion"
+                    className={`${styles.catTitle} ${styles.promotionLink}`}
+                  >
+                    Акция
+                  </Link>
+                </div>
               </div>
               <div className={`${styles.column} ${styles.subcategoriesColumn}`}>
                 {currentSubcategories?.map((subcat) => (

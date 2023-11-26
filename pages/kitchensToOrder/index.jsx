@@ -193,6 +193,10 @@ const Index = ({ images, kitchens, error }) => {
               <span className={styles.nullText}>Ничего не найдено</span>
             )}
           </div>
+          <div className={styles.titleContainer}>
+            <span className={styles.blockTitle}>Фурнитура</span>
+            <Divider />
+          </div>
         </div>
         <Footer />
         {projectIsOpen ? (

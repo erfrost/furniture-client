@@ -65,6 +65,17 @@
 .catLink:first-child {
     border-radius: 10px 10px 0 0;
 }
+.promotionLink {
+    width: 100%;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bold {
+    font-weight: 600;
+}
 .subcatLink {
     background-color: transparent;
     border-radius: 0;
