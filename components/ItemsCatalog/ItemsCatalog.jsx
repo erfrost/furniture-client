@@ -80,10 +80,11 @@ const ItemsCatalog = ({
         } else {
           items = await loadFunc(offset);
         }
-
+        console.log(items);
         if (!items.data.items.length) return (nullMoreItems = true);
         setAllItems((prevState) => [...prevState, ...items.data.items]);
       } catch (error) {
+        console.log("error");
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"

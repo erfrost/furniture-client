@@ -6,6 +6,7 @@ import { furnishersFilterState, sortState } from "@/storage/atoms";
 import { useEffect, useState } from "react";
 import { CheckIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import furnishers from "@/mock/furnishers";
+import { useRouter } from "next/router";
 
 const CatalogTitle = ({ title, isFurnishersPage }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -14,6 +15,8 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
   );
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -88,7 +91,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <span className={styles.searchText}>{title}</span>
-        <RouteToHome />
+        {router.asPath !== "/kitchensToOrder" ? <RouteToHome /> : null}
       </div>
       <div className={styles.filterContainer}>
         <div className={styles.sort}>

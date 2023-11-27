@@ -16,10 +16,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Divider, useDisclosure } from "@chakra-ui/react";
 import KitchenForm from "@/components/KitchenForm/KitchenForm";
+import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
+import formatItemsCount from "@/utils/caseFormatted";
+import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 
-const Index = ({ images, kitchens, error }) => {
+const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
+  const [furnituresState, setFurnituresState] = useState(furnitures);
+  const [countState, setCountState] = useState(furnituresCount);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [projectIsOpen, setProjectIsOpen] = useState(false);
@@ -70,6 +75,21 @@ const Index = ({ images, kitchens, error }) => {
       }
     };
   }, []);
+
+  const loadFunc = async (offset) => {
+    try {
+      const res = await axiosInstance.get(
+        `items/by_subcategory/6562ef3e4ba1483903c3811a?limit=25&offset=${offset}`
+      );
+
+      return res;
+    } catch (error) {
+      setReqError(
+        error?.response?.data?.message ||
+          "Произошла ошибка запроса. Попробуйте позднее"
+      );
+    }
+  };
 
   const projectRequest = async (name, phone) => {
     try {
@@ -193,10 +213,18 @@ const Index = ({ images, kitchens, error }) => {
               <span className={styles.nullText}>Ничего не найдено</span>
             )}
           </div>
-          <div className={styles.titleContainer}>
-            <span className={styles.blockTitle}>Фурнитура</span>
-            <Divider />
-          </div>
+          <Divider />
+          <CatalogTitle title="Фурнитура" />
+          <span className={styles.itemsCount}>
+            Найдено: {countState} {formatItemsCount(countState)}
+          </span>
+          <ItemsCatalog
+            items={furnituresState}
+            allCount={furnituresCount}
+            setCountState={setCountState}
+            isDiscountPage={false}
+            loadFunc={loadFunc}
+          />
         </div>
         <Footer />
         {projectIsOpen ? (
@@ -248,11 +276,16 @@ export async function getServerSideProps() {
   try {
     const kitchens = await axiosInstance.get("/kitchen");
     const kitchenWork = await axiosInstance.get("/kitchenWork");
+    const furnitures = await axiosInstance.get(
+      "items/by_subcategory/6562ef3e4ba1483903c3811a?limit=25"
+    );
 
     return {
       props: {
         images: kitchenWork.data,
         kitchens: kitchens.data,
+        furnitures: furnitures.data.items,
+        furnituresCount: furnitures.data.count,
       },
     };
   } catch (error) {
