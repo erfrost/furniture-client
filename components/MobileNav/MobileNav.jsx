@@ -143,6 +143,14 @@ const MobileNav = () => {
         </div>
         <Divider />
         <Link
+          href="/promotion"
+          className={styles.link}
+          onClick={() => setIsOpen(false)}
+        >
+          Акция
+        </Link>
+        <Divider />
+        <Link
           href="/kitchensToOrder"
           className={styles.link}
           onClick={() => setIsOpen(false)}
