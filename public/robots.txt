@@ -1,10 +1,4 @@
-User-agent: *
-Disallow: /cart
-Disallow: /aboutUs
-Disallow: /refund
-Disallow: /deliveryAndPayment
-Disallow: /salons
-Disallow: /furnishers
+User-Agent: *
 Allow: /
 Sitemap: https://dom888.ru/sitemap.xml
 Host: https://dom888.ru

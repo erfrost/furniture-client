@@ -51,6 +51,7 @@ export default function App({ Component, pageProps }) {
 , Аксессуары для интерьера, аксессуары, зеркала, лампы, кресла, стулья, онлайн, для дачи, комоды, кухонные гарнитуры, кухни, раковины, тумбы, для подростка, для девочки, для мальчика, скидки на мебель, мебель по акции, распродажа, рассрочка"
         />
         <meta name="yandex-verification" content="23c981ccac8729f6" />
+        <meta name="google-site-verification" content="1Bvp_6TjYTPGy2u5RoIMW-fzh547OhfeZqyppeg6MKE" />
       </Head>
       <RecoilRoot>
         <ChakraProvider>
