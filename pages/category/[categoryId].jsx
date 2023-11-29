@@ -119,6 +119,8 @@ const Index = ({ items, itemsCount, error }) => {
     };
   }, []);
 
+  if (!categoryTitle) return;
+
   return (
     <>
       <CatalogSEO
