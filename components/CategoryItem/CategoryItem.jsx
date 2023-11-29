@@ -86,7 +86,6 @@ const CategoryItem = ({ category }) => {
         alt="category"
         width={100}
         height={100}
-        // quality={100}
         className={styles.image}
         draggable={false}
         onDragStart={cancelAction}
@@ -110,8 +109,20 @@ const CategoryItem = ({ category }) => {
             onContextMenu={cancelAction}
           />
           <Link
-            href="/subcategory/[subcategoryId]"
-            as={`/subcategory/${subcat._id}`}
+            href={
+              subcat._id === "654f52db3cef74b2b79bc645"
+                ? "/kitchenWorks"
+                : subcat._id === "654bb115c2fbb0f34ee5a6e8"
+                ? "/kitchens"
+                : "/subcategory/[subcategoryId]"
+            }
+            as={
+              subcat._id === "654f52db3cef74b2b79bc645"
+                ? "/kitchenWorks"
+                : subcat._id === "654bb115c2fbb0f34ee5a6e8"
+                ? "/kitchens"
+                : `/subcategory/${subcat._id}`
+            }
             className={styles.subcatTitle}
           >
             {subcat.title}
