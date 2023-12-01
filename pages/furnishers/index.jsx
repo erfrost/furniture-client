@@ -8,34 +8,24 @@ import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/furnishers.module.css";
+import { sortedFurnishers } from "@/utils/sortedFurnishers";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-const Index = () => {
-  const [furnishers, setFurnishers] = useState([]);
+const Index = ({ furnishers }) => {
+  const [furnishersState, setFurnishersState] = useState([]);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState();
 
   useEffect(() => {
-    async function fetchFurnishers() {
-      try {
-        const res = await axiosInstance.get("/furnishers");
+    const result = sortedFurnishers(furnishers);
 
-        setFurnishers(res.data.furnishers);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      }
-    }
-
-    fetchFurnishers();
+    setFurnishersState(result);
   }, []);
-  console.log(furnishers);
+
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -95,12 +85,12 @@ const Index = () => {
       <div className={styles.content}>
         <RouteToHome />
         <div className={styles.list}>
-          {furnishers.map((item) => (
+          {furnishersState.map((item, index) => (
             <Link
               href="/furnisher/[furnisherId]"
-              as={`/furnisher/${item.id}`}
+              as={`/furnisher/${item.title}`}
               className={styles.item}
-              key={item._id}
+              key={index}
             >
               {item.id} - {item.count}шт.
             </Link>
@@ -118,5 +108,23 @@ const Index = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  try {
+    const res = await axiosInstance.get("/furnishers");
+
+    return {
+      props: {
+        furnishers: res.data,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: "На сервере произошла ошибка. Попробуйте позднее",
+      },
+    };
+  }
+}
 
 export default Index;

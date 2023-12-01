@@ -21,6 +21,11 @@
 .title:hover {
     color: #848484;
 }
+.vendorCode {
+    font-weight: 400;
+    font-size: 13px;
+    color: rgb(79, 79, 79);
+}
 .price {
     font-weight: 600;
     font-size: 26px;
@@ -111,6 +116,7 @@
 @media screen and (max-width: 535px) {
     .image {
         height: 325px;
+        object-fit: cover;
     }
 }
 @media screen and (max-width: 475px) {
