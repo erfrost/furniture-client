@@ -25,9 +25,10 @@ const ItemsCatalog = ({
   const [reqError, setReqError] = useState(null);
   let isLoading = false;
   let offset = 25;
-  let nullMoreItems = false;
+  let emptyMoreItems = false;
 
   const router = useRouter();
+
   useEffect(() => {
     setSubcategoryId(router.query.subcategoryId);
   }, [router.query.subcategoryId]);
@@ -68,23 +69,21 @@ const ItemsCatalog = ({
   }, [furnisherFilterArr, allItems]);
 
   const loadMoreItems = async () => {
-    if (!isLoading && !nullMoreItems) {
+    if (!isLoading && !emptyMoreItems) {
       isLoading = true;
       try {
-        let items;
+        let res;
 
         if (isDiscountPage) {
-          items = await axiosInstance.get(
+          res = await axiosInstance.get(
             `items/discount?limit=25&offset=${offset}`
           );
-        } else {
-          items = await loadFunc(offset);
-        }
-        console.log(items);
-        if (!items.data.items.length) return (nullMoreItems = true);
-        setAllItems((prevState) => [...prevState, ...items.data.items]);
+        } else res = await loadFunc(offset);
+
+        if (!res.data.items.length) return (emptyMoreItems = true);
+        setAllItems((prevState) => [...prevState, ...res.data.items]);
       } catch (error) {
-        console.log("error");
+        console.log(error);
         setReqError(
           error?.response?.data?.message ||
             "Произошла ошибка запроса. Попробуйте позднее"
@@ -95,9 +94,9 @@ const ItemsCatalog = ({
       }
     }
   };
-
-  const handleScroll = useRef(
-    throttle(() => {
+  console.log(router);
+  useEffect(() => {
+    const handleScroll = throttle(async () => {
       const { scrollTop, clientHeight, scrollHeight } =
         document.documentElement;
       const footer = document.querySelector(".Footer_container__Mn8SS");
@@ -108,16 +107,19 @@ const ItemsCatalog = ({
 
       if (scrollTop + clientHeight >= scrollHeight - footerHeight)
         loadMoreItems();
-    }, 500)
-  ).current;
+    }, 500);
 
-  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [
+    router.query.subcategoryId,
+    router.query.categoryId,
+    router.query.furnisherId,
+    router.query.search,
+  ]);
 
   return (
     <>

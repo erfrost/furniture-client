@@ -12,7 +12,7 @@ import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
 import formatItemsCount from "@/utils/caseFormatted";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
@@ -26,8 +26,8 @@ const Index = ({ items, itemsCount, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
-  const { subcategoryId } = router.query;
-  console.log(items);
+  let subcategoryId = router.query.subcategoryId;
+
   useEffect(() => {
     const currentSubcategory = subcategories.find(
       (cat) => cat._id === subcategoryId
@@ -39,7 +39,7 @@ const Index = ({ items, itemsCount, error }) => {
   const loadFunc = async (offset) => {
     try {
       const res = await axiosInstance.get(
-        `items/by_subcategory/${subcategoryId}?limit=25&offset=${offset}`
+        `items/by_subcategory/${router.query.subcategoryId}?limit=25&offset=${offset}`
       );
 
       return res;
