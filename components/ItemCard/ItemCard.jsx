@@ -73,7 +73,7 @@ const ItemCard = ({ item }) => {
         {item.title.length < 40 ? item.title : item.title.slice(0, 40) + "..."},{" "}
         {item.furnisherId}
       </Link>
-      <span className={styles.vendorCode}>{item.vendor_code}</span>
+      <span className={styles.vendorCode}>Артикул: {item.vendor_code}</span>
       {item.specifications.length ? (
         <span className={styles.specification}>
           {item.specifications[0].title}:{" "}
