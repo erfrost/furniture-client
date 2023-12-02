@@ -87,6 +87,12 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
           </div>
         )}
 
+        {screenWidth < 768 ? (
+          <div className={styles.linkBtns}>
+            <div className={styles.link}>Кухни на заказ</div>
+            <div className={styles.link}>Контакты</div>
+          </div>
+        ) : null}
         <CategoriesCatalog categories={categoriesRecoil} />
         <div className={styles.catalogContainer}>
           <span className={styles.catalogTitle}>Мебель со скидкой</span>
