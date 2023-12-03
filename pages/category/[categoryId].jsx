@@ -17,8 +17,6 @@ import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
   const [categoryTitle, setCategoryTitle] = useState(undefined);
-  const [itemsState, setItemsState] = useState(items);
-  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -32,41 +30,6 @@ const Index = ({ items, itemsCount, error }) => {
     const currentCategory = categories.find((cat) => cat._id === categoryId);
 
     setCategoryTitle(currentCategory?.title);
-  }, [categoryId]);
-
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/by_category/${categoryId}?limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        const response = await axiosInstance.get(
-          `items/by_category/${categoryId}?limit=25`
-        );
-        setItemsState(response.data.items);
-        setAllCount(response.data.count);
-        setCountState(response.data.count);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      }
-    }
-
-    fetchItems();
   }, [categoryId]);
 
   useEffect(() => {
@@ -147,12 +110,10 @@ const Index = ({ items, itemsCount, error }) => {
             Найдено: {countState} {formatItemsCount(countState)}
           </span>
           <ItemsCatalog
-            items={itemsState}
-            isDiscountPage={false}
+            items={items}
             queryCategoryId={categoryId}
-            allCount={allCount}
+            allCount={itemsCount}
             setCountState={setCountState}
-            loadFunc={loadFunc}
           />
         </div>
         <Footer />
@@ -171,7 +132,7 @@ const Index = ({ items, itemsCount, error }) => {
 export async function getServerSideProps({ query }) {
   try {
     const items = await axiosInstance.get(
-      `/items/by_category/${query.categoryId}?limit=25`
+      `/items/by_category/${query.categoryId}`
     );
 
     return {

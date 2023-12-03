@@ -16,54 +16,17 @@ import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
   const [furnisherTitle, setFurnisherTitle] = useState(undefined);
-  const [itemsState, setItemsState] = useState(items);
-  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-  console.log(items, itemsCount);
+
   const router = useRouter();
   const { furnisherId } = router.query;
 
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/by_furnisher/${furnisherId}?limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
-
   useEffect(() => {
     setFurnisherTitle(furnisherId);
-  }, [furnisherId]);
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        const response = await axiosInstance.get(
-          `/items/by_furnisher/${furnisherId}?limit=25`
-        );
-        setItemsState(response.data.items);
-        setAllCount(response.data.count);
-        setCountState(response.data.count);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      }
-    }
-
-    fetchItems();
   }, [furnisherId]);
 
   useEffect(() => {
@@ -128,11 +91,9 @@ const Index = ({ items, itemsCount, error }) => {
           Найдено: {countState} {formatItemsCount(countState)}
         </span>
         <ItemsCatalog
-          items={itemsState}
-          allCount={allCount}
+          items={items}
+          allCount={itemsCount}
           setCountState={setCountState}
-          isDiscountPage={false}
-          loadFunc={loadFunc}
         />
       </div>
       <Footer />
@@ -150,7 +111,7 @@ const Index = ({ items, itemsCount, error }) => {
 export async function getServerSideProps({ query }) {
   try {
     const res = await axiosInstance.get(
-      `/items/by_furnisher/${query.furnisherId}?limit=25`
+      `/items/by_furnisher/${query.furnisherId}`
     );
 
     return {

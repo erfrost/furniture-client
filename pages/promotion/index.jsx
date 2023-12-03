@@ -61,21 +61,6 @@ const Index = ({ items, itemsCount, error }) => {
     };
   }, []);
 
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/promotion?limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
-
   return (
     <>
       <div className={styles.container}>
@@ -101,8 +86,6 @@ const Index = ({ items, itemsCount, error }) => {
             items={items}
             allCount={itemsCount}
             setCountState={setCountState}
-            isDiscountPage={false}
-            loadFunc={loadFunc}
           />
         </div>
         <Footer />
@@ -120,7 +103,7 @@ const Index = ({ items, itemsCount, error }) => {
 
 export async function getServerSideProps() {
   try {
-    const res = await axiosInstance.get("/items/promotion?limit=25");
+    const res = await axiosInstance.get("/items/promotion");
 
     return {
       props: {

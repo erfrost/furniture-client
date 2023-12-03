@@ -97,7 +97,7 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
         <div className={styles.catalogContainer}>
           <span className={styles.catalogTitle}>Мебель со скидкой</span>
           {discountItems?.length ? (
-            <ItemsCatalog items={discountItems} isDiscountPage={true} />
+            <ItemsCatalog items={discountItems} />
           ) : (
             <span className={styles.notDiscountItems}>
               В данный момент нет товаров со скидкой
@@ -122,7 +122,7 @@ export async function getServerSideProps() {
     const categoriesAndSubcategories = await axiosInstance.get(
       "categoriesAndSubcategories"
     );
-    const discountItems = await axiosInstance.get("items/discount?limit=25");
+    const discountItems = await axiosInstance.get("items/discount");
     const news = await axiosInstance.get("news");
 
     return {

@@ -12,13 +12,11 @@ import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/catalog.module.css";
 import formatItemsCount from "@/utils/caseFormatted";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Index = ({ items, itemsCount, error }) => {
   const [subcategoryTitle, setSubcategoryTitle] = useState(undefined);
-  const [itemsState, setItemsState] = useState(items);
-  const [allCount, setAllCount] = useState(0);
   const [countState, setCountState] = useState(itemsCount);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
@@ -34,42 +32,6 @@ const Index = ({ items, itemsCount, error }) => {
     );
 
     setSubcategoryTitle(currentSubcategory?.title);
-  }, [subcategoryId]);
-
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/by_subcategory/${router.query.subcategoryId}?limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        const response = await axiosInstance.get(
-          `items/by_subcategory/${subcategoryId}?limit=25`
-        );
-
-        setItemsState(response.data.items);
-        setAllCount(response.data.count);
-        setCountState(response.data.count);
-      } catch (error) {
-        setReqError(
-          error?.response?.data?.message ||
-            "Произошла ошибка запроса. Попробуйте позднее"
-        );
-      }
-    }
-
-    fetchItems();
   }, [subcategoryId]);
 
   useEffect(() => {
@@ -150,11 +112,9 @@ const Index = ({ items, itemsCount, error }) => {
             Найдено: {countState} {formatItemsCount(countState)}
           </span>
           <ItemsCatalog
-            items={itemsState}
-            allCount={allCount}
+            items={items}
+            allCount={itemsCount}
             setCountState={setCountState}
-            isDiscountPage={false}
-            loadFunc={loadFunc}
           />
         </div>
         <Footer />
@@ -173,7 +133,7 @@ const Index = ({ items, itemsCount, error }) => {
 export async function getServerSideProps({ query }) {
   try {
     const items = await axiosInstance.get(
-      `items/by_subcategory/${query.subcategoryId}?limit=25`
+      `items/by_subcategory/${query.subcategoryId}`
     );
 
     return {
