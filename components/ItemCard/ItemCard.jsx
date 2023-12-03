@@ -54,7 +54,16 @@ const ItemCard = ({ item }) => {
           alt="item"
           width={300}
           height={300}
-          className={styles.image}
+          className={`${styles.image} ${
+            item.subcategory_id === "65670ca9a623b6fddfce5ffd" ||
+            item.subcategory_id === "655c90e8cbffef93b8accab8" ||
+            item.subcategory_id === "65670c97a623b6fddfce5ff9" ||
+            item.subcategory_id === "65670cbea623b6fddfce6001" ||
+            item.subcategory_id === "65670cd5a623b6fddfce6005" ||
+            item.subcategory_id === "653c08511e1415d9c89d1769"
+              ? styles.vertImage
+              : null
+          }`}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}
         />

@@ -106,7 +106,7 @@ const Index = ({ item, error }) => {
             {screenWidth < 1100 ? (
               <ItemPageSlider images={item.photo_names} />
             ) : (
-              <>
+              <div className={styles.imagesContainer}>
                 <ImagesList
                   item={item}
                   setCurrentImageIndex={setCurrentImageIndex}
@@ -120,7 +120,7 @@ const Index = ({ item, error }) => {
                   onDragStart={cancelAction}
                   onContextMenu={cancelAction}
                 />
-              </>
+              </div>
             )}
             <div className={styles.infoContainer}>
               <span className={styles.title}>{item.title}</span>

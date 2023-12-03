@@ -67,6 +67,12 @@
     object-fit: cover;
     border-radius: 3px;
 }
+.imagesContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 50px;
+}
 
 @media screen and (max-width: 1430px) {
     .description {
