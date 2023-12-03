@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import styles from "./ItemsCatalog.module.css";
 import axiosInstance from "@/axios.config";
@@ -118,7 +118,6 @@ const ItemsCatalog = ({
     router.query.subcategoryId,
     router.query.categoryId,
     router.query.furnisherId,
-    router.query.search,
   ]);
 
   return (

@@ -91,16 +91,21 @@
     .image {
         height: 175px;
     }
-    .vertImage {
-        height: 300px;
+}
+@media screen and (max-width: 1275px) {
+    .image {
+        height: 150px;
     }
 }
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1100px) {
     .image {
-        height: 225px;
+        height: 175px;
     }
 }
 @media screen and (max-width: 1000px) {
+    .image {
+        height: 150px;
+    }
     .inCartBtn:hover {
         background-color: transparent;
     }
@@ -108,9 +113,9 @@
         background-color: #dee3db;
     }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 825px) {
     .image {
-        height: 175px;
+        height: 225px;
     }
 }
 @media screen and (max-width: 750px) {
@@ -118,24 +123,23 @@
         height: 225px;
     }
 }
-@media screen and (max-width: 590px) {
+@media screen and (max-width: 675px) {
     .image {
         height: 175px;
     }
 }
-@media screen and (max-width: 535px) {
-    .image {
-        height: 325px;
-        object-fit: cover;
-    }
-}
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 550px) {
     .image {
         height: 300px;
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .image {
-        height: 175px;
+        height: 250px;
+    }
+}
+@media screen and (max-width: 385px) {
+    .image {
+        height: 215px;
     }
 }

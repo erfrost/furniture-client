@@ -5,24 +5,24 @@
     grid-gap: 15px;
 }
 
-@media screen and (max-width: 1335px) {
+@media screen and (max-width: 1100px) {
     .list {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 825px) {
     .list {
         grid-template-columns: 1fr 1fr;
     }
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 550px) {
     .list {
         grid-template-columns: 1fr;
         grid-gap: 25px;
     }
 }
-@media screen and (max-width: 535px) {
+/* @media screen and (max-width: 535px) {
     .list {
         grid-template-columns: 1fr;
     }
-}
+} */
