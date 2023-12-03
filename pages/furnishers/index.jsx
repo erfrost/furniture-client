@@ -88,7 +88,7 @@ const Index = ({ furnishers }) => {
           {furnishersState.map((item, index) => (
             <Link
               href="/furnisher/[furnisherId]"
-              as={`/furnisher/${item.title}`}
+              as={`/furnisher/${item.id}`}
               className={styles.item}
               key={index}
             >
