@@ -1,3 +1,4 @@
+import { addVertImageStyle } from "@/utils/addVertImageStyle";
 import styles from "./ImagesList.module.css";
 import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
@@ -12,7 +13,7 @@ const ImagesList = ({ item, setCurrentImageIndex }) => {
           width={100}
           height={100}
           alt="image"
-          className={styles.miniImage}
+          className={`${styles.miniImage} ${addVertImageStyle(item, styles)}`}
           onDragStart={cancelAction}
           onContextMenu={cancelAction}
           onClick={() => setCurrentImageIndex(index)}

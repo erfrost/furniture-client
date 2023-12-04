@@ -67,6 +67,9 @@
     object-fit: cover;
     border-radius: 3px;
 }
+.vertImage {
+    object-fit: contain !important;
+}
 .imagesContainer {
     display: flex;
     flex-direction: row;

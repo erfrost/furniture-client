@@ -6,21 +6,15 @@ import { throttle } from "lodash";
 import { useRecoilValue } from "recoil";
 import { furnishersFilterState, sortState } from "@/storage/atoms";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 const ItemsCatalog = ({ items, allCount, setCountState }) => {
   const [allItems, setAllItems] = useState(items);
   const [filteredItems, setFilteredItems] = useState(items);
-  const [subcategoryId, setSubcategoryId] = useState(undefined);
   const [limit, setLimit] = useState(35);
   const furnisherFilterArr = useRecoilValue(furnishersFilterState);
   const sort = useRecoilValue(sortState);
 
   const router = useRouter();
-
-  useEffect(() => {
-    setSubcategoryId(router.query.subcategoryId);
-  }, [router.query.subcategoryId]);
 
   useEffect(() => {
     setAllItems(items);

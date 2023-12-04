@@ -13,7 +13,6 @@
     object-fit: fill;
 }
 .vertImage {
-    /* height: 300px !important; */
     object-fit: contain !important;
 }
 .title {

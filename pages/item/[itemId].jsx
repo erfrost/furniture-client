@@ -12,6 +12,7 @@ import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
+import { addVertImageStyle } from "@/utils/addVertImageStyle";
 import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
 import Link from "next/link";
@@ -116,7 +117,10 @@ const Index = ({ item, error }) => {
                   alt="image"
                   width={300}
                   height={300}
-                  className={styles.image}
+                  className={`${styles.image} ${addVertImageStyle(
+                    item,
+                    styles
+                  )}`}
                 />
               </div>
             )}
