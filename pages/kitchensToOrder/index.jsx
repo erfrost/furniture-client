@@ -23,7 +23,6 @@ import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
-  const [furnituresState, setFurnituresState] = useState(furnitures);
   const [countState, setCountState] = useState(furnituresCount);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,7 +31,7 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
   const [success, setSuccess] = useState(false);
-
+  console.log(images);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -219,7 +218,7 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
             Найдено: {countState} {formatItemsCount(countState)}
           </span>
           <ItemsCatalog
-            items={furnituresState}
+            items={furnitures}
             allCount={furnituresCount}
             setCountState={setCountState}
             isDiscountPage={false}
@@ -277,7 +276,7 @@ export async function getServerSideProps() {
     const kitchens = await axiosInstance.get("/kitchen");
     const kitchenWork = await axiosInstance.get("/kitchenWork");
     const furnitures = await axiosInstance.get(
-      "items/by_subcategory/6562ef3e4ba1483903c3811a?limit=25"
+      "items/by_subcategory/656da2464eecad4547e7066c"
     );
 
     return {
