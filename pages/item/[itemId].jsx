@@ -17,6 +17,7 @@ import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ModalImage from "react-modal-image";
 import { useRecoilState } from "recoil";
 
 const Index = ({ item, error }) => {
@@ -112,7 +113,12 @@ const Index = ({ item, error }) => {
                   item={item}
                   setCurrentImageIndex={setCurrentImageIndex}
                 />
-                <Image
+                <ModalImage
+                  small={item.photo_names[currentImageIndex]}
+                  large={item.photo_names[currentImageIndex]}
+                  alt={item.title}
+                />
+                {/* <Image
                   src={item.photo_names[currentImageIndex]}
                   alt="image"
                   width={300}
@@ -121,7 +127,7 @@ const Index = ({ item, error }) => {
                     item,
                     styles
                   )}`}
-                />
+                /> */}
               </div>
             )}
             <div className={styles.infoContainer}>
