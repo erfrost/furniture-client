@@ -5,25 +5,34 @@ import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MobileNav from "@/components/MobileNav/MobileNav";
-import OurWorksSwiper from "@/components/OurWorksSwiper/OurWorksSwiper";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/KitchensToOrder.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import cancelAction from "@/utils/cancelAction";
 import Link from "next/link";
-import Image from "next/image";
 import { Divider, useDisclosure } from "@chakra-ui/react";
 import KitchenForm from "@/components/KitchenForm/KitchenForm";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import formatItemsCount from "@/utils/caseFormatted";
 import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
 
-const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
+const Index = ({
+  kitchenWork,
+  kitchenWorkCount,
+  kitchens,
+  kitchensCount,
+  furnitures,
+  furnituresCount,
+  error,
+}) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
-  const [countState, setCountState] = useState(furnituresCount);
+  const [kitchensWorkCountState, setKitchensWorkCountState] =
+    useState(kitchenWorkCount);
+  const [kitchensCountState, setKitchensCountState] = useState(kitchensCount);
+  const [furnituresCountState, setFurnituresCountState] =
+    useState(furnituresCount);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [projectIsOpen, setProjectIsOpen] = useState(false);
@@ -31,9 +40,9 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
   const [success, setSuccess] = useState(false);
-  console.log(images);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(kitchenWork);
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -138,7 +147,16 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
         )}
         <div className={styles.content}>
           <RouteToHome />
-          {images.length ? <OurWorksSwiper images={images} /> : null}
+          <CatalogTitle title="Наши работы" />
+          <span className={styles.itemsCount}>
+            Найдено: {kitchensWorkCountState}{" "}
+            {formatItemsCount(kitchensWorkCountState)}
+          </span>
+          <ItemsCatalog
+            items={kitchenWork}
+            allCount={kitchenWorkCount}
+            setCountState={setKitchensWorkCountState}
+          />
           <div className={styles.btns}>
             <div
               className={styles.btn}
@@ -165,64 +183,26 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
               3D онлайн конструктор
             </Link>
           </div>
-          <div className={styles.titleContainer}>
-            <span className={styles.blockTitle}>Кухни на заказ</span>
-            <Divider />
-          </div>
-          <div className={styles.list}>
-            {kitchens.length ? (
-              kitchens?.map((item) => (
-                <div className={styles.item} key={item._id}>
-                  <Link
-                    className={styles.link}
-                    href="/kitchen/[kitchenId]"
-                    as={`/kitchen/${item._id}`}
-                    target="_blank"
-                  >
-                    <Image
-                      src={item.photo_names[0]}
-                      alt="preview"
-                      width={300}
-                      height={300}
-                      className={styles.image}
-                      draggable={false}
-                      onDragStart={cancelAction}
-                      onContextMenu={cancelAction}
-                    />
-                  </Link>
-                  <Link
-                    href="/kitchen/[kitchenId]"
-                    as={`/kitchen/${item._id}`}
-                    target="_blank"
-                    className={styles.title}
-                  >
-                    {item.title}
-                  </Link>
-                  <Link
-                    className={styles.link}
-                    href="/kitchen/[kitchenId]"
-                    as={`/kitchen/${item._id}`}
-                    target="_blank"
-                  >
-                    <div className={styles.btn}>Подробнее</div>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <span className={styles.nullText}>Ничего не найдено</span>
-            )}
-          </div>
+          <Divider />
+          <CatalogTitle title="Кухни на заказ" />
+          <span className={styles.itemsCount}>
+            Найдено: {kitchensCountState} {formatItemsCount(kitchensCountState)}
+          </span>
+          <ItemsCatalog
+            items={kitchens}
+            allCount={kitchensCount}
+            setCountState={setKitchensCountState}
+          />
           <Divider />
           <CatalogTitle title="Фурнитура" />
           <span className={styles.itemsCount}>
-            Найдено: {countState} {formatItemsCount(countState)}
+            Найдено: {furnituresCountState}
+            {formatItemsCount(furnituresCountState)}
           </span>
           <ItemsCatalog
             items={furnitures}
             allCount={furnituresCount}
-            setCountState={setCountState}
-            isDiscountPage={false}
-            loadFunc={loadFunc}
+            setCountState={setFurnituresCountState}
           />
         </div>
         <Footer />
@@ -273,16 +253,22 @@ const Index = ({ images, kitchens, furnitures, furnituresCount, error }) => {
 
 export async function getServerSideProps() {
   try {
-    const kitchens = await axiosInstance.get("/kitchen");
-    const kitchenWork = await axiosInstance.get("/kitchenWork");
+    const kitchens = await axiosInstance.get(
+      "items/by_subcategory/654bb115c2fbb0f34ee5a6e8"
+    );
+    const kitchenWork = await axiosInstance.get(
+      "items/by_subcategory/654f52db3cef74b2b79bc645"
+    );
     const furnitures = await axiosInstance.get(
       "items/by_subcategory/656da2464eecad4547e7066c"
     );
 
     return {
       props: {
-        images: kitchenWork.data,
-        kitchens: kitchens.data,
+        kitchenWork: kitchenWork.data.items,
+        kitchenWorkCount: kitchenWork.data.count,
+        kitchens: kitchens.data.items,
+        kitchensCount: kitchens.data.count,
         furnitures: furnitures.data.items,
         furnituresCount: furnitures.data.count,
       },

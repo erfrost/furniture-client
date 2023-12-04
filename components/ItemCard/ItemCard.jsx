@@ -56,6 +56,7 @@ const ItemCard = ({ item }) => {
       "653c08511e1415d9c89d1769",
       "655e112449ba0935b43a3eb2",
       "654bb117c2fbb0f34ee5a6ec",
+      "654bb11ac2fbb0f34ee5a6f0",
     ];
 
     if (ids.includes(item.subcategory_id)) return styles.vertImage;

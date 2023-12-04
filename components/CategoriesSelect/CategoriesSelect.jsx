@@ -105,20 +105,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     .filter((subcat) => subcat.category_id === cat._id)
                     .map((subcat) => (
                       <Link
-                        href={
-                          subcat._id === "654f52db3cef74b2b79bc645"
-                            ? "/kitchenWorks"
-                            : subcat._id === "654bb115c2fbb0f34ee5a6e8"
-                            ? "/kitchens"
-                            : "/subcategory/[subcategoryId]"
-                        }
-                        as={
-                          subcat._id === "654f52db3cef74b2b79bc645"
-                            ? "/kitchenWorks"
-                            : subcat._id === "654bb115c2fbb0f34ee5a6e8"
-                            ? "/kitchens"
-                            : `/subcategory/${subcat._id}`
-                        }
+                        href={"/subcategory/[subcategoryId]"}
+                        as={`/subcategory/${subcat._id}`}
                         className={`${styles.link} ${styles.subcatLink}`}
                         key={subcat._id}
                       >

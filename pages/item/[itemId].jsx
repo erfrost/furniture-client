@@ -117,8 +117,6 @@ const Index = ({ item, error }) => {
                   width={300}
                   height={300}
                   className={styles.image}
-                  onDragStart={cancelAction}
-                  onContextMenu={cancelAction}
                 />
               </div>
             )}

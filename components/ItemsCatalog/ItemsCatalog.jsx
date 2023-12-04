@@ -85,20 +85,9 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   return (
     <>
       <div className={styles.list}>
-        {subcategoryId === "654f52db3cef74b2b79bc645"
-          ? items.map((item) => (
-              <Image
-                className={styles.image}
-                key={item._id}
-                src={item.photo_name}
-                alt="photo"
-                width={300}
-                height={100}
-              />
-            ))
-          : filteredItems
-              ?.slice(0, limit)
-              .map((item) => <ItemCard item={item} key={item._id} />)}
+        {filteredItems?.slice(0, limit).map((item) => (
+          <ItemCard item={item} key={item._id} />
+        ))}
       </div>
     </>
   );
