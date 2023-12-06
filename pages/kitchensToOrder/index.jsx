@@ -6,7 +6,11 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
+import {
+  categoriesState,
+  sortState,
+  subcategoriesState,
+} from "@/storage/atoms";
 import styles from "@/styles/KitchensToOrder.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -26,13 +30,22 @@ const Index = ({
   furnituresCount,
   error,
 }) => {
+  const [sort, setSort] = useRecoilState(sortState);
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
+  const [kitchenWorksState, setKitchenWorksState] = useState(kitchenWork);
   const [kitchensWorkCountState, setKitchensWorkCountState] =
     useState(kitchenWorkCount);
+  const [kitchensState, setKitchensState] = useState(kitchens);
   const [kitchensCountState, setKitchensCountState] = useState(kitchensCount);
+  const [furnituresState, setFurnituresState] = useState(furnitures);
   const [furnituresCountState, setFurnituresCountState] =
     useState(furnituresCount);
+  const [offsets, setOffsets] = useState({
+    works: 12,
+    kitchens: 12,
+    furnitures: 12,
+  });
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [projectIsOpen, setProjectIsOpen] = useState(false);
@@ -42,7 +55,7 @@ const Index = ({
   const [success, setSuccess] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(kitchenWork);
+
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -84,13 +97,15 @@ const Index = ({
     };
   }, []);
 
-  const loadFunc = async (offset) => {
+  const loadFunc = async (url, setState, objKey) => {
     try {
-      const res = await axiosInstance.get(
-        `items/by_subcategory/6562ef3e4ba1483903c3811a?limit=25&offset=${offset}`
-      );
+      const res = await axiosInstance.get(url);
 
-      return res;
+      setState((prevState) => [...prevState, ...res.data.items]);
+
+      setSort("none");
+
+      offsets[objKey] += 12;
     } catch (error) {
       setReqError(
         error?.response?.data?.message ||
@@ -128,7 +143,7 @@ const Index = ({
       );
     }
   };
-
+  console.log(kitchensState.length, kitchensCount);
   return (
     <>
       <div className={styles.container}>
@@ -147,16 +162,16 @@ const Index = ({
         )}
         <div className={styles.content}>
           <RouteToHome />
-          <CatalogTitle title="Наши работы" />
-          <span className={styles.itemsCount}>
-            Найдено: {kitchensWorkCountState}{" "}
-            {formatItemsCount(kitchensWorkCountState)}
+          <ul className={styles.ulList}>
+            <li>Бесплатный дизайн проект</li>
+            <li>Бесплатный замер</li>
+            <li>Мойка, смеситель, освещение и столешница в подарок</li>
+            <li>Бесплатный дизайн проект</li>
+          </ul>
+          <span className={styles.listText}>
+            (Присылайте на WhatsApp размеры - сделаем проект с ценой) (так же
+            много кухонь в наличии)
           </span>
-          <ItemsCatalog
-            items={kitchenWork}
-            allCount={kitchenWorkCount}
-            setCountState={setKitchensWorkCountState}
-          />
           <div className={styles.btns}>
             <div
               className={styles.btn}
@@ -178,32 +193,85 @@ const Index = ({
             </div>
             <Link
               href="https://dsv-mebel.ru/constructor-3d/"
+              target="_blank"
               className={styles.btn}
             >
               3D онлайн конструктор
             </Link>
           </div>
+          <CatalogTitle title="Наши работы" />
+          <span className={styles.itemsCount}>
+            Найдено: {kitchensWorkCountState}{" "}
+            {formatItemsCount(kitchensWorkCountState)}
+          </span>
+          <ItemsCatalog
+            items={kitchenWorksState}
+            allCount={kitchenWorkCount}
+            setCountState={setKitchensWorkCountState}
+          />
+          {kitchenWorksState.length < kitchenWorkCount ? (
+            <div
+              className={styles.loadBtn}
+              onClick={() =>
+                loadFunc(
+                  `items/by_subcategory/654f52db3cef74b2b79bc645?limit=12&offset=${offsets.works}`,
+                  setKitchenWorksState,
+                  "works"
+                )
+              }
+            >
+              Загрузить еще
+            </div>
+          ) : null}
           <Divider />
           <CatalogTitle title="Кухни на заказ" />
           <span className={styles.itemsCount}>
             Найдено: {kitchensCountState} {formatItemsCount(kitchensCountState)}
           </span>
           <ItemsCatalog
-            items={kitchens}
+            items={kitchensState}
             allCount={kitchensCount}
             setCountState={setKitchensCountState}
           />
+          {kitchensState.length < kitchensCount ? (
+            <div
+              className={styles.loadBtn}
+              onClick={() =>
+                loadFunc(
+                  `items/by_subcategory/654bb115c2fbb0f34ee5a6e8?limit=12&offset=${offsets.kitchens}`,
+                  setKitchensState,
+                  "kitchens"
+                )
+              }
+            >
+              Загрузить еще
+            </div>
+          ) : null}
           <Divider />
           <CatalogTitle title="Фурнитура" />
           <span className={styles.itemsCount}>
-            Найдено: {furnituresCountState}
+            Найдено: {furnituresCountState}{" "}
             {formatItemsCount(furnituresCountState)}
           </span>
           <ItemsCatalog
-            items={furnitures}
+            items={furnituresState}
             allCount={furnituresCount}
             setCountState={setFurnituresCountState}
           />
+          {furnituresState.length < furnituresCount ? (
+            <div
+              className={styles.loadBtn}
+              onClick={() =>
+                loadFunc(
+                  `items/by_subcategory/656da2464eecad4547e7066c?limit=12&offset=${offsets.furnitures}`,
+                  setFurnituresState,
+                  "furnitures"
+                )
+              }
+            >
+              Загрузить еще
+            </div>
+          ) : null}
         </div>
         <Footer />
         {projectIsOpen ? (
@@ -254,13 +322,13 @@ const Index = ({
 export async function getServerSideProps() {
   try {
     const kitchens = await axiosInstance.get(
-      "items/by_subcategory/654bb115c2fbb0f34ee5a6e8"
+      "items/by_subcategory/654bb115c2fbb0f34ee5a6e8?limit=12"
     );
     const kitchenWork = await axiosInstance.get(
-      "items/by_subcategory/654f52db3cef74b2b79bc645"
+      "items/by_subcategory/654f52db3cef74b2b79bc645?limit=12"
     );
     const furnitures = await axiosInstance.get(
-      "items/by_subcategory/656da2464eecad4547e7066c"
+      "items/by_subcategory/656da2464eecad4547e7066c?limit=12"
     );
 
     return {

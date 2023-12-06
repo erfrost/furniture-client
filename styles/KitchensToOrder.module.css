@@ -70,6 +70,32 @@
 .btn:hover {
     background-color: #ccd2b0;
 }
+.loadBtn {
+    width: 250px;
+    padding: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.loadBtn:hover {
+    background-color: rgb(218, 218, 218);
+}
+.ulList {
+    margin-left: 16px;
+}
+.ulList li::marker {
+    background-color: green;
+}
+.listText {
+    margin-top: -30px;
+}
 .nullText {
     font-size: 22px;
 }
