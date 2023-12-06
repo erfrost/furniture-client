@@ -143,7 +143,7 @@ const Index = ({
       );
     }
   };
-  console.log(kitchensState.length, kitchensCount);
+
   return (
     <>
       <div className={styles.container}>
@@ -169,8 +169,8 @@ const Index = ({
             <li>Бесплатный дизайн проект</li>
           </ul>
           <span className={styles.listText}>
-            (Присылайте на WhatsApp размеры - сделаем проект с ценой) (так же
-            много кухонь в наличии)
+            Присылайте на WhatsApp размеры - сделаем проект с ценой. Так же
+            много кухонь в наличии
           </span>
           <div className={styles.btns}>
             <div

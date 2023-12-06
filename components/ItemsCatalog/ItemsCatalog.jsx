@@ -17,6 +17,12 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (router.pathname === "/kitchensToOrder") {
+      setLimit(Infinity);
+    }
+  }, []);
+
+  useEffect(() => {
     setAllItems(items);
   }, [items]);
 
