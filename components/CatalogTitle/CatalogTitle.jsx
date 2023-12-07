@@ -5,18 +5,41 @@ import { useRecoilState } from "recoil";
 import { furnishersFilterState, sortState } from "@/storage/atoms";
 import { useEffect, useState } from "react";
 import { CheckIcon, TriangleDownIcon } from "@chakra-ui/icons";
-import furnishers from "@/mock/furnishers";
 import { useRouter } from "next/router";
+import axiosInstance from "@/axios.config";
+import AlertInfo from "../AlertInfo/AlertInfo";
+import { sortedFurnishers } from "@/utils/sortedFurnishers";
 
 const CatalogTitle = ({ title, isFurnishersPage }) => {
+  const [furnishersState, setFurnishersState] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [furnisherFilterArr, setFurnisherFilterArr] = useRecoilState(
     furnishersFilterState
   );
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
+  const [reqError, setReqError] = useState(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchFurnishers = async () => {
+      try {
+        const res = await axiosInstance.get("/furnishers");
+
+        const result = sortedFurnishers(res.data);
+
+        setFurnishersState(result);
+      } catch (error) {
+        setReqError(
+          error?.response?.data?.message ||
+            "Произошла ошибка запроса. Попробуйте позднее"
+        );
+      }
+    };
+
+    fetchFurnishers();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -141,7 +164,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
                 isFilterOpen ? styles.active : null
               }`}
             >
-              {furnishers.map((item) => (
+              {furnishersState.map((item) => (
                 <div className={styles.furnisherItem} key={item.id}>
                   <div
                     className={styles.square}
@@ -163,6 +186,13 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
           </div>
         ) : null}
       </div>
+      {reqError && (
+        <AlertInfo
+          title="Произошла ошибка:"
+          description={reqError}
+          type="error"
+        />
+      )}
     </div>
   );
 };
