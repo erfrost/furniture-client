@@ -11,11 +11,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@chakra-ui/react";
+import furnituresIds from "@/mock/furnituresIds";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
+
+  const officeCategory = categories[7];
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,11 +66,12 @@ const CategoriesSelect = ({ categories, subcategories }) => {
 
   const calculatedCount = () => {
     if (screenWidth > 1500) return 7;
-    else if (screenWidth > 1300) return 6;
-    else if (screenWidth > 1200) return 5;
+    else if (screenWidth > 1425) return 6;
+    else if (screenWidth > 1225) return 5;
     else if (screenWidth > 1060) return 4;
-    else if (screenWidth > 930) return 3;
-    else return 2;
+    else if (screenWidth > 950) return 3;
+    else if (screenWidth > 850) return 2;
+    else return 1;
   };
 
   return (
@@ -105,8 +109,16 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     .filter((subcat) => subcat.category_id === cat._id)
                     .map((subcat) => (
                       <Link
-                        href={"/subcategory/[subcategoryId]"}
-                        as={`/subcategory/${subcat._id}`}
+                        href={`${
+                          subcat._id === "656da2464eecad4547e7066c"
+                            ? "/furnitures"
+                            : "/subcategory/[subcategoryId]"
+                        }`}
+                        as={
+                          subcat._id === "656da2464eecad4547e7066c"
+                            ? "/furnitures"
+                            : `/subcategory/${subcat._id}`
+                        }
                         className={`${styles.link} ${styles.subcatLink}`}
                         key={subcat._id}
                       >
@@ -117,6 +129,46 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               </PopoverContent>
             </Popover>
           ))}
+          {
+            <Popover key={officeCategory._id}>
+              <PopoverTrigger>
+                <div className={styles.link}>{officeCategory.title}</div>
+              </PopoverTrigger>
+              <PopoverContent className={styles.popoverContent}>
+                <PopoverBody className={styles.popoverBody}>
+                  <Link
+                    href="/category/[categoryId]"
+                    as={`/category/${officeCategory._id}`}
+                    className={`${styles.link} ${styles.catLink}`}
+                  >
+                    {officeCategory.title}
+                  </Link>
+                  {subcategories
+                    .filter(
+                      (subcat) => subcat.category_id === officeCategory._id
+                    )
+                    .map((subcat) => (
+                      <Link
+                        href={`${
+                          subcat._id === "656da2464eecad4547e7066c"
+                            ? "/furnitures"
+                            : "/subcategory/[subcategoryId]"
+                        }`}
+                        as={
+                          subcat._id === "656da2464eecad4547e7066c"
+                            ? "/furnitures"
+                            : `/subcategory/${subcat._id}`
+                        }
+                        className={`${styles.link} ${styles.subcatLink}`}
+                        key={subcat._id}
+                      >
+                        {subcat.title}
+                      </Link>
+                    ))}
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          }
           <Link href="/promotion" className={`${styles.link} ${styles.bold}`}>
             Акция
           </Link>
@@ -131,34 +183,36 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               exit={{ opacity: 0 }}
             >
               <div className={styles.column}>
-                {categories?.map((cat) => (
-                  <Link
-                    className={styles.catTitle}
-                    key={cat._id}
-                    onMouseEnter={() =>
-                      setCurrentSubcategories(
-                        subcategories.filter(
-                          (subcat) => subcat.category_id === cat._id
+                {categories
+                  ?.filter((cat) => !furnituresIds.includes(cat._id))
+                  .map((cat) => (
+                    <Link
+                      className={styles.catTitle}
+                      key={cat._id}
+                      onMouseEnter={() =>
+                        setCurrentSubcategories(
+                          subcategories.filter(
+                            (subcat) => subcat.category_id === cat._id
+                          )
                         )
-                      )
-                    }
-                    href="/category/[categoryId]"
-                    as={`/category/${cat._id}`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Image
-                      src={cat.photo_name}
-                      alt="photo"
-                      width={100}
-                      height={75}
-                      className={styles.categoryImage}
-                      draggable={false}
-                      onDragStart={cancelAction}
-                      onContextMenu={cancelAction}
-                    />
-                    {cat.title}
-                  </Link>
-                ))}
+                      }
+                      href="/category/[categoryId]"
+                      as={`/category/${cat._id}`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Image
+                        src={cat.photo_name}
+                        alt="photo"
+                        width={100}
+                        height={75}
+                        className={styles.categoryImage}
+                        draggable={false}
+                        onDragStart={cancelAction}
+                        onContextMenu={cancelAction}
+                      />
+                      {cat.title}
+                    </Link>
+                  ))}
                 <div className={styles.promotionLink}>
                   <Link
                     href="/promotion"

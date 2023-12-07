@@ -43,7 +43,7 @@
 .link {
     width: 100%;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     background: #EBEBEB;
     padding: 5px 15px;
@@ -204,9 +204,14 @@
     box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.15) !important;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 1300px) {
     .link {
-        font-size: 15px;
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 1125px) {
+    .categories {
+        gap: 10px;
     }
 }
 @media screen and (max-width: 900px) {
