@@ -21,6 +21,10 @@
     align-items: center;
     gap: 25px;
 }
+.furnituresTitle {
+    font-weight: 600;
+    font-size: 36px;
+}
 .list {
     width: 100%;
     display: grid;
@@ -133,9 +137,17 @@
         font-size: 11px;
     }
 }
+@media screen and (max-width: 1000px) {
+    .furnituresTitle {
+        font-size: 28px;
+    }
+}
 @media screen and (max-width: 900px) {
     .content {
         padding: 55px 20px;
+    }
+    .furnituresTitle {
+        font-size: 28px;
     }
 }
 @media screen and (max-width: 860px) {
@@ -155,6 +167,11 @@
 @media screen and (max-width: 725px) {
     .image {
         height: 225px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .furnituresTitle {
+        font-size: 22px;
     }
 }
 @media screen and (max-width: 575px) {
@@ -183,9 +200,19 @@
         font-size: 13px;
     }
 }
+@media screen and (max-width: 430px) {
+    .furnituresTitle {
+        font-size: 18px;
+    }
+}
 @media screen and (max-width: 400px) {
     .image {
         height: 225px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .furnituresTitle {
+        font-size: 19px;
     }
 }
 @media screen and (max-width: 350px) {

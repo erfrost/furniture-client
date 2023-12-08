@@ -15,7 +15,7 @@ import { useRecoilState } from "recoil";
 import niznevartovsk1 from "@/assets/Нижневартовск1.jpeg";
 import niznevartovsk2 from "@/assets/Нижневартовск2.jpeg";
 import niznevartovsk3 from "@/assets/Нижневартовск3.jpeg";
-import langepas1 from "@/assets/Лангепас.jpeg";
+import langepas from "@/assets/Лангепас.jpeg";
 
 const Contacts = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -145,11 +145,11 @@ const Contacts = () => {
               </Map>
               <div className={styles.imagesContainer}>
                 <Image
-                  src={langepas1}
+                  src={langepas}
                   alt="photo"
                   width={400}
                   height={200}
-                  className={styles.image}
+                  className={styles.langepasImage}
                 />
               </div>
             </div>

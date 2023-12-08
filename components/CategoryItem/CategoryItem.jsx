@@ -109,8 +109,16 @@ const CategoryItem = ({ category }) => {
             onContextMenu={cancelAction}
           />
           <Link
-            href={"/subcategory/[subcategoryId]"}
-            as={`/subcategory/${subcat._id}`}
+            href={
+              subcat._id === "656da2464eecad4547e7066c"
+                ? "/furnitures"
+                : "/subcategory/[subcategoryId]"
+            }
+            as={
+              subcat._id === "656da2464eecad4547e7066c"
+                ? "/furnitures"
+                : `/subcategory/${subcat._id}`
+            }
             className={styles.subcatTitle}
           >
             {subcat.title}

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import RouteToHome from "../RouteToHome/RouteToHome";
 import styles from "./CatalogTitle.module.css";
 import { useRecoilState } from "recoil";
@@ -19,7 +18,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(null);
-
+  console.log(isFilterOpen);
   const router = useRouter();
 
   useEffect(() => {
@@ -63,13 +62,22 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
       const popoverContent = document.querySelector(
         ".CatalogTitle_furnishersList__RHF9N"
       );
-      const icon = document.querySelector(".CatalogTitle_filter__di3tg");
+      const icons = document.querySelectorAll(".CatalogTitle_filter__di3tg");
+
+      let clickedOnIcon = false;
+
+      icons.forEach((icon) => {
+        if (icon.contains(e.target)) {
+          clickedOnIcon = true;
+        }
+      });
 
       if (
         popoverContent &&
         !popoverContent.contains(e.target) &&
-        !icon.contains(e.target)
+        !clickedOnIcon
       ) {
+        console.log("close");
         setIsFilterOpen(false);
       }
     };

@@ -20,6 +20,7 @@ import KitchenForm from "@/components/KitchenForm/KitchenForm";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import formatItemsCount from "@/utils/caseFormatted";
 import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
+import FurnituresList from "@/components/FurnituresList/FurnituresList";
 
 const Index = ({
   kitchenWork,
@@ -248,30 +249,11 @@ const Index = ({
             </div>
           ) : null}
           <Divider />
-          <CatalogTitle title="Фурнитура" />
-          <span className={styles.itemsCount}>
-            Найдено: {furnituresCountState}{" "}
-            {formatItemsCount(furnituresCountState)}
-          </span>
-          <ItemsCatalog
-            items={furnituresState}
-            allCount={furnituresCount}
-            setCountState={setFurnituresCountState}
+          <span className={styles.furnituresTitle}>Фурнитура</span>
+          <FurnituresList
+            categories={categories}
+            subcategories={subcategories}
           />
-          {furnituresState.length < furnituresCount ? (
-            <div
-              className={styles.loadBtn}
-              onClick={() =>
-                loadFunc(
-                  `items/by_subcategory/656da2464eecad4547e7066c?limit=12&offset=${offsets.furnitures}`,
-                  setFurnituresState,
-                  "furnitures"
-                )
-              }
-            >
-              Загрузить еще
-            </div>
-          ) : null}
         </div>
         <Footer />
         {projectIsOpen ? (

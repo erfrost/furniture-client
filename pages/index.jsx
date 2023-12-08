@@ -13,6 +13,7 @@ import { useRecoilState } from "recoil";
 import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
 import MobileNav from "@/components/MobileNav/MobileNav";
 import NewsSlider from "@/components/NewsSlider/NewsSlider";
+import Link from "next/link";
 
 const Index = ({ categories, subcategories, discountItems, news, error }) => {
   const [categoriesRecoil, setCategoriesRecoil] =
@@ -89,8 +90,12 @@ const Index = ({ categories, subcategories, discountItems, news, error }) => {
 
         {screenWidth < 768 ? (
           <div className={styles.linkBtns}>
-            <div className={styles.link}>Кухни на заказ</div>
-            <div className={styles.link}>Контакты</div>
+            <Link href="/kitchensToOrder" className={styles.link}>
+              Кухни на заказ
+            </Link>
+            <Link href="/contacts" className={styles.link}>
+              Контакты
+            </Link>
           </div>
         ) : null}
         <CategoriesCatalog categories={categoriesRecoil} />

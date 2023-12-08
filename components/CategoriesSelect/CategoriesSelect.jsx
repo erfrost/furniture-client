@@ -129,7 +129,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
               </PopoverContent>
             </Popover>
           ))}
-          {
+          {officeCategory ? (
             <Popover key={officeCategory._id}>
               <PopoverTrigger>
                 <div className={styles.link}>{officeCategory.title}</div>
@@ -168,7 +168,7 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                 </PopoverBody>
               </PopoverContent>
             </Popover>
-          }
+          ) : null}
           <Link href="/promotion" className={`${styles.link} ${styles.bold}`}>
             Акция
           </Link>
@@ -230,6 +230,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     href={
                       subcat._id === "654f52db3cef74b2b79bc645"
                         ? "/kitchenWorks"
+                        : subcat._id === "656da2464eecad4547e7066c"
+                        ? "/furnitures"
                         : subcat._id === "654bb115c2fbb0f34ee5a6e8"
                         ? "/kitchens"
                         : "/subcategory/[subcategoryId]"
@@ -237,6 +239,8 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                     as={
                       subcat._id === "654f52db3cef74b2b79bc645"
                         ? "/kitchenWorks"
+                        : subcat._id === "656da2464eecad4547e7066c"
+                        ? "/furnitures"
                         : subcat._id === "654bb115c2fbb0f34ee5a6e8"
                         ? "/kitchens"
                         : `/subcategory/${subcat._id}`
