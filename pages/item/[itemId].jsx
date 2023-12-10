@@ -6,6 +6,7 @@ import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ImagesList from "@/components/ImagesList/ImagesList";
+import ImagesModal from "@/components/ImagesModal/ImagesModal";
 import ItemPagePriceBlock from "@/components/ItemPagePriceBlock/ItemPagePriceBlock";
 import ItemPageSlider from "@/components/ItemPageSlider/ItemPageSlider";
 import MobileNav from "@/components/MobileNav/MobileNav";
@@ -13,17 +14,16 @@ import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/itemPage.module.css";
 import { addVertImageStyle } from "@/utils/addVertImageStyle";
-import cancelAction from "@/utils/cancelAction";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ModalImage from "react-modal-image";
 import { useRecoilState } from "recoil";
 
 const Index = ({ item, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
 
@@ -113,12 +113,7 @@ const Index = ({ item, error }) => {
                   item={item}
                   setCurrentImageIndex={setCurrentImageIndex}
                 />
-                <ModalImage
-                  small={item.photo_names[currentImageIndex]}
-                  large={item.photo_names[currentImageIndex]}
-                  alt={item.title}
-                />
-                {/* <Image
+                <Image
                   src={item.photo_names[currentImageIndex]}
                   alt="image"
                   width={300}
@@ -127,7 +122,16 @@ const Index = ({ item, error }) => {
                     item,
                     styles
                   )}`}
-                /> */}
+                  onClick={() => setIsOpenModal(true)}
+                />
+                {isOpenModal ? (
+                  <ImagesModal
+                    active={isOpenModal}
+                    setIsActive={setIsOpenModal}
+                    images={item.photo_names}
+                    index={currentImageIndex}
+                  />
+                ) : null}
               </div>
             )}
             <div className={styles.infoContainer}>
