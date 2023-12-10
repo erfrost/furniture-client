@@ -18,7 +18,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(null);
-  console.log(isFilterOpen);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -77,7 +77,6 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
         !popoverContent.contains(e.target) &&
         !clickedOnIcon
       ) {
-        console.log("close");
         setIsFilterOpen(false);
       }
     };

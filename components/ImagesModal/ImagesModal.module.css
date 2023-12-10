@@ -19,8 +19,8 @@
 }
 .circle {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 85px;
+    height: 85px;
     background-color: rgba(255, 255, 255, 0.40);
     border-radius: 50%;
     display: flex;
@@ -38,18 +38,23 @@
 .rightCircle {
     right: 50px;
 }
+.downloadCircle {
+    right: 105px;
+}
 .closeCirlce {
-    top: 75px;
     right: 25px;
+}
+.downloadCircle, .closeCirlce {
+    top: 75px;
     background-color: transparent;
 }
-.closeCirlce:hover {
+.downloadCircle:hover, .closeCirlce:hover {
     background-color: transparent;
 }
-.closeIcon path {
+.icon path {
     fill: rgba(255, 255, 255,0.4);
     transition: all 0.3s ease;
 }
-.closeCirlce:hover .closeIcon path {
+.closeCirlce:hover .icon path, .downloadCircle:hover .icon path {
     fill: white;
 }

@@ -2,10 +2,16 @@
 import { useEffect, useState } from "react";
 import styles from "./ImagesModal.module.css";
 import Image from "next/image";
-import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "@chakra-ui/icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CloseIcon,
+  DownloadIcon,
+} from "@chakra-ui/icons";
 
 const ImagesModal = ({ active, setIsActive, images, index }) => {
   const [currentIndex, setCurrentIndex] = useState(index);
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (!body) return;
@@ -45,13 +51,29 @@ const ImagesModal = ({ active, setIsActive, images, index }) => {
       setIsActive(false);
   };
 
+  const handleDownload = async () => {
+    const response = await fetch(images[currentIndex]);
+    const blob = await response.blob();
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "image.jpg";
+    link.click();
+  };
+
   return (
     <div className={styles.imagesModal}>
+      <div
+        className={`${styles.circle} ${styles.downloadCircle}`}
+        onClick={handleDownload}
+      >
+        <DownloadIcon boxSize="50%" className={styles.icon} />
+      </div>
       <div
         className={`${styles.circle} ${styles.closeCirlce}`}
         onClick={() => setIsActive(false)}
       >
-        <CloseIcon boxSize="40%" className={styles.closeIcon} />
+        <CloseIcon boxSize="40%" className={styles.icon} />
       </div>
       <div
         className={`${styles.circle} ${styles.leftCircle}`}
