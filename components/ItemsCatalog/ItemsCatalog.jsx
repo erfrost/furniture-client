@@ -46,7 +46,7 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   useEffect(() => {
     if (!furnisherFilterArr.length) {
       setFilteredItems(allItems);
-      if (setCountState && allCount > 0) setCountState(allCount);
+      if (setCountState) setCountState(allCount);
       return;
     }
 
