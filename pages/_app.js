@@ -57,12 +57,9 @@ export default function App({ Component, pageProps }) {
           content="1Bvp_6TjYTPGy2u5RoIMW-fzh547OhfeZqyppeg6MKE"
         />
       </Head>
-      <RecoilRoot>
-        <ChakraProvider>
-          <Component {...pageProps} />
-          <Script src="//code.jivo.ru/widget/78D5IbCyIB" async></Script>
-          <script type="text/javascript">
-            {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      <body>
+        <script type="text/javascript">
+          {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
@@ -75,16 +72,23 @@ export default function App({ Component, pageProps }) {
         webvisor:true,
         ecommerce:"dataLayer"
    })`}
-          </script>
-          <noscript>
-            <div>
-              <Image
-                src="https://mc.yandex.ru/watch/95928345"
-                style="position:absolute; left:-9999px;"
-                alt=""
-              />
-            </div>
-          </noscript>
+        </script>
+        <noscript>
+          <div>
+            <Image
+              src="https://mc.yandex.ru/watch/95928345"
+              style="position:absolute; left:-9999px;"
+              alt=""
+              width={100}
+              height={100}
+            />
+          </div>
+        </noscript>
+      </body>
+      <RecoilRoot>
+        <ChakraProvider>
+          <Component {...pageProps} />
+          <Script src="//code.jivo.ru/widget/78D5IbCyIB" async></Script>
         </ChakraProvider>
       </RecoilRoot>
     </>
