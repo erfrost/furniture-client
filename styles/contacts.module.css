@@ -22,6 +22,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 25px;
+    margin-top: 50px;
 }
 .adress {
     font-size: 18px;
