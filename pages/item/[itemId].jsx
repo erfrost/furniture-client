@@ -103,7 +103,11 @@ const Index = ({ item, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <RouteToHome />
+          <RouteToHome
+            category={currentCategory}
+            subcategory={currentSubcategory}
+            furnisher={item.furnisherId}
+          />
           <div className={styles.itemInfo}>
             {screenWidth < 1100 ? (
               <ItemPageSlider images={item.photo_names} />
@@ -136,35 +140,6 @@ const Index = ({ item, error }) => {
             )}
             <div className={styles.infoContainer}>
               <span className={styles.title}>{item.title}</span>
-              <div className={styles.navContainer}>
-                {currentCategory ? (
-                  <Link
-                    href="/category/[categoryId]"
-                    as={`/category/${currentCategory._id}`}
-                    className={styles.navItem}
-                  >
-                    {currentCategory.title}
-                  </Link>
-                ) : null}
-                {currentSubcategory ? (
-                  <Link
-                    href="/subcategory/[subcategoryId]"
-                    as={`/subcategory/${currentSubcategory._id}`}
-                    className={styles.navItem}
-                  >
-                    {", " + currentSubcategory.title}
-                  </Link>
-                ) : null}
-                {item.furnisherId ? (
-                  <Link
-                    href="/furnisher/[furnisherId]"
-                    as={`/furnisher/${item.furnisherId}`}
-                    className={styles.navItem}
-                  >
-                    {", " + item.furnisherId}
-                  </Link>
-                ) : null}
-              </div>
               {screenWidth < 1100 ? <ItemPagePriceBlock item={item} /> : null}
               <span className={styles.description}>{item.description}</span>
               {item?.specifications?.map((item, index) => (

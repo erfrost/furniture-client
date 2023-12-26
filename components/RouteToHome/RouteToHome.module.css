@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
 .routerContainer {
     display: flex;
     flex-direction: row;
@@ -16,6 +22,21 @@
 }
 .routerTitle:hover {
     color: black;
+}
+.navContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navItem {
+    color: rgb(65, 65, 65);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+}
+.navItem:hover {
+    color: #797979;
 }
 
 @media screen and (max-width: 430px) {
