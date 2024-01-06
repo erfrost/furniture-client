@@ -54,10 +54,6 @@ export default function App({ Component, pageProps }) {
         <meta name="yandex-verification" content="23c981ccac8729f6" />
         <meta
           name="google-site-verification"
-          content="1Bvp_6TjYTPGy2u5RoIMW-fzh547OhfeZqyppeg6MKE"
-        />
-        <meta
-          name="google-site-verification"
           content="DUwWRdeylnqva_8YDe9k1JXXfBc6NBuDxWr01sqd78s"
         />
         <script type="text/javascript">
