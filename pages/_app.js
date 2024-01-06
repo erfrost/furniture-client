@@ -56,6 +56,10 @@ export default function App({ Component, pageProps }) {
           name="google-site-verification"
           content="1Bvp_6TjYTPGy2u5RoIMW-fzh547OhfeZqyppeg6MKE"
         />
+        <meta
+          name="google-site-verification"
+          content="DUwWRdeylnqva_8YDe9k1JXXfBc6NBuDxWr01sqd78s"
+        />
         <script type="text/javascript">
           {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
