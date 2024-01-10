@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
-Sitemap: https://dom888.ru/sitemap.xml
+Sitemap: https://api.dom888.ru/api/sitemap
 Host: https://dom888.ru
