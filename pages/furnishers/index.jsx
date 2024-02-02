@@ -9,6 +9,7 @@ import RouteToHome from "@/components/RouteToHome/RouteToHome";
 import { categoriesState, subcategoriesState } from "@/storage/atoms";
 import styles from "@/styles/furnishers.module.css";
 import { sortedFurnishers } from "@/utils/sortedFurnishers";
+import { Divider } from "@chakra-ui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -25,7 +26,7 @@ const Index = ({ furnishers }) => {
 
     setFurnishersState(result);
   }, []);
-
+  console.log(furnishers);
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {
@@ -85,16 +86,34 @@ const Index = ({ furnishers }) => {
       <div className={styles.content}>
         <RouteToHome />
         <div className={styles.list}>
-          {furnishersState.map((item, index) => (
-            <Link
-              href="/furnisher/[furnisherId]"
-              as={`/furnisher/${item.id}`}
-              className={styles.item}
-              key={index}
-            >
-              {item.id} - {item.count}шт.
-            </Link>
-          ))}
+          {furnishersState
+            .filter((item) => item.count !== 0)
+            .map((item, index) => (
+              <Link
+                href="/furnisher/[furnisherId]"
+                as={`/furnisher/${item.id}`}
+                className={styles.item}
+                key={index}
+              >
+                {item.id} - {item.count}шт.
+              </Link>
+            ))}
+        </div>
+        <Divider />
+        <span className={styles.text}>Архив</span>
+        <div className={styles.list}>
+          {furnishersState
+            .filter((item) => item.count === 0)
+            .map((item, index) => (
+              <Link
+                href="/furnisher/[furnisherId]"
+                as={`/furnisher/${item.id}`}
+                className={styles.item}
+                key={index}
+              >
+                {item.id} - {item.count}шт.
+              </Link>
+            ))}
         </div>
       </div>
       <Footer />

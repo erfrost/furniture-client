@@ -22,7 +22,7 @@ const SearchPage = ({ items, itemsCount, error }) => {
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-
+  console.log(items);
   const router = useRouter();
   const { query } = router;
   const searchText = query.search;
@@ -34,21 +34,6 @@ const SearchPage = ({ items, itemsCount, error }) => {
   useEffect(() => {
     setAllCount(itemsCount);
   }, [itemsCount]);
-
-  const loadFunc = async (offset) => {
-    try {
-      const res = await axiosInstance.get(
-        `items/search?search=${searchText}&limit=25&offset=${offset}`
-      );
-
-      return res;
-    } catch (error) {
-      setReqError(
-        error?.response?.data?.message ||
-          "Произошла ошибка запроса. Попробуйте позднее"
-      );
-    }
-  };
 
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
@@ -117,7 +102,6 @@ const SearchPage = ({ items, itemsCount, error }) => {
           isDiscountPage={false}
           allCount={allCount}
           setCountState={setCountState}
-          loadFunc={loadFunc}
         />
       </div>
       <Footer />
@@ -134,9 +118,7 @@ const SearchPage = ({ items, itemsCount, error }) => {
 
 export async function getServerSideProps({ query }) {
   try {
-    const res = await axiosInstance.get(
-      `items/search?search=${query.search}&limit=25`
-    );
+    const res = await axiosInstance.get(`items/search?search=${query.search}`);
 
     return {
       props: {
