@@ -39,10 +39,10 @@ const NewsSlider = ({ news }) => {
   }, []);
 
   useEffect(() => {
-    if (!news?.length) {
-      const previewContainer = document.querySelector(
-        ".CategoriesPreview_container__IL_QJ"
-      );
+    const previewContainer = document.querySelector(
+      ".CategoriesPreview_container__IL_QJ"
+    );
+    if (!news?.length && previewContainer) {
       previewContainer.style.display = "none";
     }
   }, [screenWidth]);
