@@ -1,4 +1,4 @@
-import formattedNumber from "@/utils/formattedNumber";
+import formattedNumber from "../../utils/formattedNumber";
 import styles from "./DiscountPrice.module.css";
 
 const DiscountPrice = ({ item, procent }) => {

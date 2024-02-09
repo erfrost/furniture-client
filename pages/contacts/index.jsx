@@ -1,23 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/contacts.module.css";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/contacts.module.css";
 import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import niznevartovsk1 from "@/assets/Нижневартовск1.jpeg";
-import niznevartovsk2 from "@/assets/Нижневартовск2.jpeg";
-import niznevartovsk3 from "@/assets/Нижневартовск3.jpeg";
-import langepas from "@/assets/Лангепас.jpeg";
-import nefteyugansk1 from "@/assets/Нефтеюганск1.jpeg";
-import nefteyugansk2 from "@/assets/Нефтеюганск2.jpeg";
+import niznevartovsk1 from "../../assets/Нижневартовск1.jpeg";
+import niznevartovsk2 from "../../assets/Нижневартовск2.jpeg";
+import niznevartovsk3 from "../../assets/Нижневартовск3.jpeg";
+import langepas from "../../assets/Лангепас.jpeg";
+import nefteyugansk1 from "../../assets/Нефтеюганск1.jpeg";
+import nefteyugansk2 from "../../assets/Нефтеюганск2.jpeg";
 
 const Contacts = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);

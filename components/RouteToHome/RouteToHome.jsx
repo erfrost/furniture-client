@@ -1,7 +1,7 @@
-import arrow from "@/assets/routerArrow.svg";
+import arrow from "../../assets/routerArrow.svg";
 import styles from "./RouteToHome.module.css";
 import Image from "next/image";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import Link from "next/link";
 
 const RouteToHome = ({ category, subcategory, furnisher }) => {

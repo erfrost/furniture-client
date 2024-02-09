@@ -1,9 +1,9 @@
-import furnituresIds from "@/mock/furnituresIds";
+import furnituresIds from "../../mock/furnituresIds";
 import styles from "./FurnituresList.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import Icon from "@/assets/subcategoryIcon.svg";
-import cancelAction from "@/utils/cancelAction";
+import Icon from "../../assets/subcategoryIcon.svg";
+import cancelAction from "../../utils/cancelAction";
 import { useRouter } from "next/router";
 
 const FurnituresList = ({ categories, subcategories }) => {

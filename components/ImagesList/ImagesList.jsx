@@ -1,6 +1,6 @@
-import { addVertImageStyle } from "@/utils/addVertImageStyle";
+import { addVertImageStyle } from "../../utils/addVertImageStyle";
 import styles from "./ImagesList.module.css";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import Image from "next/image";
 
 const ImagesList = ({ item, setCurrentImageIndex }) => {

@@ -1,11 +1,11 @@
-import logo from "@/assets/logoWhite.svg";
+import logo from "../../assets/logoWhite.svg";
 import styles from "./Footer.module.css";
 import Link from "next/link";
 import { Divider } from "@chakra-ui/react";
 import Image from "next/image";
-import cancelAction from "@/utils/cancelAction";
-import WhatsappIcon from "@/assets/whatsappIcon";
-import TelegrammIcon from "@/assets/telegrammIcon";
+import cancelAction from "../../utils/cancelAction";
+import WhatsappIcon from "../../assets/whatsappIcon";
+import TelegrammIcon from "../../assets/telegrammIcon";
 
 const Footer = () => {
   return (

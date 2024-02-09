@@ -2,7 +2,7 @@ import styles from "./ItemPageSlider.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import Image from "next/image";
 
 const sliderSettings = {

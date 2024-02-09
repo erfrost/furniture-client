@@ -1,18 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import formattedNumber from "@/utils/formattedNumber";
+import formattedNumber from "../../utils/formattedNumber";
 import styles from "./ItemPagePriceBlock.module.css";
 import { useEffect, useState } from "react";
-import minusIcon from "@/assets/minus.svg";
-import plusIcon from "@/assets/plus.svg";
+import minusIcon from "../../assets/minus.svg";
+import plusIcon from "../../assets/plus.svg";
 import Image from "next/image";
-import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
+import { addToCart, getCartFromCookie, removeFromCart } from "../../utils/cart";
 import {
   addToFavorites,
   getFavoritesFromCookie,
   removeFromFavorites,
-} from "@/utils/favorites";
+} from "../../utils/favorites";
 import Link from "next/link";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
+import AvailabilityIndicator from "../AvailabilityIndicator/AvailabilityIndicator";
 
 const ItemPagePriceBlock = ({ item }) => {
   const [inCartActive, setInCartActive] = useState(false);
@@ -77,6 +78,7 @@ const ItemPagePriceBlock = ({ item }) => {
           {formattedNumber(item.discountPrice) + " ₽"}
         </span>
       )}
+      <AvailabilityIndicator availability={item.availability} />
       {inCartActive ? (
         <div className={styles.rowBtns}>
           <Link href="/cart" className={styles.linkBtn}>

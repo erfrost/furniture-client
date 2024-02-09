@@ -1,4 +1,4 @@
-import formattedNumber from "@/utils/formattedNumber";
+import formattedNumber from "../../utils/formattedNumber";
 import styles from "./CartResult.module.css";
 import { useDisclosure } from "@chakra-ui/react";
 import OrderModal from "../OrderModal/OrderModal";

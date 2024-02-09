@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/kitchenItem.module.css";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/kitchenItem.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import Image from "next/image";
-import KitchenInfoSEO from "@/SEO/KitchenInfoSEO";
+import KitchenInfoSEO from "../../SEO/KitchenInfoSEO";
 
 const Index = ({ kitchen, error }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);

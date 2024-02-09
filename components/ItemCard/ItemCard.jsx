@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./ItemCard.module.css";
-import cartIcon from "@/assets/cartIcon.svg";
+import cartIcon from "../../assets/cartIcon.svg";
 import DiscountPrice from "../DiscountPrice/DiscountPrice";
-import cancelAction from "@/utils/cancelAction";
-import formattedNumber from "@/utils/formattedNumber";
-import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
+import cancelAction from "../../utils/cancelAction";
+import formattedNumber from "../../utils/formattedNumber";
+import { addToCart, getCartFromCookie, removeFromCart } from "../../utils/cart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CheckIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import { addVertImageStyle } from "@/utils/addVertImageStyle";
+import { addVertImageStyle } from "../../utils/addVertImageStyle";
+import AvailabilityIndicator from "../AvailabilityIndicator/AvailabilityIndicator";
 
 const ItemCard = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState(false);
@@ -75,6 +76,7 @@ const ItemCard = ({ item }) => {
         {item.furnisherId}
       </Link>
       <span className={styles.vendorCode}>Артикул: {item.vendor_code}</span>
+      <AvailabilityIndicator availability={item.availability} />
       {item.specifications.length ? (
         <span className={styles.specification}>
           {item.specifications[0].title}:{" "}

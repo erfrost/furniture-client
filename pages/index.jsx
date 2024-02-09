@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import MainPageSEO from "@/SEO/MainPageSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesCatalog from "@/components/CategoriesCatalog/CategoriesCatalog";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/homePage.module.css";
+import MainPageSEO from "../SEO/MainPageSEO";
+import axiosInstance from "../axios.config";
+import AlertInfo from "../components/AlertInfo/AlertInfo";
+import CategoriesCatalog from "../components/CategoriesCatalog/CategoriesCatalog";
+import CategoriesSelect from "../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import styles from "../styles/homePage.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import NewsSlider from "@/components/NewsSlider/NewsSlider";
+import MobileNav from "../components/MobileNav/MobileNav";
+import NewsSlider from "../components/NewsSlider/NewsSlider";
 import Link from "next/link";
+import { categoriesState, subcategoriesState } from "../storage/atoms";
+import ItemsCatalog from "../components/ItemsCatalog/ItemsCatalog";
 
 const Index = ({ categories, subcategories, discountItems, news, error }) => {
   const [categoriesRecoil, setCategoriesRecoil] =

@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 import styles from "./CategoryItem.module.css";
-import axiosInstance from "@/axios.config";
-import Icon from "@/assets/subcategoryIcon.svg";
+import axiosInstance from "../../axios.config";
+import Icon from "../../assets/subcategoryIcon.svg";
 import { useEffect, useState } from "react";
 import AlertInfo from "../AlertInfo/AlertInfo";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import { useRecoilState } from "recoil";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
 
 const CategoryItem = ({ category }) => {
   const [reqError, setReqError] = useState(null);

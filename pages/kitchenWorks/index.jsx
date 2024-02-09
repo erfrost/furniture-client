@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CatalogSEO from "@/SEO/CatalogSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/catalog.module.css";
+import CatalogSEO from "../../SEO/CatalogSEO";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/catalog.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";

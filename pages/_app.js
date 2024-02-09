@@ -1,5 +1,5 @@
 import Head from "next/head";
-import "@/styles/globals.css";
+import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 import Script from "next/script";

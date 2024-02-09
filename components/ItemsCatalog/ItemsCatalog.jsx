@@ -4,14 +4,19 @@ import ItemCard from "../ItemCard/ItemCard";
 import styles from "./ItemsCatalog.module.css";
 import { throttle } from "lodash";
 import { useRecoilValue } from "recoil";
-import { furnishersFilterState, sortState } from "@/storage/atoms";
 import { useRouter } from "next/router";
+import {
+  availabilityFilterState,
+  furnishersFilterState,
+  sortState,
+} from "../../storage/atoms";
 
 const ItemsCatalog = ({ items, allCount, setCountState }) => {
   const [allItems, setAllItems] = useState(items);
   const [filteredItems, setFilteredItems] = useState(items);
   const [limit, setLimit] = useState(35);
   const furnisherFilterArr = useRecoilValue(furnishersFilterState);
+  const availabilityFilterArr = useRecoilValue(availabilityFilterState);
   const sort = useRecoilValue(sortState);
 
   const router = useRouter();
@@ -23,12 +28,13 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   }, []);
 
   useEffect(() => {
-    setAllItems(items);
+    setAllItems(allItems);
   }, [items]);
 
   useEffect(() => {
     if (sort === "none") {
       setFilteredItems(allItems);
+      setCountState(allCount);
     }
     if (sort === "up") {
       const result = [...filteredItems].sort(
@@ -56,6 +62,21 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
     setFilteredItems(resultArray);
     if (setCountState) setCountState(resultArray.length);
   }, [furnisherFilterArr, allItems]);
+
+  useEffect(() => {
+    if (!availabilityFilterArr.length) {
+      setFilteredItems(allItems);
+      if (setCountState) setCountState(allCount);
+      return;
+    }
+
+    const resultArray = allItems.filter((item) => {
+      delete item.availability._id;
+      return availabilityFilterArr.some((el) => item.availability[el]);
+    });
+    setFilteredItems(resultArray);
+    if (setCountState) setCountState(resultArray.length);
+  }, [availabilityFilterArr, allItems]);
 
   useEffect(() => {
     const handleScroll = throttle(async () => {

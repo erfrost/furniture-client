@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/furnishers.module.css";
-import { sortedFurnishers } from "@/utils/sortedFurnishers";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/furnishers.module.css";
+import { sortedFurnishers } from "../../utils/sortedFurnishers";
 import { Divider } from "@chakra-ui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ const Index = ({ furnishers }) => {
 
     setFurnishersState(result);
   }, []);
-  console.log(furnishers);
+
   useEffect(() => {
     async function fetchCategoriesAndSubcategories() {
       if (!categories.length && !subcategories.length) {

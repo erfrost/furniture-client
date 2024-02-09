@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CatalogSEO from "@/SEO/CatalogSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/catalog.module.css";
-import formatItemsCount from "@/utils/caseFormatted";
+import CatalogSEO from "../../SEO/CatalogSEO";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import styles from "../../styles/catalog.module.css";
+import formatItemsCount from "../../utils/caseFormatted";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import CatalogTitle from "../../components/CatalogTitle/CatalogTitle";
+import ItemsCatalog from "../../components/ItemsCatalog/ItemsCatalog";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
 
 const Index = ({ items, itemsCount, error }) => {
   const [subcategoryTitle, setSubcategoryTitle] = useState(undefined);
@@ -22,7 +22,7 @@ const Index = ({ items, itemsCount, error }) => {
   const [subcategories, setSubcategories] = useRecoilState(subcategoriesState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(error);
-  console.log(countState, itemsCount);
+
   const router = useRouter();
   let subcategoryId = router.query.subcategoryId;
 

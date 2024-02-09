@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import styles from "./CartItem.module.css";
 import { useEffect, useState } from "react";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import axiosInstance from "@/axios.config";
+import axiosInstance from "../../axios.config";
 import AlertInfo from "../AlertInfo/AlertInfo";
 import { useRecoilState } from "recoil";
 import CartPrice from "../CartPrice/CartPrice";
-import formattedNumber from "@/utils/formattedNumber";
-import minus from "@/assets/minus.svg";
-import plus from "@/assets/plus.svg";
+import formattedNumber from "../../utils/formattedNumber";
+import minus from "../../assets/minus.svg";
+import plus from "../../assets/plus.svg";
 import Image from "next/image";
 import Link from "next/link";
+import AvailabilityIndicator from "../AvailabilityIndicator/AvailabilityIndicator";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
 
 const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -86,6 +87,7 @@ const CartItem = ({ item, count, handleChangeCount, deleteFromCart }) => {
                 ? categoryTitle + ", " + subcategoryTitle
                 : "Загрузка..."}
             </span>
+            <AvailabilityIndicator availability={item.availability} />
           </div>
           <span
             className={styles.deleteBtn}

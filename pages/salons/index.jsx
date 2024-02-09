@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/salonsPage.module.css";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/salonsPage.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import SalonItem from "@/components/SalonItem/SalonItem";
-import salons from "@/mock/salons";
-import SalonsSEO from "@/SEO/SalonsSEO";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import SalonItem from "../../components/SalonItem/SalonItem";
+import salons from "../../mock/salons";
+import SalonsSEO from "../../SEO/SalonsSEO";
 
 const Index = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);

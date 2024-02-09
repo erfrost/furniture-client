@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import MainPageSEO from "@/SEO/MainPageSEO";
-import axiosInstance from "@/axios.config";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/furnitures.module.css";
+import MainPageSEO from "../../SEO/MainPageSEO";
+import axiosInstance from "../../axios.config";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/furnitures.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import FurnituresList from "@/components/FurnituresList/FurnituresList";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import FurnituresList from "../../components/FurnituresList/FurnituresList";
 
 const Index = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);

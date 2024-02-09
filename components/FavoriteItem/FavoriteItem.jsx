@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./FavoriteItem.module.css";
-import cancelAction from "@/utils/cancelAction";
-import formattedNumber from "@/utils/formattedNumber";
+import cancelAction from "../../utils/cancelAction";
+import formattedNumber from "../../utils/formattedNumber";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { addToCart, getCartFromCookie } from "@/utils/cart";
-import { removeFromFavorites } from "@/utils/favorites";
+import { addToCart, getCartFromCookie } from "../../utils/cart";
+import { removeFromFavorites } from "../../utils/favorites";
 import Image from "next/image";
 
 const FavoriteItem = ({ item, setFavoriteItems }) => {

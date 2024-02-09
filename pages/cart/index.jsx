@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CartSEO from "@/SEO/СartSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CartItem from "@/components/CartItem/CartItem";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import CartResult from "@/components/СartResult/CartResult";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/cartPage.module.css";
-import homePageStyles from "@/styles/homePage.module.css";
-import { addToCart, getCartFromCookie, removeFromCart } from "@/utils/cart";
+import CartSEO from "../../SEO/СartSEO";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CartItem from "../../components/CartItem/CartItem";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import CartResult from "../../components/СartResult/CartResult";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/cartPage.module.css";
+import homePageStyles from "../../styles/homePage.module.css";
+import { addToCart, getCartFromCookie, removeFromCart } from "../../utils/cart";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 

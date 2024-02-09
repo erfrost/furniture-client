@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import styles from "./KitchenForm.module.css";
-import { formatPhoneNumber } from "@/utils/formattedPhoneNumber";
+import { formatPhoneNumber } from "../../utils/formattedPhoneNumber";
 
 const KitchenForm = ({
   setProjectIsOpen,

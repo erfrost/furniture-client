@@ -19,3 +19,8 @@ export const furnishersFilterState = atom({
   key: "furnishersFilterState",
   default: [],
 });
+
+export const availabilityFilterState = atom({
+  key: "availabilityFilterState",
+  default: [],
+});

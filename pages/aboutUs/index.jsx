@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import AboutUsSEO from "@/SEO/AboutUsSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/aboutUs.module.css";
-import homePageStyles from "@/styles/homePage.module.css";
+import AboutUsSEO from "../../SEO/AboutUsSEO";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/aboutUs.module.css";
+import homePageStyles from "../../styles/homePage.module.css";
 import { DownloadIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";

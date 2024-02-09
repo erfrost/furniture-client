@@ -91,7 +91,7 @@
 .displayNone {
     opacity: 0 !important;
 }
-.furnishersList {
+.list {
     position: absolute;
     top: 25px;
     right: 0;
@@ -99,10 +99,13 @@
     border: 1px solid #bebebe;
     border-radius: 10px;
     padding: 20px;
-    display: none;
+    z-index: 9;
+    transition: all 0.3s ease; 
+}
+.furnishersList {
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
-    transition: all 0.3s ease;
 }
 .active {
     display: grid;
@@ -129,6 +132,21 @@
 }
 .square:hover {
     border-color: rgb(146, 146, 146);
+}
+.checkboxList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+.checkboxItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+.address {
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 1000px) {

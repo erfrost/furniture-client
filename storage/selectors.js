@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 import {
+  availabilityFilterState,
   categoriesState,
   furnishersFilterState,
   sortState,
@@ -32,4 +33,11 @@ export const furnishersFilterSelector = selector({
   get: ({ get }) => get(furnishersFilterState),
   set: ({ set }, value) =>
     set(furnishersFilterState, (state) => ({ ...state, value: value })),
+});
+
+export const availabilityFilterSelector = selector({
+  key: "availabilityFilterSelector",
+  get: ({ get }) => get(availabilityFilterState),
+  set: ({ set }, value) =>
+    set(availabilityFilterState, (state) => ({ ...state, value: value })),
 });

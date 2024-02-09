@@ -1,4 +1,4 @@
-import styles from "@/styles/socialIcons.module.css";
+import styles from "../styles/socialIcons.module.css";
 
 const TelegrammIcon = () => {
   return (

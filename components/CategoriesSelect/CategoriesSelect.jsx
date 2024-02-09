@@ -1,24 +1,27 @@
 import Link from "next/link";
 import styles from "./CategoriesSelect.module.css";
-import catalogIcon from "@/assets/catalogIcon.svg";
+import catalogIcon from "../../assets/catalogIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import {
   Popover,
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
 } from "@chakra-ui/react";
-import furnituresIds from "@/mock/furnituresIds";
+import furnituresIds from "../../mock/furnituresIds";
 
 const CategoriesSelect = ({ categories, subcategories }) => {
   const [currentSubcategories, setCurrentSubcategories] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(null);
 
-  const officeCategory = categories[7];
+  const officeCategory = categories.find((cat) => cat.title === "Офис");
+  const availabilityCategory = categories.find(
+    (cat) => cat.title === "Товары в наличии"
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -65,13 +68,13 @@ const CategoriesSelect = ({ categories, subcategories }) => {
   }, [isOpen]);
 
   const calculatedCount = () => {
-    if (screenWidth > 1500) return 7;
-    else if (screenWidth > 1425) return 6;
-    else if (screenWidth > 1225) return 5;
-    else if (screenWidth > 1060) return 4;
-    else if (screenWidth > 950) return 3;
-    else if (screenWidth > 850) return 2;
-    else return 1;
+    if (screenWidth > 1500) return 6;
+    else if (screenWidth > 1425) return 5;
+    else if (screenWidth > 1225) return 4;
+    else if (screenWidth > 1060) return 3;
+    else if (screenWidth > 950) return 2;
+    else if (screenWidth > 860) return 1;
+    else return 0;
   };
 
   return (
@@ -158,6 +161,47 @@ const CategoriesSelect = ({ categories, subcategories }) => {
                           subcat._id === "656da2464eecad4547e7066c"
                             ? "/furnitures"
                             : `/subcategory/${subcat._id}`
+                        }
+                        className={`${styles.link} ${styles.subcatLink}`}
+                        key={subcat._id}
+                      >
+                        {subcat.title}
+                      </Link>
+                    ))}
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          ) : null}
+          {availabilityCategory ? (
+            <Popover key={availabilityCategory._id}>
+              <PopoverTrigger>
+                <div className={`${styles.link} ${styles.bold}`}>
+                  {availabilityCategory.title}
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className={styles.popoverContent}>
+                <PopoverBody className={styles.popoverBody}>
+                  <Link
+                    href="/availability"
+                    className={`${styles.link} ${styles.catLink}`}
+                  >
+                    {availabilityCategory.title}
+                  </Link>
+                  {subcategories
+                    .filter(
+                      (subcat) =>
+                        subcat.category_id === availabilityCategory._id
+                    )
+                    .map((subcat) => (
+                      <Link
+                        href={
+                          subcat._id === "65c4cd4ccb52d6def35e0e26"
+                            ? "/availability/kuzovatkina"
+                            : subcat._id === "65c4cd52cb52d6def35e0e2a"
+                            ? "/availability/neftyanikov"
+                            : subcat._id === "65c4cd57cb52d6def35e0e2e"
+                            ? "/availability/mira"
+                            : "/"
                         }
                         className={`${styles.link} ${styles.subcatLink}`}
                         key={subcat._id}

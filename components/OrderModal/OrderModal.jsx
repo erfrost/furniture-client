@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import styles from "./OrderModal.module.css";
-import { formatPhoneNumber } from "@/utils/formattedPhoneNumber";
+import { formatPhoneNumber } from "../../utils/formattedPhoneNumber";
 
 const OrderModal = ({
   isOpen,

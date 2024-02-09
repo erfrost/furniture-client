@@ -1,4 +1,4 @@
-import furnituresIds from "@/mock/furnituresIds";
+import furnituresIds from "../../mock/furnituresIds";
 import CategoryItem from "../CategoryItem/CategoryItem";
 import styles from "./CategoriesCatalog.module.css";
 

@@ -2,19 +2,19 @@
 import styles from "./MobileNav.module.css";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import heartIcon from "@/assets/heartIcon.svg";
-import cartIcon from "@/assets/cartIcon.svg";
+import heartIcon from "../../assets/heartIcon.svg";
+import cartIcon from "../../assets/cartIcon.svg";
 import Link from "next/link";
 import Search from "../Search/Search";
 import { useRouter } from "next/router";
-import logo from "@/assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import Image from "next/image";
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";
 import AlertInfo from "../AlertInfo/AlertInfo";
-import { getFavoritesFromCookie } from "@/utils/favorites";
-import axiosInstance from "@/axios.config";
+import { getFavoritesFromCookie } from "../../utils/favorites";
+import axiosInstance from "../../axios.config";
 import { Divider } from "@chakra-ui/react";
 
 const MobileNav = () => {

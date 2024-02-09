@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DeliveryAndPaymentSEO from "@/SEO/DeliveryAndPaymentSEO";
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
-import { categoriesState, subcategoriesState } from "@/storage/atoms";
-import styles from "@/styles/deliveryAndPayment.module.css";
-import homePageStyles from "@/styles/homePage.module.css";
+import DeliveryAndPaymentSEO from "../../SEO/DeliveryAndPaymentSEO";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
+import { categoriesState, subcategoriesState } from "../../storage/atoms";
+import styles from "../../styles/deliveryAndPayment.module.css";
+import homePageStyles from "../../styles/homePage.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 

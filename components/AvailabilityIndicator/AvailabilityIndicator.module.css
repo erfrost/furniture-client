@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.circle {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+.greenCircle {
+    background-color: #00c300;
+}
+.redCircle {
+    background-color: #bd0000;
+}
+.text {
+    font-weight: 400;
+    font-size: 13px;
+    color: rgb(79, 79, 79);
+    white-space: nowrap;
+}
+.tooltip {
+    max-width: none !important;
+    border-radius: 8px !important;
+    padding: 14px !important;
+}
+.tooltipContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+.address {
+    white-space: nowrap;
+}

@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./Header.module.css";
-import cartIcon from "@/assets/cartIcon.svg";
+import cartIcon from "../../assets/cartIcon.svg";
 import Search from "../Search/Search";
-import heartIcon from "@/assets/heartIcon.svg";
+import heartIcon from "../../assets/heartIcon.svg";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import cancelAction from "@/utils/cancelAction";
-import { getFavoritesFromCookie } from "@/utils/favorites";
-import axiosInstance from "@/axios.config";
+import cancelAction from "../../utils/cancelAction";
+import { getFavoritesFromCookie } from "../../utils/favorites";
+import axiosInstance from "../../axios.config";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import AlertInfo from "../AlertInfo/AlertInfo";
-import logo from "@/assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import HeaderContacts from "../HeaderContacts/HeaderContacts";
 
 const Header = () => {

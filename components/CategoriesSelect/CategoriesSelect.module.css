@@ -204,6 +204,11 @@
     box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.15) !important;
 }
 
+@media screen and (max-width: 1500px) {
+    .container {
+        padding: 10px 25px;
+    }
+}
 @media screen and (max-width: 1300px) {
     .link {
         font-size: 13px;
@@ -216,6 +221,6 @@
 }
 @media screen and (max-width: 900px) {
     .container {
-        padding: 10px 25px;
+        padding: 10px 15px;
     }
 }

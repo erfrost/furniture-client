@@ -1,26 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axiosInstance from "@/axios.config";
-import AlertInfo from "@/components/AlertInfo/AlertInfo";
-import CategoriesSelect from "@/components/CategoriesSelect/CategoriesSelect";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import MobileNav from "@/components/MobileNav/MobileNav";
-import RouteToHome from "@/components/RouteToHome/RouteToHome";
+import axiosInstance from "../../axios.config";
+import AlertInfo from "../../components/AlertInfo/AlertInfo";
+import CategoriesSelect from "../../components/CategoriesSelect/CategoriesSelect";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import MobileNav from "../../components/MobileNav/MobileNav";
+import RouteToHome from "../../components/RouteToHome/RouteToHome";
 import {
   categoriesState,
   sortState,
   subcategoriesState,
-} from "@/storage/atoms";
-import styles from "@/styles/KitchensToOrder.module.css";
+} from "../../storage/atoms";
+import styles from "../../styles/KitchensToOrder.module.css";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
 import { Divider, useDisclosure } from "@chakra-ui/react";
-import KitchenForm from "@/components/KitchenForm/KitchenForm";
-import ItemsCatalog from "@/components/ItemsCatalog/ItemsCatalog";
-import formatItemsCount from "@/utils/caseFormatted";
-import CatalogTitle from "@/components/CatalogTitle/CatalogTitle";
-import FurnituresList from "@/components/FurnituresList/FurnituresList";
+import KitchenForm from "../../components/KitchenForm/KitchenForm";
+import ItemsCatalog from "../../components/ItemsCatalog/ItemsCatalog";
+import formatItemsCount from "../../utils/caseFormatted";
+import CatalogTitle from "../../components/CatalogTitle/CatalogTitle";
+import FurnituresList from "../../components/FurnituresList/FurnituresList";
 
 const Index = ({
   kitchenWork,

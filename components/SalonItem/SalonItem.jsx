@@ -1,4 +1,4 @@
-import cancelAction from "@/utils/cancelAction";
+import cancelAction from "../../utils/cancelAction";
 import styles from "./SalonItem.module.css";
 import Link from "next/link";
 import Image from "next/image";

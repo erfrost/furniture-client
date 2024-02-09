@@ -1,25 +1,62 @@
 import RouteToHome from "../RouteToHome/RouteToHome";
 import styles from "./CatalogTitle.module.css";
 import { useRecoilState } from "recoil";
-import { furnishersFilterState, sortState } from "@/storage/atoms";
 import { useEffect, useState } from "react";
 import { CheckIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
-import axiosInstance from "@/axios.config";
+import axiosInstance from "../../axios.config";
 import AlertInfo from "../AlertInfo/AlertInfo";
-import { sortedFurnishers } from "@/utils/sortedFurnishers";
+import { AnimatePresence, motion } from "framer-motion";
+import { addresses } from "../../mock/addresses";
+import {
+  availabilityFilterState,
+  furnishersFilterState,
+  sortState,
+} from "../../storage/atoms";
+import { addressFormatToObjetKey } from "../../utils/addressToObjectKey";
+import { sortedFurnishers } from "../../utils/sortedFurnishers";
+import { addressFormatToText } from "../../utils/addressToText";
 
 const CatalogTitle = ({ title, isFurnishersPage }) => {
   const [furnishersState, setFurnishersState] = useState([]);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isFurnishersOpen, setIsFurnishersOpen] = useState(false);
+  const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [furnisherFilterArr, setFurnisherFilterArr] = useRecoilState(
     furnishersFilterState
+  );
+  const [availabilityFilterArr, setAvailabilityFilterArr] = useRecoilState(
+    availabilityFilterState
   );
   const [sort, setSort] = useRecoilState(sortState);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(null);
 
   const router = useRouter();
+
+  const itemVariants = {
+    open: {
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 500,
+        damping: 42,
+      },
+    },
+    closed: { opacity: 0 },
+  };
+
+  useEffect(() => {
+    setFurnisherFilterArr([]);
+
+    availabilityFilterArr.map((address) => {
+      const icon = document.getElementById(
+        "checkIcon-" + addressFormatToText(address)
+      );
+      if (!icon) return;
+
+      icon.style.opacity = "1";
+    });
+  }, []);
 
   useEffect(() => {
     const fetchFurnishers = async () => {
@@ -77,7 +114,7 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
         !popoverContent.contains(e.target) &&
         !clickedOnIcon
       ) {
-        setIsFilterOpen(false);
+        setIsFurnishersOpen(false);
       }
     };
 
@@ -108,13 +145,39 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
       setFurnisherFilterArr((prevState) => [...prevState, furnisherId]);
       icon.style.opacity = "1";
     } else {
-      const icon = document.getElementById(iconId);
       setFurnisherFilterArr((prevState) => {
         const arr = [...prevState];
         return arr.filter((item) => item !== furnisherId);
       });
       icon.style.opacity = "0";
     }
+  };
+  const availabilityFilterAdd = (address, iconId) => {
+    const icon = document.getElementById(iconId);
+    const formattedAddress = addressFormatToObjetKey(address);
+    const isAlready = availabilityFilterArr.find((e) => e === formattedAddress);
+
+    if (!icon) return;
+
+    if (!isAlready) {
+      setAvailabilityFilterArr((prevState) => [...prevState, formattedAddress]);
+      icon.style.opacity = "1";
+    } else {
+      setAvailabilityFilterArr((prevState) => {
+        const arr = [...prevState];
+        return arr.filter((item) => item !== formattedAddress);
+      });
+      icon.style.opacity = "0";
+    }
+  };
+
+  const onFurnishersFilterOpen = () => {
+    setIsAvailabilityOpen(false);
+    setIsFurnishersOpen((prevState) => !prevState);
+  };
+  const onAvailabilityFilterOpen = () => {
+    setIsFurnishersOpen(false);
+    setIsAvailabilityOpen((prevState) => !prevState);
   };
 
   return (
@@ -155,43 +218,135 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
           </div>
         </div>
         {!isFurnishersPage ? (
-          <div className={styles.filter}>
-            <span
-              className={`${styles.text} ${styles.filterText}`}
-              onClick={() => setIsFilterOpen((prevState) => !prevState)}
+          <>
+            <div className={styles.filter}>
+              <span
+                className={`${styles.text} ${styles.filterText}`}
+                onClick={onFurnishersFilterOpen}
+              >
+                Фильтр по поставщикам
+              </span>
+              <TriangleDownIcon
+                className={styles.filterIcon}
+                onClick={onFurnishersFilterOpen}
+              />
+              <AnimatePresence>
+                <motion.div
+                  initial={false}
+                  animate={isFurnishersOpen ? "open" : "closed"}
+                  variants={{
+                    open: {
+                      clipPath: "inset(0% 0% 0% 0% round 10px)",
+                      transition: {
+                        type: "spring",
+                        bounce: 0,
+                        duration: 0.7,
+                        delayChildren: 0.15,
+                        staggerChildren: 0.02,
+                      },
+                    },
+                    closed: {
+                      clipPath: "inset(10% 50% 90% 50% round 10px)",
+                      transition: {
+                        type: "spring",
+                        bounce: 0,
+                        duration: 0.3,
+                      },
+                    },
+                  }}
+                  className={`${styles.list} ${styles.furnishersList}`}
+                  key="furnishersList"
+                >
+                  {furnishersState.map((item) => (
+                    <motion.div
+                      className={styles.furnisherItem}
+                      key={item.id}
+                      variants={itemVariants}
+                    >
+                      <div
+                        className={styles.square}
+                        onClick={() =>
+                          furnisherFilterAdd(item.id, "checkIcon-" + item.id)
+                        }
+                      >
+                        <CheckIcon
+                          boxSize="70%"
+                          opacity={0}
+                          transition="all 0.3s ease"
+                          id={"checkIcon-" + item.id}
+                        />
+                      </div>
+                      <span className={styles.furnisherTitle}>{item.id}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </>
+        ) : null}
+        <div className={styles.filter}>
+          <span
+            className={`${styles.text} ${styles.filterText}`}
+            onClick={onAvailabilityFilterOpen}
+          >
+            Фильтр по наличию
+          </span>
+          <TriangleDownIcon
+            className={styles.filterIcon}
+            onClick={onAvailabilityFilterOpen}
+          />
+          <AnimatePresence>
+            <motion.div
+              initial={false}
+              animate={isAvailabilityOpen ? "open" : "closed"}
+              variants={{
+                open: {
+                  clipPath: "inset(0% 0% 0% 0% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.7,
+                    delayChildren: 0.25,
+                    staggerChildren: 0.02,
+                  },
+                },
+                closed: {
+                  clipPath: "inset(10% 50% 90% 50% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.3,
+                  },
+                },
+              }}
+              className={`${styles.list} ${styles.checkboxList}`}
+              key="furnishersList"
             >
-              Фильтр по поставщикам
-            </span>
-            <TriangleDownIcon
-              className={styles.filterIcon}
-              onClick={() => setIsFilterOpen((prevState) => !prevState)}
-            />
-            <div
-              className={`${styles.furnishersList} ${
-                isFilterOpen ? styles.active : null
-              }`}
-            >
-              {furnishersState.map((item) => (
-                <div className={styles.furnisherItem} key={item.id}>
+              {addresses.map((address) => (
+                <motion.div
+                  className={styles.checkboxItem}
+                  key={address}
+                  variants={itemVariants}
+                >
                   <div
                     className={styles.square}
                     onClick={() =>
-                      furnisherFilterAdd(item.id, "checkIcon-" + item.id)
+                      availabilityFilterAdd(address, "checkIcon-" + address)
                     }
                   >
                     <CheckIcon
                       boxSize="70%"
                       opacity={0}
                       transition="all 0.3s ease"
-                      id={"checkIcon-" + item.id}
+                      id={"checkIcon-" + address}
                     />
                   </div>
-                  <span className={styles.furnisherTitle}>{item.id}</span>
-                </div>
+                  <span className={styles.address}>{address}</span>
+                </motion.div>
               ))}
-            </div>
-          </div>
-        ) : null}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
       {reqError && (
         <AlertInfo
