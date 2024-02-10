@@ -95,7 +95,7 @@ const SearchPage = ({ items, itemsCount, error }) => {
           setSortedItems={setItemsState}
         />
         <span className={styles.itemsCount}>
-          Найдено: {allCount} {formatItemsCount(allCount)}
+          Найдено: {countState} {formatItemsCount(countState)}
         </span>
         <ItemsCatalog
           items={itemsState}
