@@ -173,45 +173,12 @@ const CategoriesSelect = ({ categories, subcategories }) => {
             </Popover>
           ) : null}
           {availabilityCategory ? (
-            <Popover key={availabilityCategory._id}>
-              <PopoverTrigger>
-                <div className={`${styles.link} ${styles.bold}`}>
-                  {availabilityCategory.title}
-                </div>
-              </PopoverTrigger>
-              <PopoverContent className={styles.popoverContent}>
-                <PopoverBody className={styles.popoverBody}>
-                  <Link
-                    href="/availability"
-                    className={`${styles.link} ${styles.catLink}`}
-                  >
-                    {availabilityCategory.title}
-                  </Link>
-                  {subcategories
-                    .filter(
-                      (subcat) =>
-                        subcat.category_id === availabilityCategory._id
-                    )
-                    .map((subcat) => (
-                      <Link
-                        href={
-                          subcat._id === "65c4cd4ccb52d6def35e0e26"
-                            ? "/availability/kuzovatkina"
-                            : subcat._id === "65c4cd52cb52d6def35e0e2a"
-                            ? "/availability/neftyanikov"
-                            : subcat._id === "65c4cd57cb52d6def35e0e2e"
-                            ? "/availability/mira"
-                            : "/"
-                        }
-                        className={`${styles.link} ${styles.subcatLink}`}
-                        key={subcat._id}
-                      >
-                        {subcat.title}
-                      </Link>
-                    ))}
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+            <Link
+              href="/availability"
+              className={`${styles.link} ${styles.bold}`}
+            >
+              {availabilityCategory.title}
+            </Link>
           ) : null}
           <Link href="/promotion" className={`${styles.link} ${styles.bold}`}>
             Акция

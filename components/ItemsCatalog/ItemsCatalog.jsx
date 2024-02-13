@@ -16,7 +16,7 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   const [filteredItems, setFilteredItems] = useState(items);
   const [limit, setLimit] = useState(35);
   const furnisherFilterArr = useRecoilValue(furnishersFilterState);
-  const availabilityFilterArr = useRecoilValue(availabilityFilterState);
+  const availabilityFilter = useRecoilValue(availabilityFilterState);
   const sort = useRecoilValue(sortState);
 
   const router = useRouter();
@@ -64,19 +64,16 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   }, [furnisherFilterArr, allItems]);
 
   useEffect(() => {
-    if (!availabilityFilterArr.length) {
+    if (!availabilityFilter) {
       setFilteredItems(allItems);
       if (setCountState) setCountState(allCount);
       return;
     }
 
-    const resultArray = allItems.filter((item) => {
-      delete item.availability._id;
-      return availabilityFilterArr.some((el) => item.availability[el]);
-    });
+    const resultArray = allItems.filter((item) => item.availability);
     setFilteredItems(resultArray);
     if (setCountState) setCountState(resultArray.length);
-  }, [availabilityFilterArr, allItems]);
+  }, [availabilityFilter, allItems]);
 
   useEffect(() => {
     const handleScroll = throttle(async () => {

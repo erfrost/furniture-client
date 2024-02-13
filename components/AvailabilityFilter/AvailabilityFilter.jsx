@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { croppingAddress } from "../../utils/croppingAddress";
 
 const AvailabilityFilter = ({
-  addresses,
   onAvailabilityFilterOpen,
   isAvailabilityOpen,
   availabilityFilterAdd,
@@ -79,30 +78,23 @@ const AvailabilityFilter = ({
         className={`${styles.list} ${styles.checkboxList}`}
         key="furnishersList"
       >
-        {addresses.map((address) => (
-          <motion.div
-            className={styles.checkboxItem}
-            key={address}
-            variants={itemVariants}
-          >
-            <div
-              className={styles.square}
-              onClick={() =>
-                availabilityFilterAdd(address, "checkIcon-" + address)
-              }
-            >
-              <CheckIcon
-                boxSize="70%"
-                opacity={0}
-                transition="all 0.3s ease"
-                id={"checkIcon-" + address}
-              />
-            </div>
-            <span className={styles.address}>
-              {screenWidth < 465 ? croppingAddress(address) : address}
-            </span>
-          </motion.div>
-        ))}
+        <motion.div className={styles.checkboxItem} variants={itemVariants}>
+          <div className={styles.square} onClick={availabilityFilterAdd}>
+            <CheckIcon
+              boxSize="70%"
+              opacity={0}
+              transition="all 0.3s ease"
+              id={"checkIcon-address"}
+            />
+          </div>
+          <span className={styles.address}>
+            {screenWidth < 465
+              ? croppingAddress(
+                  "Г. Нижневартовск МЦ Дом, Ул. Кузоваткина 3, стр. 9"
+                )
+              : "Г. Нижневартовск МЦ Дом, Ул. Кузоваткина 3, стр. 9"}
+          </span>
+        </motion.div>
       </motion.div>
     </div>
   );

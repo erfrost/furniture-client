@@ -78,7 +78,7 @@ const Index = ({ items, itemsCount, error }) => {
           </div>
         )}
         <div className={styles.content}>
-          <CatalogTitle title="Товары в наличии" />
+          <CatalogTitle title="Товары в наличии" isAvailabilityPage={true} />
           <span className={styles.itemsCount}>
             Найдено: {countState} {formatItemsCount(countState)}
           </span>
@@ -103,12 +103,12 @@ const Index = ({ items, itemsCount, error }) => {
 
 export async function getServerSideProps() {
   try {
-    const items = await axiosInstance.get("items/availability/all");
+    const res = await axiosInstance.get("items/availability");
 
     return {
       props: {
-        items: items.data.items,
-        itemsCount: items.data.count,
+        items: res.data.items,
+        itemsCount: res.data.count,
       },
     };
   } catch (error) {

@@ -12,22 +12,20 @@ import {
   furnishersFilterState,
   sortState,
 } from "../../storage/atoms";
-import { addressFormatToObjetKey } from "../../utils/addressToObjectKey";
 import { sortedFurnishers } from "../../utils/sortedFurnishers";
-import { addressFormatToText } from "../../utils/addressToText";
 import FurhishersFilter from "../FurnishersFilter/FurhishersFilter";
 import AvailabilityFilter from "../AvailabilityFilter/AvailabilityFilter";
 import sortIcon from "../../assets/sortIcon.svg";
 import Image from "next/image";
 
-const CatalogTitle = ({ title, isFurnishersPage }) => {
+const CatalogTitle = ({ title, isFurnishersPage, isAvailabilityPage }) => {
   const [furnishersState, setFurnishersState] = useState([]);
   const [isFurnishersOpen, setIsFurnishersOpen] = useState(false);
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [furnisherFilterArr, setFurnisherFilterArr] = useRecoilState(
     furnishersFilterState
   );
-  const [availabilityFilterArr, setAvailabilityFilterArr] = useRecoilState(
+  const [availabilityFilter, setAvailabilityFilter] = useRecoilState(
     availabilityFilterState
   );
   const [sort, setSort] = useRecoilState(sortState);
@@ -39,14 +37,12 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
   useEffect(() => {
     setFurnisherFilterArr([]);
 
-    availabilityFilterArr.map((address) => {
-      const icon = document.getElementById(
-        "checkIcon-" + addressFormatToText(address)
-      );
+    if (availabilityFilter) {
+      const icon = document.getElementById("checkIcon-address");
       if (!icon) return;
 
       icon.style.opacity = "1";
-    });
+    }
   }, []);
 
   useEffect(() => {
@@ -144,21 +140,16 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
     }
   };
 
-  const availabilityFilterAdd = (address, iconId) => {
-    const icon = document.getElementById(iconId);
-    const formattedAddress = addressFormatToObjetKey(address);
-    const isAlready = availabilityFilterArr.find((e) => e === formattedAddress);
+  const availabilityFilterAdd = () => {
+    const icon = document.getElementById("checkIcon-address");
 
     if (!icon) return;
 
-    if (!isAlready) {
-      setAvailabilityFilterArr((prevState) => [...prevState, formattedAddress]);
+    if (!availabilityFilter) {
+      setAvailabilityFilter(true);
       icon.style.opacity = "1";
     } else {
-      setAvailabilityFilterArr((prevState) => {
-        const arr = [...prevState];
-        return arr.filter((item) => item !== formattedAddress);
-      });
+      setAvailabilityFilter(false);
       icon.style.opacity = "0";
     }
   };
@@ -205,12 +196,14 @@ const CatalogTitle = ({ title, isFurnishersPage }) => {
             furnisherFilterAdd={furnisherFilterAdd}
           />
         ) : null}
-        <AvailabilityFilter
-          addresses={addresses}
-          onAvailabilityFilterOpen={onAvailabilityFilterOpen}
-          isAvailabilityOpen={isAvailabilityOpen}
-          availabilityFilterAdd={availabilityFilterAdd}
-        />
+        {!isAvailabilityPage ? (
+          <AvailabilityFilter
+            addresses={addresses}
+            onAvailabilityFilterOpen={onAvailabilityFilterOpen}
+            isAvailabilityOpen={isAvailabilityOpen}
+            availabilityFilterAdd={availabilityFilterAdd}
+          />
+        ) : null}
       </div>
       {reqError && (
         <AlertInfo
