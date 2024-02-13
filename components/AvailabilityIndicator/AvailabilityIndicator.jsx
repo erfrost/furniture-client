@@ -22,7 +22,9 @@ const AvailabilityIndicator = ({ availability }) => {
             availability ? styles.greenCircle : styles.redCircle
           }`}
         ></div>
-        <span className={styles.text}>В наличии</span>
+        <span className={styles.text}>
+          {availability ? "В наличии" : "Нет в наличии"}
+        </span>
       </div>
     </Tooltip>
   );
