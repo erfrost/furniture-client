@@ -24,7 +24,7 @@ const Index = ({ items, itemsCount, error }) => {
   const [reqError, setReqError] = useState(error);
 
   const router = useRouter();
-  let subcategoryId = router.query.subcategoryId;
+  const { subcategoryId } = router.query;
 
   useEffect(() => {
     const currentSubcategory = subcategories.find(

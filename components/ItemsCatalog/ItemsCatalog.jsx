@@ -28,7 +28,7 @@ const ItemsCatalog = ({ items, allCount, setCountState }) => {
   }, []);
 
   useEffect(() => {
-    setAllItems(allItems);
+    setAllItems(items);
   }, [items]);
 
   useEffect(() => {
