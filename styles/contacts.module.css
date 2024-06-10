@@ -1,91 +1,53 @@
 .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 55px;
-    flex-grow: 1;
-    padding: 55px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 55px;
+  flex-grow: 1;
+  padding: 55px 40px;
 }
 .items {
-    width: 100%;
-    display: grid;
+  width: 100%;
+  /* display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 50px;
+    grid-gap: 50px; */
 }
 .item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+  margin-top: 50px;
 }
 .adress {
-    font-size: 18px;
-    font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 .imagesContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 }
 .image {
-    width: 100%;
-    height: 250px;
-    border-radius: 6px;
+  width: 100%;
+  border-radius: 6px;
 }
 .langepasImage {
-    width: 100%;
-    height: 515px;
-    object-fit: fill;
-    border-radius: 6px;
+  width: 100%;
+  height: 515px;
+  object-fit: fill;
+  border-radius: 6px;
 }
 
-@media screen and (max-width: 1100px) {
-    .items {
-        grid-template-columns: 1fr;
-    }
-    .image {
-        height: 350px;
-    }
-    .langepasImage {
-        height: 700px;
-    }
-}
 @media screen and (max-width: 900px) {
-    .content {
-        padding: 25px 20px;
-    }
-}
-@media screen and (max-width: 800px) {
-    .image {
-        height: 250px;
-    }
-}
-@media screen and (max-width: 600px) {
-    .image {
-        height: 200px;
-    }
-    .langepasImage {
-        height: 550px;
-    }
-}
-@media screen and (max-width: 475px) {
-    .image {
-        height: 150px;
-    }
-    .langepasImage {
-        height: 400px;
-    }
-}
-@media screen and (max-width: 380px) {
-    .langepasImage {
-        height: 300px;
-    }
+  .content {
+    padding: 25px 20px;
+  }
 }

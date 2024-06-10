@@ -33,9 +33,6 @@ const Footer = () => {
             <Link href="/deliveryAndPayment" className={styles.link}>
               Доставка и оплата
             </Link>
-            {/* <Link href="/salons" className={styles.link}>
-              Салоны продаж
-            </Link> */}
             <Link href="/kitchensToOrder" className={styles.link}>
               Кухни на заказ
             </Link>

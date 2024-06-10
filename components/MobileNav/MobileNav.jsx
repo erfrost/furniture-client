@@ -181,14 +181,6 @@ const MobileNav = () => {
         >
           Доставка и оплата
         </Link>
-        {/* <Divider />
-        <Link
-          href="/salons"
-          className={styles.link}
-          onClick={() => setIsOpen(false)}
-        >
-          Салоны продаж
-        </Link> */}
         <Divider />
         <Link
           href="/contacts"
@@ -197,14 +189,6 @@ const MobileNav = () => {
         >
           Контакты
         </Link>
-        {/* <div className={styles.contact}>
-          <span>г.Нижневартовск МЦ Дом ул. Кузоваткина 3 стр. 9</span>
-          <span>+7 (922) 773-22-55</span>
-        </div>
-        <div className={styles.contact}>
-          <span> г.Лангепас Отдел Кухонька Мира 7</span>{" "}
-          <span>+7 (932) 409-99-18</span>
-        </div> */}
       </div>
       <Link href="/" className={styles.logoLink}>
         <Image

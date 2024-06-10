@@ -93,7 +93,7 @@ const Index = () => {
             <span className={styles.text}>
               Мы гордимся своими достижениями и являемся признанными лидерами
               продаж в наших
-              <Link className={styles.link} href="/salons">
+              <Link className={styles.link} href="/contacts">
                 &nbsp;городах
               </Link>
               .

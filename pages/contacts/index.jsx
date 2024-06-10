@@ -15,9 +15,6 @@ import { useRecoilState } from "recoil";
 import niznevartovsk1 from "../../assets/Нижневартовск1.jpeg";
 import niznevartovsk2 from "../../assets/Нижневартовск2.jpeg";
 import niznevartovsk3 from "../../assets/Нижневартовск3.jpeg";
-import langepas from "../../assets/Лангепас.jpeg";
-import nefteyugansk1 from "../../assets/Нефтеюганск1.jpeg";
-import nefteyugansk2 from "../../assets/Нефтеюганск2.jpeg";
 
 const Contacts = () => {
   const [categories, setCategories] = useRecoilState(categoriesState);
@@ -93,7 +90,13 @@ const Contacts = () => {
               <Map
                 className={styles.map}
                 width="100%"
-                height={screenWidth > 500 ? "500px" : "250px"}
+                height={
+                  screenWidth > 1100
+                    ? "600px"
+                    : screenWidth > 500
+                    ? "400px"
+                    : "250px"
+                }
                 defaultState={{ center: [60.931377, 76.54222], zoom: 16 }}
               >
                 <Placemark
@@ -124,69 +127,6 @@ const Contacts = () => {
                   width={400}
                   height={200}
                   className={styles.image}
-                />
-              </div>
-            </div>
-            <div className={styles.item}>
-              <span className={styles.adress}>
-                Г. Лангепас Отдел Кухонька, Ул. Мира, 7
-              </span>
-              <span>+7 (932) 409-99-18</span>
-              <Map
-                className={styles.map}
-                width="100%"
-                height={screenWidth > 500 ? "500px" : "250px"}
-                defaultState={{ center: [61.247656, 75.178668], zoom: 16 }}
-              >
-                <Placemark
-                  options={{
-                    iconColor: "#396C03",
-                  }}
-                  geometry={[61.247656, 75.178668]}
-                />
-              </Map>
-              <div className={styles.imagesContainer}>
-                <Image
-                  src={langepas}
-                  alt="photo"
-                  width={400}
-                  height={200}
-                  className={styles.langepasImage}
-                />
-              </div>
-            </div>
-            <div className={styles.item}>
-              <span className={styles.adress}>
-                Г. Нефтеюганск Ул. Нефтяников, 87
-              </span>
-              <span>+7 (922) 773-22-55</span>
-              <Map
-                className={styles.map}
-                width="100%"
-                height={screenWidth > 500 ? "500px" : "250px"}
-                defaultState={{ center: [61.092009, 72.616385], zoom: 16 }}
-              >
-                <Placemark
-                  options={{
-                    iconColor: "#396C03",
-                  }}
-                  geometry={[61.092009, 72.616385]}
-                />
-              </Map>
-              <div className={styles.imagesContainer}>
-                <Image
-                  src={nefteyugansk1}
-                  alt="photo"
-                  width={400}
-                  height={200}
-                  className={styles.langepasImage}
-                />
-                <Image
-                  src={nefteyugansk2}
-                  alt="photo"
-                  width={400}
-                  height={200}
-                  className={styles.langepasImage}
                 />
               </div>
             </div>

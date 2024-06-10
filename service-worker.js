@@ -14,7 +14,6 @@ self.addEventListener("install", (event) => {
         "/styles/itemPage.module.css",
         "/styles/kitchenItem.module.css",
         "/styles/refund.module.css",
-        "/styles/salonsPage.module.css",
       ]);
     })
   );
