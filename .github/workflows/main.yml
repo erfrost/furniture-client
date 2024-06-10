@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   docker:
     name: Create docker image and push to registry, then start image
@@ -12,6 +11,8 @@ jobs:
     steps:
       - name: Pull image and run container with .env variables from secrets
         uses: appleboy/ssh-action@v0.1.6
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
           host: 31.184.254.214
           username: root
