@@ -6,7 +6,6 @@ import { TriangleDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import axiosInstance from "../../axios.config";
 import AlertInfo from "../AlertInfo/AlertInfo";
-import { addresses } from "../../mock/addresses";
 import {
   availabilityFilterState,
   furnishersFilterState,
