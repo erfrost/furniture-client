@@ -195,7 +195,6 @@ const CatalogTitle = ({ title, isFurnishersPage, isAvailabilityPage }) => {
             furnisherFilterAdd={furnisherFilterAdd}
           />
         ) : null}
-
         {!isAvailabilityPage ? (
           <AvailabilityFilter
             addresses={addresses}
