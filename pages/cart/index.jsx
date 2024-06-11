@@ -23,7 +23,6 @@ const Index = () => {
   const [totalCount, setTotalCount] = useState(undefined);
   const [screenWidth, setScreenWidth] = useState(null);
   const [reqError, setReqError] = useState(null);
-
   useEffect(() => {
     if (items.length) {
       setTotalCount(items.reduce((acc, item) => acc + item.count, 0));
