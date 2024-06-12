@@ -1,101 +1,102 @@
 .filter {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    user-select: none;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+  cursor: pointer;
 }
 .filter:hover span {
-    color: black;
+  color: black;
 }
 .filter:hover path {
-    fill: black;
+  fill: black;
 }
 .text {
-    color: #656565;
-    font-family: 'Inter';
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    user-select: none;
-    transition: all 0.3s ease;
+  color: #656565;
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.3s ease;
 }
 .filterText {
-    cursor: pointer;
+  cursor: pointer;
 }
 .filterIcon {
-    width: 8px !important;
-    height: 10px !important;
-    cursor: pointer !important;
-    opacity: 1 !important;
-    transition: all 0.3s ease !important;
+  width: 8px !important;
+  height: 10px !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
 }
 .filterIcon path {
-    fill: rgb(160, 160, 160);
-    transition: all 0.3s ease;
+  fill: rgb(160, 160, 160);
+  transition: all 0.3s ease;
 }
 .list {
-    position: absolute;
-    top: 25px;
-    right: 0;
-    background-color: white;
-    border: 1px solid #bebebe;
-    border-radius: 10px;
-    padding: 20px;
-    z-index: 9;
-    transition: all 0.3s ease; 
+  position: absolute;
+  top: 25px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #bebebe;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9;
+  transition: all 0.3s ease;
 }
 .checkboxList {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 .checkboxItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
 }
 .address {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 .square {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #d2d2d2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 .square:hover {
-    border-color: rgb(146, 146, 146);
+  border-color: rgb(146, 146, 146);
 }
 
 @media screen and (max-width: 670px) {
-    .list {
-        right: -50px;
-    }
+  .list {
+    right: -50px;
+  }
 }
 @media screen and (max-width: 570px) {
-    .list {
-        right: -50px;
-    }
-    .address {
-        font-size: 13px;
-    }
+  .list {
+    right: -50px;
+  }
+  .address {
+    font-size: 13px;
+  }
 }
 @media screen and (max-width: 500px) {
-    .list {
-        right: -65px;
-    }
+  .list {
+    right: -65px;
+  }
 }
 @media screen and (max-width: 465px) {
-    .list {
-        right: -100px;
-    }
+  .list {
+    right: -100px;
+  }
 }

@@ -198,7 +198,6 @@ const CatalogTitle = ({ title, isFurnishersPage, isAvailabilityPage }) => {
 
         {!isAvailabilityPage ? (
           <AvailabilityFilter
-            addresses={addresses}
             onAvailabilityFilterOpen={onAvailabilityFilterOpen}
             isAvailabilityOpen={isAvailabilityOpen}
             availabilityFilterAdd={availabilityFilterAdd}

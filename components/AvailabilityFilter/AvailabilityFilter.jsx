@@ -41,17 +41,11 @@ const AvailabilityFilter = ({
   };
 
   return (
-    <div className={styles.filter}>
-      <span
-        className={`${styles.text} ${styles.filterText}`}
-        onClick={onAvailabilityFilterOpen}
-      >
+    <div className={styles.filter} onClick={onAvailabilityFilterOpen}>
+      <span className={`${styles.text} ${styles.filterText}`}>
         Фильтр по наличию
       </span>
-      <TriangleDownIcon
-        className={styles.filterIcon}
-        onClick={onAvailabilityFilterOpen}
-      />
+      <TriangleDownIcon className={styles.filterIcon} />
       <motion.div
         initial={false}
         animate={isAvailabilityOpen ? "open" : "closed"}
